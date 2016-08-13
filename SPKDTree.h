@@ -14,7 +14,7 @@ typedef enum SPSplitMethod {
  * @param spkdArray
  * @param splitMethod
  */
-SPKDNode* init_kd_tree(SPKDArray spkdArray, SPLITMETHOD splitMethod);
+SPKDNode init_kd_tree(SPKDArray spkdArray, SPLITMETHOD splitMethod);
 
 
 //isLeaf

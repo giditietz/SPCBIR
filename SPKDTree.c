@@ -10,8 +10,8 @@ int CURRENT_COORDINATE = 0;
 typedef struct sp_kd_node {
     int dim;
     double val;
-    SPKDNode *left;
-    SPKDNode *right;
+    SPKDNode left;
+    SPKDNode right;
     SPPoint data;
     SPLITMETHOD splitMethod;
 } *SPKDNode;
@@ -58,7 +58,7 @@ double findMedianValueByCoor(SPKDArray spkdArray, int coor) {
 
 }
 
-SPKDNode* init_kd_tree(SPKDArray spkdArray, SPLITMETHOD splitmethod) {
+SPKDNode init_kd_tree(SPKDArray spkdArray, SPLITMETHOD splitmethod) {
     SPKDNode root = (SPKDNode) malloc(sizeof(*root));
     root->splitMethod = splitmethod;
     time_t t;
