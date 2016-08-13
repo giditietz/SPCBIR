@@ -12,11 +12,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="88878b80-8316-48ed-9675-7a6d5c348176" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SPKDArray.c" afterPath="$PROJECT_DIR$/SPKDArray.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SPKDArray.h" afterPath="$PROJECT_DIR$/SPKDArray.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SPKDTree.c" afterPath="$PROJECT_DIR$/SPKDTree.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SPKDTree.h" afterPath="$PROJECT_DIR$/SPKDTree.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.cpp" afterPath="$PROJECT_DIR$/main.cpp" />
     </list>
     <ignored path="SPCBIR.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -46,7 +43,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.cpp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="315">
@@ -82,8 +79,8 @@
       <file leaf-file-name="SPKDArray.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SPKDArray.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="447">
-              <caret line="165" column="84" selection-start-line="165" selection-start-column="84" selection-end-line="165" selection-end-column="84" />
+            <state relative-caret-position="237">
+              <caret line="84" column="5" selection-start-line="79" selection-start-column="4" selection-end-line="84" selection-end-column="5" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
               </folding>
@@ -91,13 +88,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SPKDTree.c" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SPKDTree.c" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SPKDTree.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="443">
-              <caret line="46" column="16" selection-start-line="46" selection-start-column="16" selection-end-line="46" selection-end-column="16" />
+            <state relative-caret-position="285">
+              <caret line="77" column="20" selection-start-line="77" selection-start-column="20" selection-end-line="77" selection-end-column="20" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="float.h" pinned="false" current-in-tab="false">
+        <entry file="file:///Library/Developer/CommandLineTools/usr/lib/clang/7.3.0/include/float.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <marker date="1459533667000" expanded="false" signature="3722:3849" ph="..." />
               </folding>
             </state>
           </provider>
@@ -124,11 +133,11 @@
         <option value="$PROJECT_DIR$/SPPoint.h" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/ide/ide-scripting.scpt" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
-        <option value="$PROJECT_DIR$/SPKDTree.c" />
-        <option value="$PROJECT_DIR$/SPKDTree.h" />
         <option value="$PROJECT_DIR$/SPKDArray.h" />
         <option value="$PROJECT_DIR$/SPKDArray.c" />
         <option value="$PROJECT_DIR$/main.cpp" />
+        <option value="$PROJECT_DIR$/SPKDTree.h" />
+        <option value="$PROJECT_DIR$/SPKDTree.c" />
       </list>
     </option>
   </component>
@@ -392,12 +401,12 @@
       <option name="presentableId" value="Default" />
       <updated>1470397012216</updated>
       <workItem from="1470397013427" duration="6063000" />
-      <workItem from="1470411856521" duration="47753000" />
+      <workItem from="1470411856521" duration="52097000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53816000" />
+    <option name="totallyTimeSpent" value="58160000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -410,7 +419,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30715123" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12661196" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -600,14 +609,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SPKDTree.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="10" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SPPoint.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
@@ -624,31 +625,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SPKDTree.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="443">
-          <caret line="46" column="16" selection-start-line="46" selection-start-column="16" selection-end-line="46" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="157" selection-start-line="5" selection-start-column="157" selection-end-line="5" selection-end-column="157" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SPKDArray.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="447">
-          <caret line="165" column="84" selection-start-line="165" selection-start-column="84" selection-end-line="165" selection-end-column="84" />
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -659,6 +640,44 @@
           <folding>
             <element signature="e#0#17#0" expanded="true" />
             <element signature="e#51#71#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Developer/CommandLineTools/usr/lib/clang/7.3.0/include/float.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1459533667000" expanded="false" signature="3722:3849" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SPKDArray.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="237">
+          <caret line="84" column="5" selection-start-line="79" selection-start-column="4" selection-end-line="84" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SPKDTree.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="10" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SPKDTree.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="77" column="20" selection-start-line="77" selection-start-column="20" selection-end-line="77" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
           </folding>
         </state>
       </provider>
