@@ -7,7 +7,7 @@ typedef struct sp_kd_node *SPKDNode;
 
 typedef enum SPSplitMethod {
     MAX_SPREAD, RANDOM, INCREMENTAL
-}SPLITMETHOD;
+} SPLITMETHOD;
 
 /**
  *
@@ -17,4 +17,6 @@ typedef enum SPSplitMethod {
 SPKDNode init_kd_tree(SPKDArray spkdArray, SPLITMETHOD splitMethod);
 
 
+//isLeaf
+//getPoint
 #endif //SPCBIR_SPKDTREE_H

@@ -21,8 +21,13 @@ int compare(const void *a, const void *b) {
     SPPoint *pointB = (SPPoint *) b;
     double val_a = spPointGetAxisCoor(*pointA, cur_coor);
     double val_b = spPointGetAxisCoor(*pointB, cur_coor);
-    //printf("in sort: %lf -%lf\n",val_a,val_b);
-    return (int) (val_a - val_b);
+    //printf("in sort: %lf -%lf = %lf\n",val_a,val_b,(val_a - val_b));
+    if ((val_a - val_b) > 0) {
+        return 1;
+    }
+    else {
+        return 0;
+    }
 }
 
 SPKDArray init(SPPoint *arr, int size) {
@@ -67,18 +72,18 @@ SPKDArray init(SPPoint *arr, int size) {
     return final;
 }
 
-SPKDArray split(SPKDArray kdArr, int coor) {
-    //TODO check if coor <dimention !!
+SPKDArray *split(SPKDArray kdArr, int coor) {
+    //TODO check if coor < dimention !!
     //TODO malloc/calloc assertion
     int size = spKDArrayGetSize(kdArr);
     int indexOfMedian; //TODO might add odd/even cases, should ask.
-    if (size %2 ==0){
-        indexOfMedian = size/2 -1;
+    if (size % 2 == 0) {
+        indexOfMedian = size / 2 - 1;
     }
     else {
-        indexOfMedian = size/2;
+        indexOfMedian = size / 2;
     }
-    int leftSize = indexOfMedian+1;
+    int leftSize = indexOfMedian + 1;
     int rightSize = size - leftSize;
     int dimension = spKDArrayGetDim(kdArr);
     SPKDArray left = (SPKDArray) malloc(sizeof(*left));
@@ -97,22 +102,52 @@ SPKDArray split(SPKDArray kdArr, int coor) {
         printf("%d ", arrayX[i]);
     }
     //split the pointArray to two pointArrays using arrayX: leftPointArray and rightPointArray
-    SPPoint *leftpointArray = (SPPoint *) malloc(indexOfMedian * sizeof(SPPoint));
-    SPPoint *rightpointArray = (SPPoint *) malloc((size - indexOfMedian) * sizeof(SPPoint));
+    SPPoint *rightPointArray = (SPPoint *) malloc((rightSize) * sizeof(SPPoint));
+    SPPoint *leftPointArray = (SPPoint *) malloc((leftSize) * sizeof(SPPoint));
+
     int rightPointArrayIndex = 0;
     int leftPointArrayIndex = 0;
+    puts("\npoint array:");
     for (int i = 0; i < size; i++) {
-        if (arrayX[i] == 0) {
-            leftpointArray[leftPointArrayIndex] = pointArray[i];
+        printf("%d ", spPointGetIndex(pointArray[i]));
+    }
+    for (int i = 0; i < size; i++) {
+        int idexOfPointInGivenCoor = dataMatrix[coor][i];
+        if (arrayX[idexOfPointInGivenCoor] == 0) {
+            leftPointArray[leftPointArrayIndex] = pointArray[idexOfPointInGivenCoor];
             leftPointArrayIndex++;
         }
-        else {
-            rightpointArray[leftPointArrayIndex] = pointArray[i];
+        if (arrayX[idexOfPointInGivenCoor] == 1) {
+            rightPointArray[rightPointArrayIndex] = pointArray[idexOfPointInGivenCoor];
             rightPointArrayIndex++;
         }
     }
-    free(arrayX);
+
+    //create maps for each new matrix
+    int *leftMap = (int *) malloc(size * sizeof(int));
+    int *rightMap = (int *) malloc(size * sizeof(int));
+
+    //initialize both maps with (-1)s.
+    for (int i = 0; i < size; i++) {
+        leftMap[i] = -1;
+        rightMap[i] = -1;
+    }
+    int leftNewMapping = 0;
+    int rightNewMapping = 0;
+    for (int i = 0; i < size; i++) {
+        if (arrayX[i] == 0) {
+            leftMap[i] = leftNewMapping;
+            leftNewMapping++;
+        }
+        else {
+            rightMap[i] = rightNewMapping;
+            rightNewMapping++;
+        }
+    }
+
     //split the data matrix into two matrices: leftMatrix and rightMatrix (create a copy in O(d*n))
+    int rightInsertionIndex = 0;
+    int leftInsertionIndex = 0;
     int **leftdata = (int **) malloc(dimension * sizeof(int *));
     for (int i = 0; i < dimension; i++) {
         leftdata[i] = (int *) malloc((leftSize - 1) * sizeof(int));
@@ -123,14 +158,18 @@ SPKDArray split(SPKDArray kdArr, int coor) {
     }
     for (int dim = 0; dim < dimension; dim++) {
         for (int num = 0; num < size; num++) {
-            if (num <= indexOfMedian) {
-                leftdata[dim][num] = dataMatrix[dim][num];
+            if (arrayX[dataMatrix[dim][num]] == 0) { //left KDArray. Using arrayX to determine.
+                leftdata[dim][leftInsertionIndex] = leftMap[dataMatrix[dim][num]];
+                leftInsertionIndex++;
             }
-            else {
-                rightdata[dim][num - indexOfMedian - 1] = dataMatrix[dim][num];
+            else { //right KDArray. Using arrayX to determine.
+                rightdata[dim][rightInsertionIndex] = rightMap[dataMatrix[dim][num]];
+                rightInsertionIndex++;
+            }
 
-            }
         }
+        leftInsertionIndex = 0;
+        rightInsertionIndex = 0;
     }
     printf("\nleft matrix\n");
     for (int i = 0; i < dimension; i++) {
@@ -148,18 +187,31 @@ SPKDArray split(SPKDArray kdArr, int coor) {
     }
 
 
-    //create maps for each new matrix
+
+    puts("\nleft map:");
+    for (int i = 0; i < size; i++) {
+        printf("%d ", leftMap[i]);
+    }
+    puts("\nright map:");
+    for (int i = 0; i < size; i++) {
+        printf("%d ", rightMap[i]);
+    }
 
 
-    left->pointArray = leftpointArray;
+    left->pointArray = leftPointArray;
     left->size = leftSize;
     left->dim = dimension;
-    right->pointArray = rightpointArray;
+    left->dataMatrix = leftdata;
+    right->pointArray = rightPointArray;
     right->size = rightSize;
+    right->dataMatrix = rightdata;
     right->dim = dimension;
 
+    SPKDArray ret_array[2] = {left, right};
+    free(arrayX);
 
-    return left, right;
+
+    return ret_array;
 }
 
 

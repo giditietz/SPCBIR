@@ -16,7 +16,7 @@ SPKDArray init(SPPoint *arr, int size);
 /**Returns two kd-arrays (kdLeft, kdRight) such that the first ⌈𝒏/𝟐⌉ points with
  * respect to the coordinate coor are in kdLeft , and the rest of the points are in kdRight
  **/
-SPKDArray split(SPKDArray kdArr, int coor);
+SPKDArray* split(SPKDArray kdArr, int coor);
 
 /**
  * A getter for the dimension of the kdarray
