@@ -5,10 +5,12 @@ extern "C" {
 #include "SPPoint.h"
 #include "SPKDArray.h"
 #include "SPBPriorityQueue.h"
+#include "SPKDTree.h"
 }
 
 
 int main() {
+/*
     int dim = 5;
     double arr1[5] = {4.1, 1, 2, 6, 7};
     SPPoint p1 = spPointCreate(arr1, dim, 0);
@@ -22,6 +24,7 @@ int main() {
     SPPoint p5 = spPointCreate(arr5, dim, 4);
     SPPoint arr[5] = {p1, p2, p3, p4, p5};
     SPKDArray kd = init(arr, 5);
+*/
 
 
     double arra1[2] = {1, 2};
@@ -34,12 +37,14 @@ int main() {
     SPPoint pp4 = spPointCreate(arra4, 2, 3);
     double arra5[2] = {3, 4};
     SPPoint pp5 = spPointCreate(arra5, 2, 4);
-    double arra6[2] = {1000, 1000};
+    double arra6[2] = {320, 321};
     SPPoint pp6 = spPointCreate(arra6, 2, 5);
-    double arra7[2] = {1000, 990.2423};
+    double arra7[2] = {500, 501};
     SPPoint pp7 = spPointCreate(arra7, 2, 6);
-    SPPoint arra[7] = {pp1, pp2, pp3, pp4, pp5,pp6,pp7};
-    SPKDArray kdb = init(arra, 7);
+    SPPoint parra[7] = {pp1, pp2, pp3, pp4, pp5, pp6,pp7};
+    SPKDArray kdb = init(parra, 7);
+
+    int max_split = findMaxSpreadDimension(kdb);
 
     SPKDArray l1;
     SPKDArray r1;
@@ -47,8 +52,8 @@ int main() {
     l1 = res[0];
     r1 = res[1];
     int a = spKDArrayGetDim(kdb);
-    SPPoint * rpoints = spKDArrayGetPointArray(r1);
-    SPPoint * lpoints = spKDArrayGetPointArray(l1);
+    SPPoint *rpoints = spKDArrayGetPointArray(r1);
+    SPPoint *lpoints = spKDArrayGetPointArray(l1);
 
     puts("\nleft array");
     for (int i = 0; i < spKDArrayGetSize(l1); i++) {
@@ -60,10 +65,11 @@ int main() {
         printf("%d ", spPointGetIndex(rpoints[i]));
     }
 
+    //printf("dim to split is %d",max_split);
     puts("\n");
-
-
-
+    //SPKDNode root =  init_kd_tree(kdb,MAX_SPREAD);
+    //SPKDNode root1 =  init_kd_tree(kdb,RANDOM);
+    SPKDNode root2 =  init_kd_tree(kdb,INCREMENTAL);
 
     return 0;
 }

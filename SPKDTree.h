@@ -1,4 +1,5 @@
 #include "SPKDArray.h"
+#include "SPBPriorityQueue.h"
 
 
 #ifndef SPKDTREE_H
@@ -16,6 +17,7 @@ typedef enum SPSplitMethod {
  */
 SPKDNode init_kd_tree(SPKDArray spkdArray, SPLITMETHOD splitMethod);
 
+int findMaxSpreadDimension(SPKDArray spkdArray); //TODO remove this from .h file
 
 //isLeaf
 //getPoint

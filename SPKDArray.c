@@ -7,6 +7,7 @@ int cur_coor = 0;
 typedef struct sp_kdarray {
     int dim;
     int size;
+    int dim_to_split;
     int **dataMatrix;
     SPPoint *pointArray;
 } *KDArray;
@@ -16,17 +17,20 @@ typedef struct sp_kdarray {
 
 
 int compare(const void *a, const void *b) {
-    //printf("coor is %d\n",cur_coor);
+    //printf("coor is %d\n", cur_coor);
     SPPoint *pointA = (SPPoint *) a;
     SPPoint *pointB = (SPPoint *) b;
     double val_a = spPointGetAxisCoor(*pointA, cur_coor);
     double val_b = spPointGetAxisCoor(*pointB, cur_coor);
-    //printf("in sort: %lf -%lf = %lf\n",val_a,val_b,(val_a - val_b));
+    //printf("in sort: %lf -%lf = %lf\n", val_a, val_b, (val_a - val_b));
     if ((val_a - val_b) > 0) {
         return 1;
     }
+    if ((val_a - val_b) < 0) {
+        return -1;
+    }
     else {
-        return 0;
+        return 0; //TODO might add an index comparison so if 'index_a'<'index_b', 'a' will be first
     }
 }
 
@@ -47,11 +51,12 @@ SPKDArray init(SPPoint *arr, int size) {
     for (int coor = 0; coor < dimension; coor++) {
         cur_coor = coor; //update global var for comparison function
         qsort(arr, size, sizeof(SPPoint), compare);
-        //printf("printing image order after sort by coor %d\n", coor);
-        // for (int j = 0; j < size; j++) {
-        //   int ind = spPointGetIndex(arr[j]);
-        //  printf("%d ", ind); }
-        //puts("\n");
+/*        printf("printing image order after sort by coor %d\n", coor);
+        for (int j = 0; j < size; j++) {
+            int ind = spPointGetIndex(arr[j]);
+            printf("%d ", ind);
+        }
+        puts("\n");*/
         for (int num = 0; num < size; num++) {
             data[coor][num] = spPointGetIndex(arr[num]);
 
@@ -68,6 +73,7 @@ SPKDArray init(SPPoint *arr, int size) {
     final->size = size;
     final->dataMatrix = data;
     final->pointArray = pointArray;
+    final->dim_to_split = 0;
     cur_coor = 0;
     return final;
 }
@@ -187,7 +193,6 @@ SPKDArray *split(SPKDArray kdArr, int coor) {
     }
 
 
-
     puts("\nleft map:");
     for (int i = 0; i < size; i++) {
         printf("%d ", leftMap[i]);
@@ -201,11 +206,14 @@ SPKDArray *split(SPKDArray kdArr, int coor) {
     left->pointArray = leftPointArray;
     left->size = leftSize;
     left->dim = dimension;
+    left->dim_to_split = coor;
     left->dataMatrix = leftdata;
     right->pointArray = rightPointArray;
     right->size = rightSize;
-    right->dataMatrix = rightdata;
     right->dim = dimension;
+    right->dim_to_split = coor;
+    right->dataMatrix = rightdata;
+
 
     SPKDArray ret_array[2] = {left, right};
     free(arrayX);
@@ -229,4 +237,8 @@ SPPoint *spKDArrayGetPointArray(SPKDArray kdarray) {
 
 int **spKDArrayGetDataMatrix(SPKDArray kdarray) {
     return kdarray->dataMatrix;
+}
+
+int spKDArrayGetDimToSplit(SPKDArray kdarray) {
+    return kdarray->dim_to_split;
 }
