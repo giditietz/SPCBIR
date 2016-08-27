@@ -12,6 +12,7 @@
 
 
 #define ERROR_MSG_KNN_SEARCH_FAILED "Error: KNN search has failed"
+#define ERROR_MSG_KNN_SEARCH_BPQ_FAILED "Error: KNN search has failed due to a BPQueue issue"
 #define ERROR_MSG_NULL_NODE "Error: node is NULL"
 
 
@@ -172,7 +173,7 @@ bool spKDTreeKNNSearch(SPKDNode curr, SPBPQueue bpq, SPPoint queryPoint) {
         SPListElement newElement = spListElementCreate(curr_index, curr_distance);
         msg = spBPQueueEnqueue(bpq, newElement);
         if ((msg != SP_ELEMENT_SUCCESS) != (msg != SP_BPQUEUE_FULL)) {
-            spLoggerPrintError(msg, __FILE__, __func__, __LINE__);
+            spLoggerPrintError(ERROR_MSG_KNN_SEARCH_BPQ_FAILED, __FILE__, __func__, __LINE__);
             return false;
         }
         return true;
