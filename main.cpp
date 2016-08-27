@@ -6,12 +6,14 @@ extern "C" {
 #include "SPKDArray.h"
 #include "SPBPriorityQueue.h"
 #include "SPKDTree.h"
+#include "SPLogger.h"
 }
 
 
 int main() {
-/*
-    int dim = 5;
+    spLoggerCreate(NULL, SP_LOGGER_DEBUG_INFO_WARNING_ERROR_LEVEL);
+
+/*    int dim = 5;
     double arr1[5] = {4.1, 1, 2, 6, 7};
     SPPoint p1 = spPointCreate(arr1, dim, 0);
     double arr2[5] = {3.1, 2, 3, 5, 6.4};
@@ -23,9 +25,7 @@ int main() {
     double arr5[5] = {0.1, 5, 1, 20, 0.5};
     SPPoint p5 = spPointCreate(arr5, dim, 4);
     SPPoint arr[5] = {p1, p2, p3, p4, p5};
-    SPKDArray kd = init(arr, 5);
-*/
-
+    SPKDArray kd = init(arr, 5);*/
 
     double arra1[2] = {1, 2};
     SPPoint pp1 = spPointCreate(arra1, 2, 0);
@@ -41,12 +41,51 @@ int main() {
     SPPoint pp6 = spPointCreate(arra6, 2, 5);
     double arra7[2] = {500, 501};
     SPPoint pp7 = spPointCreate(arra7, 2, 6);
-    SPPoint parra[7] = {pp1, pp2, pp3, pp4, pp5, pp6,pp7};
-    SPKDArray kdb = init(parra, 7);
+    SPPoint parra[6] = {pp1, pp2, pp3, pp4, pp5, pp6};
+    SPKDArray kdb = init(parra, 6);
 
-    int max_split = findMaxSpreadDimension(kdb);
 
-    SPKDArray l1;
+    double a0[2] = {1, 1};
+    SPPoint f0 = spPointCreate(a0, 2, 0);
+    double a1[2] = {4, 1};
+    SPPoint f1 = spPointCreate(a1, 2, 1);
+    double a2[2] = {1, 4};
+    SPPoint f2 = spPointCreate(a2, 2, 2);
+    double a3[2] = {4, 4};
+    SPPoint f3 = spPointCreate(a3, 2, 3);
+    double a4[2] = {1, 8};
+    SPPoint f4 = spPointCreate(a4, 2, 4);
+    double a5[2] = {4, 8};
+    SPPoint f5 = spPointCreate(a5, 2, 5);
+    double a6[2] = {1, 11};
+    SPPoint f6 = spPointCreate(a6, 2, 6);
+    double a7[2] = {4, 11};
+    SPPoint f7 = spPointCreate(a7, 2, 7);
+    double a8[2] = {10, 11};
+    SPPoint f8 = spPointCreate(a8, 2, 8);
+    double a9[2] = {13, 11};
+    SPPoint f9 = spPointCreate(a9, 2, 9);
+    double a10[2] = {10, 8};
+    SPPoint f10 = spPointCreate(a10, 2, 10);
+    double a11[2] = {13, 8};
+    SPPoint f11 = spPointCreate(a11, 2, 11);
+    double a12[2] = {10, 4};
+    SPPoint f12 = spPointCreate(a12, 2, 12);
+    double a13[2] = {13, 4};
+    SPPoint f13 = spPointCreate(a13, 2, 13);
+    double a14[2] = {10, 1};
+    SPPoint f14 = spPointCreate(a14, 2, 14);
+    double a15[2] = {13, 1};
+    SPPoint f15 = spPointCreate(a15, 2, 15);
+    SPPoint features[16] = {f0,f1,f2,f3,f4,f5,f6,f7,f8,f9,f10,f11,f12,f13,f14,f15};
+    SPKDArray kdarray = init(features, 16);
+
+
+    double aquery[2] = {9.123456, 5.12345};
+    SPPoint fquery = spPointCreate(aquery, 2, 17);
+
+
+ /*   SPKDArray l1;
     SPKDArray r1;
     SPKDArray *res = split(kdb, 0);
     l1 = res[0];
@@ -63,13 +102,15 @@ int main() {
 
     for (int i = 0; i < spKDArrayGetSize(r1); i++) {
         printf("%d ", spPointGetIndex(rpoints[i]));
-    }
+    }*/
 
     //printf("dim to split is %d",max_split);
     puts("\n");
     //SPKDNode root =  init_kd_tree(kdb,MAX_SPREAD);
     //SPKDNode root1 =  init_kd_tree(kdb,RANDOM);
-    SPKDNode root2 =  init_kd_tree(kdb,INCREMENTAL);
+    SPKDNode root2 = spKDTreeInit(kdarray, MAX_SPREAD);
+    SPBPQueue bpq = spBPQueueCreate(5);
+    spKDTreeKNNSearch(root2, bpq, fquery);
 
     return 0;
 }

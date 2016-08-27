@@ -15,10 +15,20 @@ typedef enum SPSplitMethod {
  * @param spkdArray
  * @param splitMethod
  */
-SPKDNode init_kd_tree(SPKDArray spkdArray, SPLITMETHOD splitMethod);
+SPKDNode spKDTreeInit(SPKDArray spkdArray, SPLITMETHOD splitMethod);
 
-int findMaxSpreadDimension(SPKDArray spkdArray); //TODO remove this from .h file
+bool spKDTreeIsLeaf(SPKDNode);
 
-//isLeaf
-//getPoint
+int spKDTreeNodeGetDim(SPKDNode);
+
+double spKDTreeNodeGetVal(SPKDNode);
+
+SPKDNode spKDTreeNodeGetLeftChild(SPKDNode);
+
+SPKDNode spKDTreeNodeGetRightChild(SPKDNode);
+
+SPPoint spKDTreeNodeGetData(SPKDNode);
+
+bool spKDTreeKNNSearch(SPKDNode curr, SPBPQueue bpq, SPPoint queryPoint);
+
 #endif //SPCBIR_SPKDTREE_H

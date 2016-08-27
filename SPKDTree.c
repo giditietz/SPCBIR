@@ -4,7 +4,16 @@
 #include "SPKDTree.h"
 #include <stdio.h>
 #include <time.h>
+#include "SPBPriorityQueue.h"
+#include "SPListElement.h"
+#include "SPLogger.h"
+#include <math.h>
 #include <float.h>
+
+
+#define ERROR_MSG_KNN_SEARCH_FAILED "Error: KNN search has failed"
+#define ERROR_MSG_NULL_NODE "Error: node is NULL"
+
 
 int IS_ROOT = true;
 
@@ -60,7 +69,7 @@ double findMedianValueByCoor(SPKDArray spkdArray, int coor) {
 
 }
 
-SPKDNode init_kd_tree(SPKDArray spkdArray, SPLITMETHOD splitmethod) {
+SPKDNode spKDTreeInit(SPKDArray spkdArray, SPLITMETHOD splitmethod) {
     SPKDNode root = (SPKDNode) malloc(sizeof(*root));
     root->splitMethod = splitmethod;
     time_t t;
@@ -73,8 +82,8 @@ SPKDNode init_kd_tree(SPKDArray spkdArray, SPLITMETHOD splitmethod) {
     //TODO (spKDArrayGetSize(spkdArray)==1) -> error
     int dim_for_split = 0;
     if (spKDArrayGetSize(spkdArray) == 1) { //stopping condition
-        //TODO dim & val suppose to be INVALID, what does that mean? INFTY?
-        root->dim =-1;
+        root->val = DBL_MAX;
+        root->dim = -1;
         root->left = NULL;
         root->right = NULL;
         root->data = spKDArrayGetPointArray(spkdArray)[0];
@@ -103,10 +112,105 @@ SPKDNode init_kd_tree(SPKDArray spkdArray, SPLITMETHOD splitmethod) {
         root->dim = dim_for_split;
         root->val = findMedianValueByCoor(spkdArray, dim_for_split);
         root->data = NULL;
-        root->left = init_kd_tree(left, splitmethod);
-        root->right = init_kd_tree(right, splitmethod);
+        root->left = spKDTreeInit(left, splitmethod);
+        root->right = spKDTreeInit(right, splitmethod);
         return root;
 
     }
 }
 
+bool spKDTreeIsLeaf(SPKDNode node) {
+    if ((NULL == node->left) && (NULL == node->right)) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+
+int spKDTreeNodeGetDim(SPKDNode node) {
+    return node->dim;
+}
+
+double spKDTreeNodeGetVal(SPKDNode node) {
+    return node->val;
+}
+
+SPKDNode spKDTreeNodeGetLeftChild(SPKDNode node) {
+    return node->left;
+}
+
+SPKDNode spKDTreeNodeGetRightChild(SPKDNode node) {
+    return node->right;
+}
+
+SPPoint spKDTreeNodeGetData(SPKDNode node) {
+    return node->data;
+}
+
+
+bool spKDTreeKNNSearch(SPKDNode curr, SPBPQueue bpq, SPPoint queryPoint) {
+    int curr_index;
+    double curr_distance;
+    int cur_dim;
+    SPKDNode nextNode;
+    SPKDNode remainingNode;
+    SP_BPQUEUE_MSG msg;
+
+    cur_dim = spKDTreeNodeGetDim(curr);
+
+    //if curr is null
+    if (NULL == curr) {
+        spLoggerPrintError(ERROR_MSG_NULL_NODE, __FILE__, __func__, __LINE__); //TODO Might change to info
+        return true;
+    }
+        /*if curr is a leaf just enqueue it - if it's not good it won't be stored due to BPQueue's properties.*/
+    else if (spKDTreeIsLeaf(curr)) {
+        curr_index = spPointGetIndex(spKDTreeNodeGetData(curr));
+        curr_distance = spPointL2SquaredDistance(queryPoint, spKDTreeNodeGetData(curr));
+        SPListElement newElement = spListElementCreate(curr_index, curr_distance);
+        msg = spBPQueueEnqueue(bpq, newElement);
+        if ((msg != SP_ELEMENT_SUCCESS) != (msg != SP_BPQUEUE_FULL)) {
+            spLoggerPrintError(msg, __FILE__, __func__, __LINE__);
+            return false;
+        }
+        return true;
+    }
+    else {
+        /* Recursively search the half of the tree that contains the test point. */
+        if (spPointGetAxisCoor(queryPoint, cur_dim) <= spKDTreeNodeGetVal(curr)) { //search the left subtree
+            nextNode = spKDTreeNodeGetLeftChild(curr);
+            remainingNode = spKDTreeNodeGetRightChild(curr);
+            if (!spKDTreeKNNSearch(nextNode, bpq, queryPoint)) {
+                spLoggerPrintError(ERROR_MSG_KNN_SEARCH_FAILED, __FILE__, __func__, __LINE__);
+                return false;
+            }
+        }
+        else {//search the right subtree
+            nextNode = spKDTreeNodeGetRightChild(curr);
+            remainingNode = spKDTreeNodeGetLeftChild(curr);
+            if (!spKDTreeKNNSearch(nextNode, bpq, queryPoint)) {
+                spLoggerPrintError(ERROR_MSG_KNN_SEARCH_FAILED, __FILE__, __func__, __LINE__);
+                return false;
+            }
+        }
+        SPListElement lastElement = spBPQueuePeekLast(bpq);
+        double lastElementPriority = spListElementGetValue(lastElement);
+        double distance_from_median_line = (fabs(spKDTreeNodeGetVal(curr) - spPointGetAxisCoor(queryPoint, cur_dim)));
+        spListElementDestroy(lastElement); //used only for the above variable
+
+        /* If the candidate hypersphere crosses this splitting plane,
+         * look on the other side of the plane by examining the other subtree*/
+        if (!spBPQueueIsFull(bpq) || distance_from_median_line < lastElementPriority) {
+            if (!spKDTreeKNNSearch(remainingNode, bpq, queryPoint)) {
+                spLoggerPrintError(ERROR_MSG_KNN_SEARCH_FAILED, __FILE__, __func__, __LINE__);
+                return false;
+
+            }
+
+        }
+
+        return true;
+    }
+}
