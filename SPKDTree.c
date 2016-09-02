@@ -215,3 +215,25 @@ bool spKDTreeKNNSearch(SPKDNode curr, SPBPQueue bpq, SPPoint queryPoint) {
         return true;
     }
 }
+
+//TODO verify that it's working. The tests have shown that it's fine, but we need to make sure.
+void spKDTreeDestroy(SPKDNode node) {
+    if (spKDTreeIsLeaf(node)) {
+        if (NULL != node->data) { //data can only appear in leaves, but not every leaf contains data.
+            spPointDestroy(node->data);
+        }
+        free(node);
+    }
+    else {
+        if (NULL != node->left) {
+            spKDTreeDestroy(node->left);
+            node->left = NULL;
+
+        }
+        if (NULL != node->right) {
+            spKDTreeDestroy(node->right);
+            node->right = NULL;
+
+        }
+    }
+}

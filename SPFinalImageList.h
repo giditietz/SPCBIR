@@ -5,5 +5,5 @@
 #ifndef SPCBIR_SPFINALIMAGELIST_H
 #define SPCBIR_SPFINALIMAGELIST_H
 
-int *spGetFinalImageList(SPKDNode kdtree, SPPoint *queryImageFeatures, int numOfImages, int spknn, int numOfSimilarImages);
+int *spGetFinalImageList(SPKDNode kdtree, SPPoint *queryImageFeatures,int spNumOfFeatures, int numOfImages, int spknn, int numOfSimilarImages);
 #endif //SPCBIR_SPFINALIMAGELIST_H

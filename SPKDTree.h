@@ -31,4 +31,6 @@ SPPoint spKDTreeNodeGetData(SPKDNode);
 
 bool spKDTreeKNNSearch(SPKDNode curr, SPBPQueue bpq, SPPoint queryPoint);
 
+void spKDTreeDestroy(SPKDNode node);
+
 #endif //SPCBIR_SPKDTREE_H

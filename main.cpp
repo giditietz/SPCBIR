@@ -7,6 +7,8 @@ extern "C" {
 #include "SPBPriorityQueue.h"
 #include "SPKDTree.h"
 #include "SPLogger.h"
+#include "SPFinalImageList.h"
+
 }
 
 
@@ -77,32 +79,36 @@ int main() {
     SPPoint f14 = spPointCreate(a14, 2, 14);
     double a15[2] = {13, 1};
     SPPoint f15 = spPointCreate(a15, 2, 15);
-    SPPoint features[16] = {f0,f1,f2,f3,f4,f5,f6,f7,f8,f9,f10,f11,f12,f13,f14,f15};
+    SPPoint features[16] = {f0, f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15};
     SPKDArray kdarray = init(features, 16);
 
 
-    double aquery[2] = {9.123456, 5.12345};
-    SPPoint fquery = spPointCreate(aquery, 2, 17);
+    double aquery[2] = {6, 7};
+    SPPoint f1query = spPointCreate(aquery, 2, 17);
 
+    double bquery[2] = {2.5, 2.5};
+    SPPoint f2query = spPointCreate(bquery, 2, 17);
 
- /*   SPKDArray l1;
-    SPKDArray r1;
-    SPKDArray *res = split(kdb, 0);
-    l1 = res[0];
-    r1 = res[1];
-    int a = spKDArrayGetDim(kdb);
-    SPPoint *rpoints = spKDArrayGetPointArray(r1);
-    SPPoint *lpoints = spKDArrayGetPointArray(l1);
+    SPPoint qfeatures[2] = {f1query, f2query};
 
-    puts("\nleft array");
-    for (int i = 0; i < spKDArrayGetSize(l1); i++) {
-        printf("%d ", spPointGetIndex(lpoints[i]));
-    }
-    puts("\nright array");
+    /*   SPKDArray l1;
+       SPKDArray r1;
+       SPKDArray *res = split(kdb, 0);
+       l1 = res[0];
+       r1 = res[1];
+       int a = spKDArrayGetDim(kdb);
+       SPPoint *rpoints = spKDArrayGetPointArray(r1);
+       SPPoint *lpoints = spKDArrayGetPointArray(l1);
 
-    for (int i = 0; i < spKDArrayGetSize(r1); i++) {
-        printf("%d ", spPointGetIndex(rpoints[i]));
-    }*/
+       puts("\nleft array");
+       for (int i = 0; i < spKDArrayGetSize(l1); i++) {
+           printf("%d ", spPointGetIndex(lpoints[i]));
+       }
+       puts("\nright array");
+
+       for (int i = 0; i < spKDArrayGetSize(r1); i++) {
+           printf("%d ", spPointGetIndex(rpoints[i]));
+       }*/
 
     //printf("dim to split is %d",max_split);
     puts("\n");
@@ -110,7 +116,11 @@ int main() {
     //SPKDNode root1 =  init_kd_tree(kdb,RANDOM);
     SPKDNode root2 = spKDTreeInit(kdarray, MAX_SPREAD);
     SPBPQueue bpq = spBPQueueCreate(5);
-    spKDTreeKNNSearch(root2, bpq, fquery);
+    spKDTreeKNNSearch(root2, bpq, f1query);
+    int* images = spGetFinalImageList(root2,qfeatures,2,16,7,3);
 
+    for (int i=0;i <3;i++){
+        printf("%d ",images[i]);
+    }
     return 0;
 }
