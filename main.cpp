@@ -32,7 +32,7 @@ int main() {
     double arra1[2] = {1, 2};
     SPPoint pp1 = spPointCreate(arra1, 2, 0);
     double arra2[2] = {123, 11};
-    SPPoint pp2 = spPointCreate(arra2, 2, 1);
+    SPPoint pp2 = spPointCreate(arra2, 2, 0);
     double arra3[2] = {2, 7};
     SPPoint pp3 = spPointCreate(arra3, 2, 2);
     double arra4[2] = {9, 70};
@@ -50,48 +50,48 @@ int main() {
     double a0[2] = {1, 1};
     SPPoint f0 = spPointCreate(a0, 2, 0);
     double a1[2] = {4, 1};
-    SPPoint f1 = spPointCreate(a1, 2, 1);
+    SPPoint f1 = spPointCreate(a1, 2, 0);
     double a2[2] = {1, 4};
-    SPPoint f2 = spPointCreate(a2, 2, 2);
+    SPPoint f2 = spPointCreate(a2, 2, 1);
     double a3[2] = {4, 4};
-    SPPoint f3 = spPointCreate(a3, 2, 3);
+    SPPoint f3 = spPointCreate(a3, 2, 1);
     double a4[2] = {1, 8};
-    SPPoint f4 = spPointCreate(a4, 2, 4);
+    SPPoint f4 = spPointCreate(a4, 2, 2);
     double a5[2] = {4, 8};
-    SPPoint f5 = spPointCreate(a5, 2, 5);
+    SPPoint f5 = spPointCreate(a5, 2, 2);
     double a6[2] = {1, 11};
-    SPPoint f6 = spPointCreate(a6, 2, 6);
+    SPPoint f6 = spPointCreate(a6, 2, 3);
     double a7[2] = {4, 11};
-    SPPoint f7 = spPointCreate(a7, 2, 7);
+    SPPoint f7 = spPointCreate(a7, 2,3);
     double a8[2] = {10, 11};
-    SPPoint f8 = spPointCreate(a8, 2, 8);
+    SPPoint f8 = spPointCreate(a8, 2, 4);
     double a9[2] = {13, 11};
-    SPPoint f9 = spPointCreate(a9, 2, 9);
+    SPPoint f9 = spPointCreate(a9, 2, 4);
     double a10[2] = {10, 8};
-    SPPoint f10 = spPointCreate(a10, 2, 10);
+    SPPoint f10 = spPointCreate(a10, 2, 5);
     double a11[2] = {13, 8};
-    SPPoint f11 = spPointCreate(a11, 2, 11);
+    SPPoint f11 = spPointCreate(a11, 2, 5);
     double a12[2] = {10, 4};
-    SPPoint f12 = spPointCreate(a12, 2, 12);
+    SPPoint f12 = spPointCreate(a12, 2, 6);
     double a13[2] = {13, 4};
-    SPPoint f13 = spPointCreate(a13, 2, 13);
+    SPPoint f13 = spPointCreate(a13, 2, 6);
     double a14[2] = {10, 1};
-    SPPoint f14 = spPointCreate(a14, 2, 14);
+    SPPoint f14 = spPointCreate(a14, 2, 7);
     double a15[2] = {13, 1};
-    SPPoint f15 = spPointCreate(a15, 2, 15);
+    SPPoint f15 = spPointCreate(a15, 2, 7);
     SPPoint features[16] = {f0, f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15};
     SPKDArray kdarray = init(features, 16);
 
 
-    double aquery[2] = {6, 7};
+    double aquery[2] = {8, 4};
     SPPoint f1query = spPointCreate(aquery, 2, 17);
 
-    double bquery[2] = {2.5, 2.5};
+    double bquery[2] = {8, 5.9};
     SPPoint f2query = spPointCreate(bquery, 2, 17);
 
     SPPoint qfeatures[2] = {f1query, f2query};
 
-    /*   SPKDArray l1;
+/*       SPKDArray l1;
        SPKDArray r1;
        SPKDArray *res = split(kdb, 0);
        l1 = res[0];
@@ -117,7 +117,7 @@ int main() {
     SPKDNode root2 = spKDTreeInit(kdarray, MAX_SPREAD);
     SPBPQueue bpq = spBPQueueCreate(5);
     spKDTreeKNNSearch(root2, bpq, f1query);
-    int* images = spGetFinalImageList(root2,qfeatures,2,16,7,3);
+    int* images = spGetFinalImageList(root2,qfeatures,2,8,5,3);
 
     for (int i=0;i <3;i++){
         printf("%d ",images[i]);

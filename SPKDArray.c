@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "SPPoint.h"
+#include "IndexedPoint.h"
 
 int cur_coor = 0;
 typedef struct sp_kdarray {
@@ -10,7 +11,9 @@ typedef struct sp_kdarray {
     int dim_to_split;
     int **dataMatrix;
     SPPoint *pointArray;
-} *KDArray;
+} *SPKDArray;
+
+
 
 //TODO Add logging
 //TODO remove commented-out prints.
@@ -18,10 +21,10 @@ typedef struct sp_kdarray {
 
 int compare(const void *a, const void *b) {
     //printf("coor is %d\n", cur_coor);
-    SPPoint *pointA = (SPPoint *) a;
-    SPPoint *pointB = (SPPoint *) b;
-    double val_a = spPointGetAxisCoor(*pointA, cur_coor);
-    double val_b = spPointGetAxisCoor(*pointB, cur_coor);
+    IndexedPoint *ipointA = (IndexedPoint *) a;
+    IndexedPoint *ipointB = (IndexedPoint *) b;
+    double val_a = indexedPointGetPointAxisData(*ipointA, cur_coor);
+    double val_b = indexedPointGetPointAxisData(*ipointB, cur_coor);
     //printf("in sort: %lf -%lf = %lf\n", val_a, val_b, (val_a - val_b));
     if ((val_a - val_b) > 0) {
         return 1;
@@ -41,6 +44,11 @@ SPKDArray init(SPPoint *arr, int size) {
     for (int i = 0; i < size; i++) {
         pointArray[i] = spPointCopy(arr[i]);
     }
+    IndexedPoint indexedPointArray[size];
+    for (int i = 0; i < size; i++) {
+        indexedPointArray[i] = indexedPointInit(pointArray[i],i);
+    }
+
     SPKDArray final = (SPKDArray) malloc(sizeof(*final)); //might be an issue
     int dimension = spPointGetDimension(arr[0]);
     //dynamically allocate an int matrix, it will assigned to the KDArray
@@ -50,7 +58,7 @@ SPKDArray init(SPPoint *arr, int size) {
     }
     for (int coor = 0; coor < dimension; coor++) {
         cur_coor = coor; //update global var for comparison function
-        qsort(arr, size, sizeof(SPPoint), compare);
+        qsort(indexedPointArray, size, sizeof(IndexedPoint), compare);
 /*        printf("printing image order after sort by coor %d\n", coor);
         for (int j = 0; j < size; j++) {
             int ind = spPointGetIndex(arr[j]);
@@ -58,7 +66,7 @@ SPKDArray init(SPPoint *arr, int size) {
         }
         puts("\n");*/
         for (int num = 0; num < size; num++) {
-            data[coor][num] = spPointGetIndex(arr[num]);
+            data[coor][num] = indexedPointGetIndex(indexedPointArray[num]);
 
         }
     }
@@ -75,6 +83,10 @@ SPKDArray init(SPPoint *arr, int size) {
     final->pointArray = pointArray;
     final->dim_to_split = 0;
     cur_coor = 0;
+    //destroy the indexedPointArray, it will not be used again.
+    for (int i = 0; i < size; i++) {
+        indexedPointDestroy(indexedPointArray[i]);
+    }
     return final;
 }
 
@@ -114,9 +126,9 @@ SPKDArray *split(SPKDArray kdArr, int coor) {
     int rightPointArrayIndex = 0;
     int leftPointArrayIndex = 0;
     puts("\npoint array:");
-    for (int i = 0; i < size; i++) {
+/*    for (int i = 0; i < size; i++) {
         printf("%d ", spPointGetIndex(pointArray[i]));
-    }
+    }*/
     for (int i = 0; i < size; i++) {
         int idexOfPointInGivenCoor = dataMatrix[coor][i];
         if (arrayX[idexOfPointInGivenCoor] == 0) {

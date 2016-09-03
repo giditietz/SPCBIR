@@ -2,6 +2,7 @@
 <module type="CPP_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/SPKDArray.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SPLogger.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SPPoint.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SPFinalImageList.h" isTestSource="false" />
@@ -10,14 +11,15 @@
       <sourceFolder url="file://$MODULE_DIR$/SPListElement.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SPListElement.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/IndexedPoint.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SPList.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/SPKDArray.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/SPKDTree.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SPBPriorityQueue.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SPKDTree.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SPBPriorityQueue.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SPKDArray.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/main.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/SPKDTree.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/IndexedPoint.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SPList.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SPPoint.h" isTestSource="false" />
     </content>
