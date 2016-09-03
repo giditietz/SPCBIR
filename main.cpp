@@ -83,13 +83,19 @@ int main() {
     SPKDArray kdarray = init(features, 16);
 
 
-    double aquery[2] = {8, 4};
+    double aquery[2] = {2.5, 6};
     SPPoint f1query = spPointCreate(aquery, 2, 17);
 
-    double bquery[2] = {8, 5.9};
+    double bquery[2] = {2.5, 9.5};
     SPPoint f2query = spPointCreate(bquery, 2, 17);
 
-    SPPoint qfeatures[2] = {f1query, f2query};
+    double cquery[2] = {7, 6};
+    SPPoint f3query = spPointCreate(cquery, 2, 17);
+
+    double dquery[2] = {7, 9.5};
+    SPPoint f4query = spPointCreate(dquery, 2, 17);
+
+    SPPoint qfeatures[4] = {f1query, f2query,f3query,f4query};
 
 /*       SPKDArray l1;
        SPKDArray r1;
@@ -114,12 +120,13 @@ int main() {
     puts("\n");
     //SPKDNode root =  init_kd_tree(kdb,MAX_SPREAD);
     //SPKDNode root1 =  init_kd_tree(kdb,RANDOM);
-    SPKDNode root2 = spKDTreeInit(kdarray, MAX_SPREAD);
+    SPKDNode root2 = spKDTreeInit(kdarray, INCREMENTAL);
     SPBPQueue bpq = spBPQueueCreate(5);
     spKDTreeKNNSearch(root2, bpq, f1query);
-    int* images = spGetFinalImageList(root2,qfeatures,2,8,5,3);
+    spKDTreeKNNSearch(root2, bpq, f1query);
+    int* images = spGetFinalImageList(root2,qfeatures,4,8,4,4);
 
-    for (int i=0;i <3;i++){
+    for (int i=0;i <4;i++){
         printf("%d ",images[i]);
     }
     return 0;

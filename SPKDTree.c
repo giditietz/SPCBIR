@@ -107,12 +107,12 @@ SPKDNode spKDTreeInit(SPKDArray spkdArray, SPLITMETHOD splitmethod) {
                 dim_for_split = (spKDArrayGetDimToSplit(spkdArray) + 1) % (max_dim); //TODO verify correctness}
             }
         }
-        res = split(spkdArray, dim_for_split);
-        left = res[0];
-        right = res[1];
         root->dim = dim_for_split;
         root->val = findMedianValueByCoor(spkdArray, dim_for_split);
         root->data = NULL;
+        res = split(spkdArray, dim_for_split);
+        left = res[0];
+        right = res[1];
         root->left = spKDTreeInit(left, splitmethod);
         root->right = spKDTreeInit(right, splitmethod);
         return root;
