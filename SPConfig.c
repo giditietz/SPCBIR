@@ -7,6 +7,7 @@
 #include "Malloc_Macro.h"
 #include <string.h>
 #include <assert.h>
+#include <stdbool.h>
 
 #define LINE_LENGTH 1024
 int createDefaultValuesConfig(SPConfig config);
