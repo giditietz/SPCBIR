@@ -6,20 +6,27 @@
       <sourceFolder url="file://$MODULE_DIR$/SPLogger.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SPPoint.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SPFinalImageList.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Malloc_Macro.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SPLogger.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SPFinalImageList.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SPListElement.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/SPImageProc.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SPListElement.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/SPKDTree.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/IndexedPoint.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SPList.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SPKDTree.c" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/SPBPriorityQueue.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/SPKDTree.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/SPConfig.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/SPImageProc.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SPBPriorityQueue.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/SPBPriorityQueue.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SPKDArray.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/IndexedPoint.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/regError.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/regError.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/SPConfig.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SPList.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SPPoint.h" isTestSource="false" />
     </content>
@@ -203,6 +210,7 @@
           <root url="file:///Library/Frameworks/iTunesLibrary.framework/Headers" />
           <root url="file:///usr/include" />
           <root url="file:///usr/local/include" />
+          <root url="file:///usr/local/Cellar/opencv3/3.1.0_3/include" />
         </CLASSES>
         <SOURCES>
           <root url="file:///System/Library/Frameworks/AudioToolbox.framework/Headers" />
@@ -381,6 +389,7 @@
           <root url="file:///Library/Frameworks/iTunesLibrary.framework/Headers" />
           <root url="file:///usr/include" />
           <root url="file:///usr/local/include" />
+          <root url="file:///usr/local/Cellar/opencv3/3.1.0_3/include" />
         </SOURCES>
       </library>
     </orderEntry>

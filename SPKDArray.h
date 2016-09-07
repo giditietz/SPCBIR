@@ -11,7 +11,7 @@ typedef struct sp_kdarray *SPKDArray;
 /** Initializes the kd-array with the data given by arr.
  * The complexity of this operation is 𝑂(𝑑 × 𝑛𝑙𝑜𝑔(𝑛)).
  **/
-SPKDArray init(SPPoint *arr, int size);
+SPKDArray spKDArrayInit(SPPoint *arr, int size);
 
 /**Returns two kd-arrays (kdLeft, kdRight) such that the first ⌈𝒏/𝟐⌉ points with
  * respect to the coordinate coor are in kdLeft , and the rest of the points are in kdRight

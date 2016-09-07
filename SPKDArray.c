@@ -21,7 +21,7 @@ typedef struct sp_kdarray {
 
 /**
  * Destroys a KDArray
- * @param kdarray 
+ * @param kdarray
  */
 void spKDArrayDestroy(SPKDArray kdarray) {
     int size = kdarray->size;

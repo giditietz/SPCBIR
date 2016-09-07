@@ -44,7 +44,7 @@ int main() {
     double arra7[2] = {500, 501};
     SPPoint pp7 = spPointCreate(arra7, 2, 6);
     SPPoint parra[6] = {pp1, pp2, pp3, pp4, pp5, pp6};
-    SPKDArray kdb = init(parra, 6);
+    SPKDArray kdb = spKDArrayInit(parra, 6);
 
 
     double a0[2] = {1, 1};
@@ -80,7 +80,7 @@ int main() {
     double a15[2] = {13, 1};
     SPPoint f15 = spPointCreate(a15, 2, 7);
     SPPoint features[16] = {f0, f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15};
-    SPKDArray kdarray = init(features, 16);
+    SPKDArray kdarray = spKDArrayInit(features, 16);
 
 
     double aquery[2] = {2.5, 6};
