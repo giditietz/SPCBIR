@@ -10,7 +10,6 @@
 
 
 int *spGetFinalImageList(SPConfig cfg, SPKDNode kdtree, int *finalIndexArray, SPPoint *queryImageFeatures) {
-    //TODO use SPConfig fields instead
     SP_CONFIG_MSG msg;
     int res = SUCCESS;
     int spNumOfFeatures = spConfigGetNumOfFeatures(cfg, &msg);

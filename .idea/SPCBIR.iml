@@ -2,10 +2,10 @@
 <module type="CPP_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/SPBPriorityQueue.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SPImageProc.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/KDTreeTest.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/SPBPriorityQueue.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/SPBPriorityQueue.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Functions.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SPFinalImageList.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SPKDArray.h" isTestSource="false" />
@@ -27,12 +27,12 @@
       <sourceFolder url="file://$MODULE_DIR$/SPKDTree.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Malloc_Macro.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SPKDTree.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Functions.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/regError.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SPLogger.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/main.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/mainUtils.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SPLogger.c" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/mainUtils.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/SPBPriorityQueue.h" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">

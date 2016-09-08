@@ -8,8 +8,10 @@
 #include <string.h>
 #include <assert.h>
 #include <stdbool.h>
+#include <assert.h>
 
 #define LINE_LENGTH 1024
+#define FEATS ".feats"
 
 int createDefaultValuesConfig(SPConfig config);
 
@@ -135,6 +137,26 @@ int spConfigGetspNumOfSimilarImages(const SPConfig config, SP_CONFIG_MSG *msg) {
     }
 }
 
+SP_CONFIG_MSG spConfigGetFeaturesPathFeats(char* imagePath, const SPConfig config,
+                                           int index){
+    char indexStr[LINE_LENGTH];
+    if(imagePath==NULL||config==NULL){
+        return SP_CONFIG_INVALID_ARGUMENT;
+    }
+    if(index>=config->spNumOfImages){
+        return SP_CONFIG_INDEX_OUT_OF_RANGE;
+    }
+    else{
+        strcat(imagePath,config->spImagesDirectory);
+        strcat(imagePath,config->spImagesPrefix);
+        sprintf(indexStr,"%d",index);
+        strcat(imagePath,indexStr);
+        strcat(imagePath,FEATS);
+        return SP_CONFIG_SUCCESS;
+
+
+    }
+}
 
 int spConfigGetPCADim(const SPConfig config, SP_CONFIG_MSG *msg) {
     assert(msg != NULL);
@@ -157,6 +179,7 @@ SP_CONFIG_MSG spConfigGetImagePath(char *imagePath, const SPConfig config,
         return SP_CONFIG_INDEX_OUT_OF_RANGE;
     }
     else {
+        strcpy(imagePath,""); //it was an error
         strcat(imagePath, config->spImagesDirectory);
         strcat(imagePath, config->spImagesPrefix);
         sprintf(indexStr, "%d", index);
@@ -165,6 +188,16 @@ SP_CONFIG_MSG spConfigGetImagePath(char *imagePath, const SPConfig config,
         return SP_CONFIG_SUCCESS;
 
 
+    }
+}
+SP_KD_TREE_SPLIT_METHOD spConfigGetSplitMethod(const SPConfig config, SP_CONFIG_MSG* msg){
+    assert(msg!=NULL);
+    if(config==NULL){
+        *msg=SP_CONFIG_INVALID_ARGUMENT;
+        return INCREMENTAL;
+    }else{
+        *msg=SP_CONFIG_SUCCESS;
+        return config->spKDTreeSplitMethod;
     }
 }
 
@@ -539,6 +572,13 @@ int removeSpaceAndCheckValid(char **line) {
     (*line)[index] = '\0';
     return SUCCESS;
 }
+
+
+
+
+
+
+
 
 
 

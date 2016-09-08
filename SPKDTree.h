@@ -7,9 +7,7 @@
 #define SPKDTREE_H
 typedef struct sp_kd_node *SPKDNode;
 
-/*typedef enum SPSplitMethod {
-    MAX_SPREAD, RANDOM, INCREMENTAL
-} SPLITMETHOD;*/
+
 
 /**
  *
