@@ -161,6 +161,7 @@ sp::ImageProc::ImageProc(const SPConfig config) {
 		}
 	} catch (...) {
 		spLoggerPrintError(GENERAL_ERROR_MSG, __FILE__, __func__, __LINE__);
+
 		throw Exception();
 	}
 }

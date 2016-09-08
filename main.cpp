@@ -47,6 +47,8 @@ int main(int argc, char *argv[]) {
 #define DEFAULT_FILE_NAME "spcbir.config"
 #define C "-c"
 #define COMMAND_LINE_ERROR "Invalid command line : use -c"
+
+
 #define MAX_LEN 1024
 
 extern "C" {
@@ -57,17 +59,20 @@ extern "C" {
 #include "SPLogger.h"
 #include "SPFinalImageList.h"
 #include "SPConfig.h"
+#include "SPKDTree.h"
+#include <limits.h>
+#include "KDTreeTest.h"
 #include "SPPoint.h"
 #include "Functions.h"
 
 
 }
 
-
 int main(int argc, char *argv[]) {
+    //Decelerations & Inits
     SP_CONFIG_MSG msg;
     SPConfig config = NULL;
-    int res=SP_CONFIG_SUCCESS;
+    int res = SP_CONFIG_SUCCESS;
     int *featuresNum = NULL;
     SPPoint **arrImageFeatures = NULL;
     int imageNum;
@@ -75,8 +80,13 @@ int main(int argc, char *argv[]) {
     SPPoint *totalImageFeatures = NULL;
     SP_KD_TREE_SPLIT_METHOD method;
     bool extraction;
-    int temp=0;
+    int temp = 0;
     char imagePath[MAX_LEN];
+    bool proceed = true;
+    SPPoint *queryPointArray;
+    int numOfFeatsQueryImage;
+    int indexOfQueryImage = INT_MAX;
+
     //Create SPConfig
     if (argc == 1) {
         config = spConfigCreate(DEFAULT_FILE_NAME, &msg);
@@ -107,31 +117,33 @@ int main(int argc, char *argv[]) {
     }
 
     MALLOC_MACRO(arrImageFeatures, SPPoint**, imageNum * sizeof(SPPoint *));
-   // MALLOC_MACRO(arrImageFeatures, SPPoint**, imageNum * sizeof(SPPoint *));
-    MALLOC_MACRO(featuresNum,int*, imageNum * sizeof(int));
+    // MALLOC_MACRO(arrImageFeatures, SPPoint**, imageNum * sizeof(SPPoint *));
+    MALLOC_MACRO(featuresNum, int*, imageNum * sizeof(int));
     //extraction mode
 
-    if(extraction){
-       // imagePath="\0";
-        for(temp = 0 ; temp < imageNum ; temp++){
+
+
+    if (extraction) {
+        // imagePath="\0";
+        for (temp = 0; temp < imageNum; temp++) {
             // Get image path
-            msg=spConfigGetImagePath(imagePath,config,temp);
-            if(msg!=SP_CONFIG_SUCCESS){
+            msg = spConfigGetImagePath(imagePath, config, temp);
+            if (msg != SP_CONFIG_SUCCESS) {
                 goto fail;
             }
 
             arrImageFeatures[temp] = imageProcObject->getImageFeatures(imagePath, temp, &(featuresNum[temp]));
-            if(NULL == arrImageFeatures[temp]){
+            if (NULL == arrImageFeatures[temp]) {
                 goto fail;
             }
         }
-        for(int i=0; i<imageNum; i++){
-            printf("\n%d",featuresNum[i]);
+        for (int i = 0; i < imageNum; i++) {
+            printf("\n%d", featuresNum[i]);
         }
 
-        for(int i=0;i<imageNum;i++){
-           res=writeFeatures(config,i,featuresNum[i],arrImageFeatures[i]);
-            if(res!=SP_CONFIG_SUCCESS){
+        for (int i = 0; i < imageNum; i++) {
+            res = writeFeatures(config, i, featuresNum[i], arrImageFeatures[i]);
+            if (res != SP_CONFIG_SUCCESS) {
                 goto fail;
             }
         }
@@ -139,6 +151,24 @@ int main(int argc, char *argv[]) {
     }
 
 
+    test(config); //temporary test for kdtree, only works with conf-gidi.txt (change the images path)
+
+    //query
+
+    while (proceed) {
+        char path[MAX_LEN];
+        puts("\nPlease enter an image path:\n");
+        fgets(path, MAX_LEN, stdin); //user input
+        if (0 == strcmp("<>\n", path)) { //TODO Remove "\n"!!!
+            proceed = false;
+            puts("Exiting...\n");
+            goto fail; //Program is terminated, so we move to the cleanup phase.
+        }
+        if (proceed) {
+            queryPointArray = imageProcObject->getImageFeatures(path, indexOfQueryImage,
+                                                                &numOfFeatsQueryImage); //need to check
+        }
+    }
     fail:
     FREE_MACRO(featuresNum);
     FREE_MACRO(arrImageFeatures);
@@ -148,4 +178,7 @@ int main(int argc, char *argv[]) {
 
     return 0;
 }
+
+
+///Users/gideontietz/Desktop/Images/quaryA.png
 

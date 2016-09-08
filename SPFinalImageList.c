@@ -6,10 +6,29 @@
 #include "SPBPriorityQueue.h"
 #include "SPListElement.h"
 #include "SPLogger.h"
+#include "SPConfig.h"
 
 
-int *spGetFinalImageList(SPKDNode kdtree, SPPoint *queryImageFeatures, int spNumOfFeatures, int numOfImages, int spknn, int numOfSimilarImages) {
-    //TODO use SPConfig fields instead
+int *spGetFinalImageList(SPConfig cfg, SPKDNode kdtree, int *finalIndexArray, SPPoint *queryImageFeatures) {
+    SP_CONFIG_MSG msg;
+    int res = SUCCESS;
+    int spNumOfFeatures = spConfigGetNumOfFeatures(cfg, &msg);
+    if (msg != SP_CONFIG_SUCCESS) {
+        goto fail;
+    }
+    int numOfImages = spConfigGetNumOfImages(cfg, &msg);
+    if (msg != SP_CONFIG_SUCCESS) {
+        goto fail;
+    }
+    int spknn = spConfigGetSPKnn(cfg, &msg);
+    if (msg != SP_CONFIG_SUCCESS) {
+        goto fail;
+    }
+    int numOfSimilarImages = spConfigGetspNumOfSimilarImages(cfg, &msg);
+    if (msg != SP_CONFIG_SUCCESS) {
+        goto fail;
+    }
+
     SPBPQueue currBpq = spBPQueueCreate(spknn);
     SPBPQueue finalBpq = spBPQueueCreate(numOfSimilarImages);
     SPPoint currPoint;
@@ -22,7 +41,7 @@ int *spGetFinalImageList(SPKDNode kdtree, SPPoint *queryImageFeatures, int spNum
     //create an int[] 'indexArray' in length numOfImages
     int *indexArray = (int *) calloc((size_t) numOfImages, sizeof(int));
     //create an int[] 'finalIndexArray' in length numOfImages
-    int *finalIndexArray = (int *) calloc((size_t) numOfSimilarImages, sizeof(int));
+    finalIndexArray = (int *) calloc((size_t) numOfSimilarImages, sizeof(int));
     //TODO Allocation error + logger
     //iterate over the queryImageFeatures:
     for (int i = 0; i < spNumOfFeatures; i++) {
@@ -40,17 +59,17 @@ int *spGetFinalImageList(SPKDNode kdtree, SPPoint *queryImageFeatures, int spNum
             spListElementDestroy(curElement);
             //Dequeue the first element after using it
             bpqMsg = spBPQueueDequeue(currBpq);
-            if (bpqMsg == 1) {
+            if (!(bpqMsg == SP_BPQUEUE_FULL || bpqMsg == SP_BPQUEUE_SUCCESS)) {
                 //TODO Raise error + logger
             }
         }
-        for (int k =0; k<numOfImages; k++) {
-            printf("%d ",indexArray[k]);
+        for (int k = 0; k < numOfImages; k++) {
+            printf("%d ", indexArray[k]);
         }
         puts("\n");
     }
-    for (int k =0; k<numOfImages; k++) {
-        printf("%d ",indexArray[k]);
+    for (int k = 0; k < numOfImages; k++) {
+        printf("%d ", indexArray[k]);
     }
     puts("\n");
     //after loop is done, our list will represent the number of times each index was encountered in the KNN Search
@@ -91,4 +110,7 @@ int *spGetFinalImageList(SPKDNode kdtree, SPPoint *queryImageFeatures, int spNum
     spListElementDestroy(newElement);
     spKDTreeDestroy(kdtree);
     return finalIndexArray;
+
+    fail:
+    return NULL; //TODO Change to something meaningful
 }
