@@ -196,6 +196,9 @@ SP_CONFIG_MSG spConfigGetPCAPath(char* pcaPath, const SPConfig config);
 void spConfigDestroy(SPConfig config);
 //TODO
 int parseConfigFile(const char* file,SPConfig config,int* numberOfLines);
+SP_KD_TREE_SPLIT_METHOD spConfigGetSplitMethod(const SPConfig config, SP_CONFIG_MSG* msg);
+SP_CONFIG_MSG spConfigGetFeaturesPathFeats(char* imagePath, const SPConfig config,
+                                           int index);
 
 
 #endif /* SPCONFIG_H_ */

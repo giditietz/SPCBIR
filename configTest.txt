@@ -1,0 +1,17 @@
+#this is a valid configuration file 
+#The following variables don’t have default values and must be set
+spImagesDirectory = /Users/idoilani/ClionProjects/FinalProject/Images/
+spImagesPrefix=img
+spImagesSuffix = .png
+spNumOfImages = 17
+#the following variables have default values, if not set the default value is choosen 
+spPCADimension = 20
+spPCAFilename = pca.yml
+spNumOfFeatures = 202
+spExtractionMode = true
+spKDTreeSplitMethod = MAX_SPREAD
+spKNN = 2
+spMinimalGUI = true
+spNumOfSimilarImages = 15
+spLoggerLevel = 2
+spLoggerFilename = stdout

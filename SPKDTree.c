@@ -24,7 +24,7 @@ typedef struct sp_kd_node {
     SPKDNode left;
     SPKDNode right;
     SPPoint data;
-    SPLITMETHOD splitMethod;
+    SP_KD_TREE_SPLIT_METHOD splitMethod;
 } *SPKDNode;
 
 
@@ -70,7 +70,7 @@ double findMedianValueByCoor(SPKDArray spkdArray, int coor) {
 
 }
 
-SPKDNode spKDTreeInit(SPKDArray spkdArray, SPLITMETHOD splitmethod) {
+SPKDNode spKDTreeInit(SPKDArray spkdArray, SP_KD_TREE_SPLIT_METHOD splitmethod) {
     SPKDNode root = (SPKDNode) malloc(sizeof(*root));
     root->splitMethod = splitmethod;
     time_t t;

@@ -2,19 +2,20 @@
 // Created by Ido Ilani on 25/08/2016.
 //
 
-#include <stdlib.h>
+#include<stdlib.h>
 #include "SPConfig.h"
 #include "Malloc_Macro.h"
 #include <string.h>
 #include <assert.h>
-#include <stdbool.h>
 
 #define LINE_LENGTH 1024
+#define FEATS ".feats"
 int createDefaultValuesConfig(SPConfig config);
 int parseConfigFile(const char* file,SPConfig config,int* numberOfLines);
 int removeSpaceAndCheckValid(char** line);
 int isDefaultValuesSet(SPConfig config, const char *file, int numberOfLines);
 int setValuesConfig(char* variable,char* val,int lineNum,const char* file,SPConfig config);
+
 SP_CONFIG_MSG getConfigMsg(int res);
 
 //define sp_config_t struct (declared in SPConfig.h)
@@ -95,7 +96,16 @@ int spConfigGetNumOfImages(const SPConfig config, SP_CONFIG_MSG* msg){
         return config->spNumOfImages;
     }
 }
-
+SP_KD_TREE_SPLIT_METHOD spConfigGetSplitMethod(const SPConfig config, SP_CONFIG_MSG* msg){
+    assert(msg!=NULL);
+    if(config==NULL){
+        *msg=SP_CONFIG_INVALID_ARGUMENT;
+        return INCREMENTAL;
+    }else{
+        *msg=SP_CONFIG_SUCCESS;
+        return config->spKDTreeSplitMethod;
+    }
+}
 int spConfigGetNumOfFeatures(const SPConfig config, SP_CONFIG_MSG* msg){
     assert(msg!=NULL);
     if(config==NULL){
@@ -128,11 +138,32 @@ SP_CONFIG_MSG spConfigGetImagePath(char* imagePath, const SPConfig config,
         return SP_CONFIG_INDEX_OUT_OF_RANGE;
     }
     else{
+        *imagePath='\0';
         strcat(imagePath,config->spImagesDirectory);
         strcat(imagePath,config->spImagesPrefix);
         sprintf(indexStr,"%d",index);
         strcat(imagePath,indexStr);
         strcat(imagePath,config->spImagesSuffix);
+        return SP_CONFIG_SUCCESS;
+
+
+    }
+}
+SP_CONFIG_MSG spConfigGetFeaturesPathFeats(char* imagePath, const SPConfig config,
+                                   int index){
+    char indexStr[LINE_LENGTH];
+    if(imagePath==NULL||config==NULL){
+        return SP_CONFIG_INVALID_ARGUMENT;
+    }
+    if(index>=config->spNumOfImages){
+        return SP_CONFIG_INDEX_OUT_OF_RANGE;
+    }
+    else{
+        strcat(imagePath,config->spImagesDirectory);
+        strcat(imagePath,config->spImagesPrefix);
+        sprintf(indexStr,"%d",index);
+        strcat(imagePath,indexStr);
+        strcat(imagePath,FEATS);
         return SP_CONFIG_SUCCESS;
 
 
