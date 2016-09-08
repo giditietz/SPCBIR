@@ -14,8 +14,11 @@ extern "C" {
 #include "SPFinalImageList.h"
 #include "SPConfig.h"
 #include "SPKDTree.h"
+#include <limits.h>
+#include "KDTreeTest.h"
 
 }
+const int MAX_PATH_LENGTH = 1024;
 
 
 int main(int argc, char *argv[]) {
@@ -44,5 +47,40 @@ int main(int argc, char *argv[]) {
     //extraction mode
     sp:: ImageProc* imageProcObject=new sp::ImageProc(config);
 
+
+    test(config);
+
+    //query
+    bool proceed = true;
+    SPPoint* queryPointArray;
+    int numOfFeatsQueryImage;
+    int indexOfQueryImage = INT_MAX;
+    while (proceed){
+        char path[MAX_PATH_LENGTH];
+        puts("\nPlease enter an image path:\n");
+        fgets (path, MAX_PATH_LENGTH, stdin); //user input
+        if (0 == strcmp("<>\n",path)){ //TODO Remove "\n"!!!
+            proceed = false;
+            //TODO goto end
+        }
+        if (proceed){
+            queryPointArray = imageProcObject->getImageFeatures(path,indexOfQueryImage,&numOfFeatsQueryImage); //need to check
+            int a = 2;
+
+
+
+
+
+
+
+
+
+        }
+
+    }
+
     return 0;
 }
+
+
+///Users/gideontietz/Desktop/Images/quaryA.png

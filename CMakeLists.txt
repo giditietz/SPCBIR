@@ -5,7 +5,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 set(SOURCE_FILES KDTreeTest.c SPKDArray.h SPKDArray.c SPPoint.c SPPoint.h SPBPriorityQueue.h SPBPriorityQueue.c SPList.c
         SPList.h SPListElement.c SPListElement.h SPKDTree.h SPKDTree.c SPLogger.c SPLogger.h SPFinalImageList.h SPFinalImageList.c
-        SPFinalImageList.c IndexedPoint.h IndexedPoint.c SPImageProc.h SPImageProc.cpp SPConfig.c SPConfig.h regError.h regError.c Malloc_Macro.h main.cpp)
+        SPFinalImageList.c IndexedPoint.h IndexedPoint.c SPImageProc.h SPImageProc.cpp SPConfig.c SPConfig.h regError.h regError.c Malloc_Macro.h main.cpp mainUtils.h mainUtils.c KDTreeTest.h)
 #find_package(OpenCV REQUIRED)
 link_directories("/usr/local/Cellar/opencv3/3.1.0_3/lib")
 set(OpenCV_INCLUDE_DIRS "/usr/local/Cellar/opencv3/3.1.0_3/include")

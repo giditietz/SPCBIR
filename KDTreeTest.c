@@ -9,7 +9,7 @@
 
 
 
-int test() {
+int test(SPConfig cfg) {
     spLoggerCreate(NULL, SP_LOGGER_DEBUG_INFO_WARNING_ERROR_LEVEL);
 
 /*    int dim = 5;
@@ -121,7 +121,8 @@ int test() {
     SPBPQueue bpq = spBPQueueCreate(5);
     spKDTreeKNNSearch(root2, bpq, f1query);
     spKDTreeKNNSearch(root2, bpq, f1query);
-    int* images = spGetFinalImageList(root2,qfeatures,4,8,4,4);
+    int finalArray[4] = {0,0,0,0};
+    int* images = spGetFinalImageList(cfg,root2,finalArray,qfeatures);
 
     for (int i=0;i <4;i++){
         printf("%d ",images[i]);

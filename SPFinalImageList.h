@@ -1,9 +1,11 @@
 #include "SPKDArray.h"
 #include "SPBPriorityQueue.h"
 #include "SPKDTree.h"
+#include "SPConfig.h"
 
 #ifndef SPCBIR_SPFINALIMAGELIST_H
 #define SPCBIR_SPFINALIMAGELIST_H
 
-int *spGetFinalImageList(SPKDNode kdtree, SPPoint *queryImageFeatures,int spNumOfFeatures, int numOfImages, int spknn, int numOfSimilarImages);
+int * spGetFinalImageList(SPConfig cfg, SPKDNode kdtree, int *finalIndexArray, SPPoint *queryImageFeatures);
+
 #endif //SPCBIR_SPFINALIMAGELIST_H

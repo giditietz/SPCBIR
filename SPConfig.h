@@ -76,7 +76,7 @@ typedef struct sp_config_t* SPConfig;
 
 SPConfig spConfigCreate(const char* filename, SP_CONFIG_MSG* msg);
 
-/*
+/**
  * Returns true if spExtractionMode = true, false otherwise.
  *
  * @param config - the configuration structure
@@ -89,7 +89,7 @@ SPConfig spConfigCreate(const char* filename, SP_CONFIG_MSG* msg);
  */
 bool spConfigIsExtractionMode(const SPConfig config, SP_CONFIG_MSG* msg);
 
-/*
+/**
  * Returns true if spMinimalGUI = true, false otherwise.
  *
  * @param config - the configuration structure
@@ -102,7 +102,7 @@ bool spConfigIsExtractionMode(const SPConfig config, SP_CONFIG_MSG* msg);
  */
 bool spConfigMinimalGui(const SPConfig config, SP_CONFIG_MSG* msg);
 
-/*
+/**
  * Returns the number of images set in the configuration file, i.e the value
  * of spNumOfImages.
  *
@@ -116,7 +116,33 @@ bool spConfigMinimalGui(const SPConfig config, SP_CONFIG_MSG* msg);
  */
 int spConfigGetNumOfImages(const SPConfig config, SP_CONFIG_MSG* msg);
 
-/*
+/**
+ * Returns the KNN set in the configuration file, for K Nearest Neighbors Search algorithm.
+ *
+ * @param config - the configuration structure
+ * @assert msg != NULL
+ * @param msg - pointer in which the msg returned by the function is stored
+ * @return positive integer in success, negative integer otherwise.
+ *
+ * - SP_CONFIG_INVALID_ARGUMENT - if config == NULL
+ * - SP_CONFIG_SUCCESS - in case of success
+ */
+int spConfigGetSPKnn(const SPConfig config, SP_CONFIG_MSG* msg);
+
+/**
+ * Returns the Num Of Similar Images set in the configuration file, for the query part.
+ *
+ * @param config - the configuration structure
+ * @assert msg != NULL
+ * @param msg - pointer in which the msg returned by the function is stored
+ * @return positive integer in success, negative integer otherwise.
+ *
+ * - SP_CONFIG_INVALID_ARGUMENT - if config == NULL
+ * - SP_CONFIG_SUCCESS - in case of success
+ */
+int spConfigGetspNumOfSimilarImages(const SPConfig config, SP_CONFIG_MSG* msg);
+
+/**
  * Returns the number of features to be extracted. i.e the value
  * of spNumOfFeatures.
  *
