@@ -1,44 +1,3 @@
-/*#include <iostream>
-extern "C"{
-#include "SPConfig.h"
-#include "SPImageProc.h"
-//#include "SPLogger.h"
-//#include "SPLogger.c"
-}
-#define DEFAULT_FILE_NAME "spcbir.config"
-#define C "-c"
-#define COMMAND_LINE_ERROR "Invalid command line : use -c"
-
-int main(int argc, char *argv[]) {
-    SP_CONFIG_MSG msg;
-    SPConfig config=NULL;
-    int res;
-    //Create SPConfig
-    if(argc==1){
-        config=spConfigCreate(DEFAULT_FILE_NAME,&msg);
-        if(msg==SP_CONFIG_CANNOT_OPEN_FILE){//no arguments were entered by user and the default file cannot be open
-            printCannotOpenFileNoArguments();
-        }
-    }
-    else if(strcmp(argv[1],C)==0){
-        config=spConfigCreate(argv[2],&msg);
-        if(msg==SP_CONFIG_CANNOT_OPEN_FILE){//user entered arguments but the file cannot be open
-            printCannotOpenFile(argv[2]);
-        }
-    }
-    else{// user didn't entered arguments correctly
-        printf("%s %s\n",COMMAND_LINE_ERROR,argv[2]);//if the user entered arguments not correctly
-
-    }
-
-    //extraction mode
-  //  sp:: ImageProc* imageProcObject=new sp::ImageProc(config);
-
-
-
-
-}
-*/
 #include <cstdio>
 #include <cstdlib>
 #include "SPImageProc.h"
@@ -54,7 +13,6 @@ int main(int argc, char *argv[]) {
 extern "C" {
 #include "SPPoint.h"
 #include "SPKDArray.h"
-#include "SPBPriorityQueue.h"
 #include "SPKDTree.h"
 #include "SPLogger.h"
 #include "SPFinalImageList.h"
@@ -70,6 +28,7 @@ extern "C" {
 
 int main(int argc, char *argv[]) {
     //TODO MUST CREATE AN SPLOGGER STRUCT!!!!!
+    spLoggerCreate(NULL, SP_LOGGER_WARNING_ERROR_LEVEL); //TODO TEMPORARY!!
     //Decelerations & Inits
     SP_CONFIG_MSG msg;
     SPConfig config = NULL;
@@ -88,8 +47,8 @@ int main(int argc, char *argv[]) {
     int numOfFeatsQueryImage;
     int totalNumberOfFeatures;
     int indexOfQueryImage = INT_MAX;
-    int *finalImageIndexes;
-    SPKDNode root;
+    int *finalImageIndexes = NULL;
+    SPKDNode root = NULL;
     bool minimalGUI;
     int numberOfSimilarImages;
 
@@ -168,7 +127,7 @@ int main(int argc, char *argv[]) {
         //fgets(queryImagePath, MAX_LEN, stdin); //user input
         scanf("%s", queryImagePath);
         fflush(NULL);
-        if (0 == strcmp("<>", queryImagePath)) { //TODO Remove "\n"!!!
+        if (0 == strcmp("<>", queryImagePath)) {
             proceed = false;
             puts("Exiting...\n");
             goto fail; //Program is terminated, so we move to the cleanup phase.
@@ -176,20 +135,25 @@ int main(int argc, char *argv[]) {
         if (proceed) {
 
             queryPointArray = imageProcObject->getImageFeatures(queryImagePath, indexOfQueryImage,
-                                                                &numOfFeatsQueryImage); //TODO need to test that. and make sure it's not NULL!!
-            if (NULL == queryPointArray){
-                spLoggerPrintError("image not found",__FILE__,__FUNCTION__,__LINE__);
+                                                                &numOfFeatsQueryImage);
+            if (NULL == queryPointArray) {
+                spLoggerPrintError("Cannot get image features", __FILE__, __FUNCTION__, __LINE__);
+                goto fail;
             }
             numberOfSimilarImages = spConfigGetspNumOfSimilarImages(config, &msg);
-            finalImageIndexes = (int *) calloc((size_t) numberOfSimilarImages,
-                                               sizeof(int)); //TODO Look better. make sure it's not NULL!!
+            finalImageIndexes = (int *) calloc((size_t) numberOfSimilarImages, sizeof(int));
+            if (NULL == finalImageIndexes) {
+                spLoggerPrintError("Memory allocation error", __FILE__, __FUNCTION__, __LINE__);
+                goto fail;
+            }
+
 
             FUNC_MACRO(spGetFinalImageList(config, root, finalImageIndexes, queryPointArray));
             minimalGUI = spConfigGetMinimalGUI(config, &msg); //TODO SAFE_METHOD
 
             //Two cases: MinimalGUI or Non-MinimalGUI
 
-            char resultPath[MAX_LEN]; //TODO might need to allocate first
+            char resultPath[MAX_LEN];
             if (!minimalGUI) { printf("Best candidates for - %s - are:\n", queryImagePath); }
 
             for (int i = 0; i < numberOfSimilarImages; i++) {
