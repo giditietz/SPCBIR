@@ -2,8 +2,8 @@
 #include <cassert>
 #include <cstring>
 #include <opencv2/xfeatures2d.hpp>
-#include <opencv2/core.hpp>
-#include <opencv2/imgproc.hpp>
+#include <opencv2/core/core.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/highgui.hpp>
 #include <cstdio>
@@ -14,6 +14,7 @@ extern "C" {
 
 using namespace cv;
 using namespace std;
+
 
 #define PCA_MEAN_STR "mean"
 #define PCA_EIGEN_VEC_STR "e_vectors"
@@ -149,6 +150,7 @@ sp::ImageProc::ImageProc(const SPConfig config) {
 			spLoggerPrintError(INVALID_ARG_ERROR, __FILE__, __func__, __LINE__);
 			throw Exception();
 		}
+
 		SP_CONFIG_MSG msg;
 		bool preprocMode = false;
 		initFromConfig(config);
