@@ -201,6 +201,20 @@ SP_KD_TREE_SPLIT_METHOD spConfigGetSplitMethod(const SPConfig config, SP_CONFIG_
     }
 }
 
+
+bool spConfigGetMinimalGUI(const SPConfig config, SP_CONFIG_MSG* msg){
+    assert(msg != NULL);
+    if (config == NULL) {
+        *msg = SP_CONFIG_INVALID_ARGUMENT;
+        return -1;
+    } else {
+        *msg = SP_CONFIG_SUCCESS;
+        return config->spMinimalGUI;
+    }
+}
+
+
+
 SP_CONFIG_MSG spConfigGetPCAPath(char *pcaPath, const SPConfig config) {
     if (pcaPath == NULL || config == NULL) {
         return SP_CONFIG_INVALID_ARGUMENT;

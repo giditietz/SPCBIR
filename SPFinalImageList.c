@@ -9,7 +9,7 @@
 #include "SPConfig.h"
 
 
-int *spGetFinalImageList(SPConfig cfg, SPKDNode kdtree, int *finalIndexArray, SPPoint *queryImageFeatures) {
+int spGetFinalImageList(SPConfig cfg, SPKDNode kdtree, int *finalIndexArray, SPPoint *queryImageFeatures) {
     SP_CONFIG_MSG msg;
     int res = SUCCESS;
     int spNumOfFeatures = spConfigGetNumOfFeatures(cfg, &msg);
@@ -41,7 +41,7 @@ int *spGetFinalImageList(SPConfig cfg, SPKDNode kdtree, int *finalIndexArray, SP
     //create an int[] 'indexArray' in length numOfImages
     int *indexArray = (int *) calloc((size_t) numOfImages, sizeof(int));
     //create an int[] 'finalIndexArray' in length numOfImages
-    finalIndexArray = (int *) calloc((size_t) numOfSimilarImages, sizeof(int));
+    //finalIndexArray = (int *) calloc((size_t) numOfSimilarImages, sizeof(int)); TODO Remove
     //TODO Allocation error + logger
     //iterate over the queryImageFeatures:
     for (int i = 0; i < spNumOfFeatures; i++) {
@@ -109,7 +109,7 @@ int *spGetFinalImageList(SPConfig cfg, SPKDNode kdtree, int *finalIndexArray, SP
     spBPQueueDestroy(finalBpq);
     spListElementDestroy(newElement);
     spKDTreeDestroy(kdtree);
-    return finalIndexArray;
+    return res;
 
     fail:
     return NULL; //TODO Change to something meaningful

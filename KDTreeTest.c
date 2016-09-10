@@ -7,10 +7,9 @@
 #include "SPConfig.h"
 
 
-
-
 int test(SPConfig cfg) {
     spLoggerCreate(NULL, SP_LOGGER_DEBUG_INFO_WARNING_ERROR_LEVEL);
+    SP_CONFIG_MSG msg = SP_CONFIG_SUCCESS;
 
 /*    int dim = 5;
     double arr1[5] = {4.1, 1, 2, 6, 7};
@@ -59,7 +58,7 @@ int test(SPConfig cfg) {
     double a6[2] = {1, 11};
     SPPoint f6 = spPointCreate(a6, 2, 3);
     double a7[2] = {4, 11};
-    SPPoint f7 = spPointCreate(a7, 2,3);
+    SPPoint f7 = spPointCreate(a7, 2, 3);
     double a8[2] = {10, 11};
     SPPoint f8 = spPointCreate(a8, 2, 4);
     double a9[2] = {13, 11};
@@ -92,7 +91,7 @@ int test(SPConfig cfg) {
     double dquery[2] = {7, 9.5};
     SPPoint f4query = spPointCreate(dquery, 2, 17);
 
-    SPPoint qfeatures[4] = {f1query, f2query,f3query,f4query};
+    SPPoint qfeatures[4] = {f1query, f2query, f3query, f4query};
 
 /*       SPKDArray l1;
        SPKDArray r1;
@@ -121,11 +120,11 @@ int test(SPConfig cfg) {
     SPBPQueue bpq = spBPQueueCreate(5);
     spKDTreeKNNSearch(root2, bpq, f1query);
     spKDTreeKNNSearch(root2, bpq, f1query);
-    int finalArray[4] = {0,0,0,0};
-    int* images = spGetFinalImageList(cfg,root2,finalArray,qfeatures);
+    int *finalIndexArray = (int *) calloc((size_t) spConfigGetspNumOfSimilarImages(cfg, &msg), sizeof(int));
+    spGetFinalImageList(cfg, root2, finalIndexArray, qfeatures);
 
-    for (int i=0;i <4;i++){
-        printf("%d ",images[i]);
+    for (int i = 0; i < spConfigGetspNumOfSimilarImages(cfg, &msg); i++) {
+        printf("%d ", finalIndexArray[i]);
     }
 
     return 0;

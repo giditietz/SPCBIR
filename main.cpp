@@ -85,7 +85,12 @@ int main(int argc, char *argv[]) {
     bool proceed = true;
     SPPoint *queryPointArray;
     int numOfFeatsQueryImage;
+    int totalNumberOfFeatures;
     int indexOfQueryImage = INT_MAX;
+    int *finalImageIndexes;
+    SPKDNode root;
+    bool minimalGUI;
+    int numberOfSimilarImages;
 
     //Create SPConfig
     if (argc == 1) {
@@ -150,30 +155,62 @@ int main(int argc, char *argv[]) {
 
     }
 
+    //TODO Get total number of features from featuresNum array (after loading the .feat files)
 
-    test(config); //temporary test for kdtree, only works with conf-gidi.txt (change the images path)
+    //test(config); //temporary test for kdtree, only works with conf-gidi.txt (change the images path)
 
     //query
 
     while (proceed) {
-        char path[MAX_LEN];
+        char queryImagePath[MAX_LEN];
         puts("\nPlease enter an image path:\n");
-        fgets(path, MAX_LEN, stdin); //user input
-        if (0 == strcmp("<>\n", path)) { //TODO Remove "\n"!!!
+        //fgets(queryImagePath, MAX_LEN, stdin); //user input
+        scanf("%s", queryImagePath);
+        fflush(NULL);
+        if (0 == strcmp("<>", queryImagePath)) { //TODO Remove "\n"!!!
             proceed = false;
             puts("Exiting...\n");
             goto fail; //Program is terminated, so we move to the cleanup phase.
         }
         if (proceed) {
-            queryPointArray = imageProcObject->getImageFeatures(path, indexOfQueryImage,
-                                                                &numOfFeatsQueryImage); //need to check
+
+            queryPointArray = imageProcObject->getImageFeatures(queryImagePath, indexOfQueryImage,
+                                                                &numOfFeatsQueryImage); //TODO need to test that. and make sure it's not NULL!!
+            numberOfSimilarImages = spConfigGetspNumOfSimilarImages(config, &msg);
+            finalImageIndexes = (int *) calloc((size_t) numberOfSimilarImages,
+                                               sizeof(int)); //TODO Look better. make sure it's not NULL!!
+            FUNC_MACRO(spGetFinalImageList(config, root, finalImageIndexes, queryPointArray));
+            minimalGUI = spConfigGetMinimalGUI(config, &msg); //TODO SAFE_METHOD
+
+            //Two cases: MinimalGUI or Non-MinimalGUI
+
+            char resultPath[MAX_LEN]; //TODO might need to allocate first
+            if (!minimalGUI) { printf("Best candidates for - %s - are:\n", queryImagePath); }
+
+            for (int i = 0; i < numberOfSimilarImages; i++) {
+                int indexOfImageToShow = finalImageIndexes[i];
+                FUNC_MACRO(spConfigGetImagePath(resultPath, config, indexOfImageToShow));
+                //two cases: MinimalGUI of Non-MinimalGUI
+                if (minimalGUI) {
+                    imageProcObject->showImage(resultPath);
+                }
+                else {
+                    printf("%s\n", resultPath);
+                }
+            }
         }
     }
+
+
     fail:
+    FREE_MACRO(finalImageIndexes);
+    FREE_MACRO(queryPointArray);
     FREE_MACRO(featuresNum);
     FREE_MACRO(arrImageFeatures);
     FREE_MACRO(totalImageFeatures);
-    spConfigDestroy(config);
+    spConfigDestroy(config); //TODO: if != NULL
+    //Destroy KDnode
+    //
 
 
     return 0;
