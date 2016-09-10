@@ -111,24 +111,24 @@ SPKDArray spKDArrayInit(SPPoint *arr, int size) {
     for (int coor = 0; coor < dimension; coor++) {
         cur_coor = coor; //update global var for comparison function
         qsort(indexedPointArray, size, sizeof(IndexedPoint), compare);
-/*        printf("printing image order after sort by coor %d\n", coor);
+        printf("printing image order after sort by coor %d\n", coor);
         for (int j = 0; j < size; j++) {
             int ind = spPointGetIndex(arr[j]);
             printf("%d ", ind);
         }
-        puts("\n");*/
+        puts("\n");
         for (int num = 0; num < size; num++) {
             data[coor][num] = indexedPointGetIndex(indexedPointArray[num]);
 
         }
     }
-/*    printf("\nmatrix\n");
+    printf("\nmatrix\n");
     for (int i = 0; i < dimension; i++) {
         for (int j = 0; j < size; j++) {
             printf("%d ", data[i][j]);
         }
         puts("");
-    }*/
+    }
     final->dim = dimension;
     final->size = size;
     final->dataMatrix = data;
@@ -358,7 +358,7 @@ SPKDArray *split(SPKDArray kdArr, int coor) {
     free(arrayX);
     free(leftMap);
     free(rightMap);
-    spKDArrayDestroy(kdArr);
+    //spKDArrayDestroy(kdArr);
 
     return ret_array;
 

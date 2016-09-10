@@ -32,15 +32,17 @@ int main(int argc, char *argv[]) {
     //Decelerations & Inits
     SP_CONFIG_MSG msg;
     SPConfig config = NULL;
+    bool created = false;
     int res = SP_CONFIG_SUCCESS;
     int *featuresNum = NULL;
     SPPoint **arrImageFeatures = NULL;
     int imageNum;
     int totalFeatures;
-    SPPoint *totalImageFeatures = NULL;
+    SPPoint *totalImageFeaturesArr = NULL;
     SP_KD_TREE_SPLIT_METHOD method;
     bool extraction;
     int temp = 0;
+    int sum = 0;
     char imagePath[MAX_LEN];
     bool proceed = true;
     SPPoint *queryPointArray;
@@ -49,6 +51,7 @@ int main(int argc, char *argv[]) {
     int indexOfQueryImage = INT_MAX;
     int *finalImageIndexes = NULL;
     SPKDNode root = NULL;
+    SPKDArray kdarray = NULL;
     bool minimalGUI;
     int numberOfSimilarImages;
 
@@ -113,11 +116,20 @@ int main(int argc, char *argv[]) {
             }
         }
 
+    } else {
+        for (int j = 0; j < imageNum; j++) {
+            readFeatures(config, j, &featuresNum[j], &arrImageFeatures[j], created, imageNum);
+            created = true;
+        }
     }
+    //end of extraction/non extraction mode
+    sum = sumAllFeatures(featuresNum, imageNum);//get total number of features
+    createAllImagesPointsArr(&totalImageFeaturesArr, arrImageFeatures, imageNum, sum, featuresNum);
 
-    //TODO Get total number of features from featuresNum array (after loading the .feat files)
-
-    test(config); //temporary test for kdtree, only works with conf-gidi.txt (change the images path)
+    //Init the data structures:
+    kdarray = spKDArrayInit(totalImageFeaturesArr, sum);
+    root = spKDTreeInit(kdarray, method);
+    //test(config); //temporary test for kdtree, only works with conf-gidi.txt (change the images path)
 
     //query
 
@@ -176,7 +188,7 @@ int main(int argc, char *argv[]) {
     FREE_MACRO(queryPointArray);
     FREE_MACRO(featuresNum);
     FREE_MACRO(arrImageFeatures);
-    FREE_MACRO(totalImageFeatures);
+    FREE_MACRO(totalImageFeaturesArr);
     spConfigDestroy(config); //TODO: if != NULL
     //Destroy KDnode
     //

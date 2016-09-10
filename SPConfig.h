@@ -41,8 +41,9 @@ enum res{
     INVALID_STRING,
     INVALID_ARGUMENT,
     LINE_INVALID,
+    SEP_ERROR,
+    FAIL_READ_FEATURE,
     SUCCESS
-
 };
 
 
