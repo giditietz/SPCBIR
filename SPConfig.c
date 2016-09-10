@@ -56,6 +56,7 @@ SPConfig spConfigCreate(const char *filename, SP_CONFIG_MSG *msg) {
     FUNC_MACRO(createDefaultValuesConfig(spConfig));
     FUNC_MACRO(parseConfigFile(filename, spConfig, &configLines));
     FUNC_MACRO(isDefaultValuesSet(spConfig, filename, configLines));
+    spLoggerCreate(spConfig->spLoggerFilename,spConfig->spLoggerLevel);
     *msg = getConfigMsg(res);
     if (res == SUCCESS)
         return spConfig;
@@ -200,6 +201,20 @@ SP_KD_TREE_SPLIT_METHOD spConfigGetSplitMethod(const SPConfig config, SP_CONFIG_
         return config->spKDTreeSplitMethod;
     }
 }
+
+
+bool spConfigGetMinimalGUI(const SPConfig config, SP_CONFIG_MSG* msg){
+    assert(msg != NULL);
+    if (config == NULL) {
+        *msg = SP_CONFIG_INVALID_ARGUMENT;
+        return -1;
+    } else {
+        *msg = SP_CONFIG_SUCCESS;
+        return config->spMinimalGUI;
+    }
+}
+
+
 
 SP_CONFIG_MSG spConfigGetPCAPath(char *pcaPath, const SPConfig config) {
     if (pcaPath == NULL || config == NULL) {

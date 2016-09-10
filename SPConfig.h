@@ -41,8 +41,9 @@ enum res{
     INVALID_STRING,
     INVALID_ARGUMENT,
     LINE_INVALID,
+    SEP_ERROR,
+    FAIL_READ_FEATURE,
     SUCCESS
-
 };
 
 
@@ -128,6 +129,20 @@ int spConfigGetNumOfImages(const SPConfig config, SP_CONFIG_MSG* msg);
  * - SP_CONFIG_SUCCESS - in case of success
  */
 int spConfigGetSPKnn(const SPConfig config, SP_CONFIG_MSG* msg);
+
+
+/**
+ * Returns the MinimalGUI setup from the config struct..
+ *
+ * @param config - the configuration structure
+ * @assert msg != NULL
+ * @param msg - pointer in which the msg returned by the function is stored
+ * @return positive integer in success, negative integer otherwise.
+ *
+ * - SP_CONFIG_INVALID_ARGUMENT - if config == NULL
+ * - SP_CONFIG_SUCCESS - in case of success
+ */
+bool spConfigGetMinimalGUI(const SPConfig config, SP_CONFIG_MSG* msg);
 
 /**
  * Returns the Num Of Similar Images set in the configuration file, for the query part.
@@ -222,7 +237,9 @@ SP_CONFIG_MSG spConfigGetPCAPath(char* pcaPath, const SPConfig config);
 void spConfigDestroy(SPConfig config);
 //TODO
 int parseConfigFile(const char* file,SPConfig config,int* numberOfLines);
+
 SP_KD_TREE_SPLIT_METHOD spConfigGetSplitMethod(const SPConfig config, SP_CONFIG_MSG* msg);
+
 SP_CONFIG_MSG spConfigGetFeaturesPathFeats(char* imagePath, const SPConfig config,
                                            int index);
 

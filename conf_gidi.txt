@@ -13,4 +13,4 @@ spKDTreeSplitMethod = MAX_SPREAD
 spKNN = 4
 spMinimalGUI = true
 spNumOfSimilarImages = 4
-spLoggerLevel = 2
+spLoggerLevel = 4

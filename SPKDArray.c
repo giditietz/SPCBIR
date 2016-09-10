@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include "SPPoint.h"
 #include "IndexedPoint.h"
+#include "SPLogger.h"
+#include "Malloc_Macro.h"
 
 int cur_coor = 0;
 typedef struct sp_kdarray {
@@ -38,7 +40,7 @@ void spKDArrayDestroy(SPKDArray kdarray) {
 }
 
 /**
- * A comparator functio for qsort
+ * A comparator function for qsort
  * @param a - an IndexedPoint pointer
  * @param b - an IndexedPoint pointer
  */
@@ -67,59 +69,66 @@ int compare(const void *a, const void *b) {
  * @return an initialized KDArray.
  */
 SPKDArray spKDArrayInit(SPPoint *arr, int size) {
+    SPPoint *pointArray = NULL;
+    SPKDArray final = NULL;
+    int **data = NULL;
+    IndexedPoint indexedPointArray[size];
+
     //TODO malloc/calloc assertion
     //TODO logger
-    //TODO might need to destroy arr, if not needed later.
-    SPPoint *pointArray = (SPPoint *) malloc(size * sizeof(SPPoint));
+    pointArray = (SPPoint *) malloc(size * sizeof(SPPoint));
     if (NULL == pointArray) {
-        //TODO error
+        spLoggerPrintError("Memory allocation error", __FILE__, __FUNCTION__, __LINE__);
+        goto fail;
     }
     for (int i = 0; i < size; i++) {
         pointArray[i] = spPointCopy(arr[i]);
     }
-    IndexedPoint indexedPointArray[size];
     for (int i = 0; i < size; i++) {
         indexedPointArray[i] = indexedPointInit(pointArray[i], i);
     }
 
-    SPKDArray final = (SPKDArray) malloc(sizeof(*final)); //might be an issue
+    final = (SPKDArray) malloc(sizeof(*final)); //might be an issue
     if (NULL == final) {
-        //TODO error
+        spLoggerPrintError("Memory allocation error", __FILE__, __FUNCTION__, __LINE__);
+        goto fail;
     }
     int dimension = spPointGetDimension(arr[0]);
     //dynamically allocate an int matrix, it will assigned to the KDArray
-    int **data = (int **) malloc(dimension * sizeof(int *));
+    data = (int **) malloc(dimension * sizeof(int *));
     if (NULL == data) {
-        //TODO error
+        spLoggerPrintError("Memory allocation error", __FILE__, __FUNCTION__, __LINE__);
+        goto fail;
     }
 
     for (int i = 0; i < dimension; i++) {
         data[i] = (int *) malloc(size * sizeof(int));
         if (NULL == data[i]) {
-            //TODO error
+            spLoggerPrintError("Memory allocation error", __FILE__, __FUNCTION__, __LINE__);
+            goto fail;
         }
     }
     for (int coor = 0; coor < dimension; coor++) {
         cur_coor = coor; //update global var for comparison function
         qsort(indexedPointArray, size, sizeof(IndexedPoint), compare);
-/*        printf("printing image order after sort by coor %d\n", coor);
+        printf("printing image order after sort by coor %d\n", coor);
         for (int j = 0; j < size; j++) {
             int ind = spPointGetIndex(arr[j]);
             printf("%d ", ind);
         }
-        puts("\n");*/
+        puts("\n");
         for (int num = 0; num < size; num++) {
             data[coor][num] = indexedPointGetIndex(indexedPointArray[num]);
 
         }
     }
-/*    printf("\nmatrix\n");
+    printf("\nmatrix\n");
     for (int i = 0; i < dimension; i++) {
         for (int j = 0; j < size; j++) {
             printf("%d ", data[i][j]);
         }
         puts("");
-    }*/
+    }
     final->dim = dimension;
     final->size = size;
     final->dataMatrix = data;
@@ -130,11 +139,22 @@ SPKDArray spKDArrayInit(SPPoint *arr, int size) {
     for (int i = 0; i < size; i++) {
         indexedPointDestroy(indexedPointArray[i]);
     }
+    spLoggerPrintInfo("KDTree has been initialized.");
     return final;
+
+    fail:
+        for (int i = 0; i < size; i++) {
+            FREE_MACRO(pointArray[i]);
+        }
+        FREE_MACRO(final);
+        FREE_MACRO(data);
+        spLoggerPrintInfo("KDTree initialization has failed.");
+
+    return NULL;
 }
 
 /**
- * Split a KDArray be a specific coordinate
+ * Split a KDArray by a specific coordinate (axis)
  * @param kdArr - a KDArray to split
  * @param coor - the coordinate to split
  * @return
@@ -142,6 +162,11 @@ SPKDArray spKDArrayInit(SPPoint *arr, int size) {
 SPKDArray *split(SPKDArray kdArr, int coor) {
     //TODO check if coor < dimention !!
     //TODO malloc/calloc assertion
+    SPKDArray left = NULL;
+    SPKDArray right =NULL;
+    int **dataMatrix = NULL;
+
+
     int size = spKDArrayGetSize(kdArr);
     int indexOfMedian;
     if (size % 2 == 0) {
@@ -153,19 +178,25 @@ SPKDArray *split(SPKDArray kdArr, int coor) {
     int leftSize = indexOfMedian + 1;
     int rightSize = size - leftSize;
     int dimension = spKDArrayGetDim(kdArr);
-    SPKDArray left = (SPKDArray) malloc(sizeof(*left));
+    left = (SPKDArray) malloc(sizeof(*left));
     if (NULL == left) {
+        spLoggerPrintError("Memory allocation error", __FILE__, __FUNCTION__, __LINE__);
+
         //TODO raise memory allocation error
     }
-    SPKDArray right = (SPKDArray) malloc(sizeof(*right));
+    right = (SPKDArray) malloc(sizeof(*right));
     if (NULL == right) {
+        spLoggerPrintError("Memory allocation error", __FILE__, __FUNCTION__, __LINE__);
+
         //TODO raise memory allocation error
     }
-    int **dataMatrix = spKDArrayGetDataMatrix(kdArr);
+    dataMatrix = spKDArrayGetDataMatrix(kdArr);
     SPPoint *pointArray = spKDArrayGetPointArray(kdArr);
     //create arrayX:
     int *arrayX = (int *) calloc(size, sizeof(int));
     if (NULL == arrayX) {
+        spLoggerPrintError("Memory allocation error", __FILE__, __FUNCTION__, __LINE__);
+
         //TODO raise memory allocation error
     }
     for (int i = indexOfMedian + 1;
@@ -180,10 +211,14 @@ SPKDArray *split(SPKDArray kdArr, int coor) {
     //split the pointArray to two pointArrays using arrayX: leftPointArray and rightPointArray
     SPPoint *rightPointArray = (SPPoint *) malloc((rightSize) * sizeof(SPPoint));
     if (NULL == rightPointArray) {
+        spLoggerPrintError("Memory allocation error", __FILE__, __FUNCTION__, __LINE__);
+
         //TODO raise memory allocation error
     }
     SPPoint *leftPointArray = (SPPoint *) malloc((leftSize) * sizeof(SPPoint));
     if (NULL == leftPointArray) {
+        spLoggerPrintError("Memory allocation error", __FILE__, __FUNCTION__, __LINE__);
+
         //TODO raise memory allocation error
     }
     int rightPointArrayIndex = 0;
@@ -207,10 +242,14 @@ SPKDArray *split(SPKDArray kdArr, int coor) {
     //create maps for each new matrix
     int *leftMap = (int *) malloc(size * sizeof(int));
     if (NULL == leftMap) {
+        spLoggerPrintError("Memory allocation error", __FILE__, __FUNCTION__, __LINE__);
+
         //TODO raise memory allocation error
     }
     int *rightMap = (int *) malloc(size * sizeof(int));
     if (NULL == rightMap) {
+        spLoggerPrintError("Memory allocation error", __FILE__, __FUNCTION__, __LINE__);
+
         //TODO raise memory allocation error
     }
     //initialize both maps with (-1)s.
@@ -236,21 +275,29 @@ SPKDArray *split(SPKDArray kdArr, int coor) {
     int leftInsertionIndex = 0;
     int **leftdata = (int **) malloc(dimension * sizeof(int *));
     if (NULL == leftdata) {
+        spLoggerPrintError("Memory allocation error", __FILE__, __FUNCTION__, __LINE__);
+
         //TODO raise memory allocation error
     }
     for (int i = 0; i < dimension; i++) {
         leftdata[i] = (int *) malloc((leftSize - 1) * sizeof(int));
         if (NULL == leftdata[i]) {
+            spLoggerPrintError("Memory allocation error", __FILE__, __FUNCTION__, __LINE__);
+
             //TODO raise memory allocation error
         }
     }
     int **rightdata = (int **) malloc(dimension * sizeof(int *));
     if (NULL == rightdata) {
+        spLoggerPrintError("Memory allocation error", __FILE__, __FUNCTION__, __LINE__);
+
         //TODO raise memory allocation error
     }
     for (int i = 0; i < dimension; i++) {
         rightdata[i] = (int *) malloc((rightSize - 1) * sizeof(int));
         if (NULL == rightdata[i]) {
+            spLoggerPrintError("Memory allocation error", __FILE__, __FUNCTION__, __LINE__);
+
             //TODO raise memory allocation error
         }
     }
@@ -311,9 +358,12 @@ SPKDArray *split(SPKDArray kdArr, int coor) {
     free(arrayX);
     free(leftMap);
     free(rightMap);
-    spKDArrayDestroy(kdArr);
+    //spKDArrayDestroy(kdArr);
 
     return ret_array;
+
+    fail:
+    return NULL;
 }
 
 /**
