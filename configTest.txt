@@ -13,5 +13,5 @@ spKDTreeSplitMethod = MAX_SPREAD
 spKNN = 2
 spMinimalGUI = true
 spNumOfSimilarImages = 15
-spLoggerLevel = 2
-spLoggerFilename = stdout
+spLoggerLevel = 1
+spLoggerFilename = NULL

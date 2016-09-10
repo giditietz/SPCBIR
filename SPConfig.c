@@ -56,6 +56,7 @@ SPConfig spConfigCreate(const char *filename, SP_CONFIG_MSG *msg) {
     FUNC_MACRO(createDefaultValuesConfig(spConfig));
     FUNC_MACRO(parseConfigFile(filename, spConfig, &configLines));
     FUNC_MACRO(isDefaultValuesSet(spConfig, filename, configLines));
+    spLoggerCreate(spConfig->spLoggerFilename,spConfig->spLoggerLevel);
     *msg = getConfigMsg(res);
     if (res == SUCCESS)
         return spConfig;

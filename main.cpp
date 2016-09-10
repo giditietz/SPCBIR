@@ -69,6 +69,7 @@ extern "C" {
 }
 
 int main(int argc, char *argv[]) {
+    //TODO MUST CREATE AN SPLOGGER STRUCT!!!!!
     //Decelerations & Inits
     SP_CONFIG_MSG msg;
     SPConfig config = NULL;
@@ -157,7 +158,7 @@ int main(int argc, char *argv[]) {
 
     //TODO Get total number of features from featuresNum array (after loading the .feat files)
 
-    //test(config); //temporary test for kdtree, only works with conf-gidi.txt (change the images path)
+    test(config); //temporary test for kdtree, only works with conf-gidi.txt (change the images path)
 
     //query
 
@@ -176,9 +177,13 @@ int main(int argc, char *argv[]) {
 
             queryPointArray = imageProcObject->getImageFeatures(queryImagePath, indexOfQueryImage,
                                                                 &numOfFeatsQueryImage); //TODO need to test that. and make sure it's not NULL!!
+            if (NULL == queryPointArray){
+                spLoggerPrintError("image not found",__FILE__,__FUNCTION__,__LINE__);
+            }
             numberOfSimilarImages = spConfigGetspNumOfSimilarImages(config, &msg);
             finalImageIndexes = (int *) calloc((size_t) numberOfSimilarImages,
                                                sizeof(int)); //TODO Look better. make sure it's not NULL!!
+
             FUNC_MACRO(spGetFinalImageList(config, root, finalImageIndexes, queryPointArray));
             minimalGUI = spConfigGetMinimalGUI(config, &msg); //TODO SAFE_METHOD
 
