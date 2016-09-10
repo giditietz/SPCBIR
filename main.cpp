@@ -28,7 +28,7 @@ extern "C" {
 
 int main(int argc, char *argv[]) {
     //TODO MUST CREATE AN SPLOGGER STRUCT!!!!!
-    spLoggerCreate(NULL, SP_LOGGER_WARNING_ERROR_LEVEL); //TODO TEMPORARY!!
+    spLoggerCreate(NULL, SP_LOGGER_INFO_WARNING_ERROR_LEVEL); //TODO TEMPORARY!!
     //Decelerations & Inits
     SP_CONFIG_MSG msg;
     SPConfig config = NULL;
