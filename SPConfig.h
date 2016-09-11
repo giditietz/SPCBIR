@@ -243,5 +243,6 @@ SP_KD_TREE_SPLIT_METHOD spConfigGetSplitMethod(const SPConfig config, SP_CONFIG_
 SP_CONFIG_MSG spConfigGetFeaturesPathFeats(char* imagePath, const SPConfig config,
                                            int index);
 
-
+SP_LOGGER_LEVEL spConfigGetLoggerLevel(const SPConfig config,SP_CONFIG_MSG *msg);
+void spConfigGetLoggerName(const SPConfig config,char* name);
 #endif /* SPCONFIG_H_ */

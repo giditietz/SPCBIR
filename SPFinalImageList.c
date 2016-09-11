@@ -10,7 +10,7 @@
 #include "Malloc_Macro.h"
 
 
-int spGetFinalImageList(SPConfig cfg, SPKDNode kdtree, int *finalIndexArray, SPPoint *queryImageFeatures) {
+int spGetFinalImageList(SPConfig cfg, SPKDNode kdtree, int *finalIndexArray, SPPoint *queryImageFeatures, int queryFeaturesNum) {
     //declare the arrays/structs that will be malloced later
     int res = SUCCESS;
     int *indexArray = NULL;
@@ -52,7 +52,7 @@ int spGetFinalImageList(SPConfig cfg, SPKDNode kdtree, int *finalIndexArray, SPP
     //create an int[] 'indexArray' in length numOfImages
     indexArray = (int *) calloc((size_t) numOfImages, sizeof(int));
     //iterate over the queryImageFeatures:
-    for (int i = 0; i < spNumOfFeatures; i++) {
+    for (int i = 0; i < queryFeaturesNum; i++) {
         currPoint = queryImageFeatures[i];
         //  -for each feature, run KNN Search
         if (!spKDTreeKNNSearch(kdtree, currBpq, currPoint)) {
@@ -80,15 +80,15 @@ int spGetFinalImageList(SPConfig cfg, SPKDNode kdtree, int *finalIndexArray, SPP
             }
         }
         //TODO Delete prints
-        for (int k = 0; k < numOfImages; k++) {
+/*        for (int k = 0; k < numOfImages; k++) {
             printf("%d ", indexArray[k]);
-        }
-        puts("\n");
+        }*/
+       // puts("\n");
     }
-    for (int k = 0; k < numOfImages; k++) {
+/*    for (int k = 0; k < numOfImages; k++) {
         printf("%d ", indexArray[k]);
-    }
-    puts("\n");
+    }*/
+   // puts("\n");
     //after loop is done, our list will represent the number of times each index was encountered in the KNN Search
     //find the maximum of the array for future calculations
     for (int i = 0; i < numOfImages; i++) {
@@ -129,7 +129,6 @@ int spGetFinalImageList(SPConfig cfg, SPKDNode kdtree, int *finalIndexArray, SPP
     spBPQueueDestroy(currBpq);
     spBPQueueDestroy(finalBpq);
     spListElementDestroy(newElement);
-    spKDTreeDestroy(kdtree);
     spLoggerPrintDebug("All resources in the scope were peacefully freed.", __FILE__, __FUNCTION__, __LINE__);
     spLoggerPrintInfo("Best images were found!");
     return res;
