@@ -37,11 +37,20 @@ int findMaxSpreadDimension(SPKDArray spkdArray) {
     int dimension = spKDArrayGetDim(spkdArray);
     int size = spKDArrayGetSize(spkdArray);
     int **dataMatrix = spKDArrayGetDataMatrix(spkdArray);
+/*    printf("\ndata matrix in max spread\n");
+    for (int i = 0; i < dimension; i++) {
+        for (int j = 0; j < size; j++) {
+            printf("%d ", dataMatrix[i][j]);
+        }
+        puts("");
+    }*/
     SPPoint *pointList = spKDArrayGetPointArray(spkdArray);
     for (int i = 0; i < dimension; i++) {
-        min = spPointGetAxisCoor(pointList[dataMatrix[i][0]],
+        int smallestPointIndex = dataMatrix[i][0];
+        int largestPointIndex = dataMatrix[i][size - 1];
+        min = spPointGetAxisCoor(pointList[smallestPointIndex],
                                  i);//each first entry in a row of the matrix is the index of the point with the minimal value by axis.
-        max = spPointGetAxisCoor(pointList[dataMatrix[i][size - 1]],
+        max = spPointGetAxisCoor(pointList[largestPointIndex],
                                  i);//each last entry in a row of the matrix is the index of the point with the maximal value by axis.
         spread = max - min;
         if (spread > max_spread) {
@@ -49,7 +58,8 @@ int findMaxSpreadDimension(SPKDArray spkdArray) {
             dim_for_split = i;
         }
     }
-    printf("\ndim to split: %d, max spread: %lf\n", dim_for_split, max_spread);
+
+    //printf("\ndim to split: %d, max spread: %lf\n", dim_for_split, max_spread);
     return dim_for_split;
 }
 

@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
     int sum = 0;
     char imagePath[MAX_LEN];
     bool proceed = true;
-    SPPoint *queryPointArray;
+    SPPoint *queryPointArray =NULL;
     int numOfFeatsQueryImage;
     int totalNumberOfFeatures;
     int indexOfQueryImage = INT_MAX;
@@ -54,6 +54,18 @@ int main(int argc, char *argv[]) {
     SPKDArray kdarray = NULL;
     bool minimalGUI;
     int numberOfSimilarImages;
+
+
+    SPPoint P0 = NULL;
+    SPPoint P1 = NULL;
+    SPPoint P2 = NULL;
+    SPPoint P3 = NULL;
+    SPPoint P4 = NULL;
+    SPPoint P5 = NULL;
+    SPPoint P6 = NULL;
+    SPPoint P7 = NULL;
+    SPPoint P8 = NULL;
+    SPPoint P9;
 
     //Create SPConfig
     if (argc == 1) {
@@ -87,6 +99,9 @@ int main(int argc, char *argv[]) {
     MALLOC_MACRO(arrImageFeatures, SPPoint**, imageNum * sizeof(SPPoint *));
     // MALLOC_MACRO(arrImageFeatures, SPPoint**, imageNum * sizeof(SPPoint *));
     MALLOC_MACRO(featuresNum, int*, imageNum * sizeof(int));
+    for (int i = 0; i < imageNum; i++) {
+        arrImageFeatures[i] = NULL;
+    }
     //extraction mode
 
 
@@ -118,16 +133,37 @@ int main(int argc, char *argv[]) {
 
     } else {
         for (int j = 0; j < imageNum; j++) {
-            readFeatures(config, j, &featuresNum[j], &arrImageFeatures[j], created, imageNum);
+            readFeatures(config, j, &(featuresNum[j]), &(arrImageFeatures[j]), created, imageNum);
             created = true;
         }
     }
     //end of extraction/non extraction mode
     sum = sumAllFeatures(featuresNum, imageNum);//get total number of features
     createAllImagesPointsArr(&totalImageFeaturesArr, arrImageFeatures, imageNum, sum, featuresNum);
+/*    for (int i = 0; i < imageNum; ++i) {
+        for (int j = 0; j <featuresNum[i] ; ++j) {
+            spPointDestroy(arrImageFeatures[i][j]);
 
+        }
+
+    }*/
+    P0 = totalImageFeaturesArr[0];
+    P1 = totalImageFeaturesArr[1];
+    P2 = totalImageFeaturesArr[2];
+    P3 = totalImageFeaturesArr[3];
+    P4 = totalImageFeaturesArr[4];
+    P5 = totalImageFeaturesArr[5];
+    P6 = totalImageFeaturesArr[6];
+    P7 = totalImageFeaturesArr[7];
+    P8 = totalImageFeaturesArr[8];
+    P9 = totalImageFeaturesArr[9];
+    free(arrImageFeatures);
     //Init the data structures:
     kdarray = spKDArrayInit(totalImageFeaturesArr, sum);
+    if (NULL == kdarray) {
+        spLoggerPrintError("KDArray init failed due to a memory allocation error.", __FILE__, __FUNCTION__, __LINE__);
+        goto fail;
+    }
     root = spKDTreeInit(kdarray, method);
     //test(config); //temporary test for kdtree, only works with conf-gidi.txt (change the images path)
 
@@ -170,7 +206,7 @@ int main(int argc, char *argv[]) {
 
             for (int i = 0; i < numberOfSimilarImages; i++) {
                 int indexOfImageToShow = finalImageIndexes[i];
-                FUNC_MACRO(spConfigGetImagePath(resultPath, config, indexOfImageToShow));
+                spConfigGetImagePath(resultPath, config, indexOfImageToShow); //FUNC_MALLOC
                 //two cases: MinimalGUI of Non-MinimalGUI
                 if (minimalGUI) {
                     imageProcObject->showImage(resultPath);
@@ -187,8 +223,8 @@ int main(int argc, char *argv[]) {
     FREE_MACRO(finalImageIndexes);
     FREE_MACRO(queryPointArray);
     FREE_MACRO(featuresNum);
-    FREE_MACRO(arrImageFeatures);
-    FREE_MACRO(totalImageFeaturesArr);
+    spKDTreeDestroy(root);
+    FREE_MACRO(root);//check
     spConfigDestroy(config); //TODO: if != NULL
     //Destroy KDnode
     //

@@ -129,7 +129,6 @@ int spGetFinalImageList(SPConfig cfg, SPKDNode kdtree, int *finalIndexArray, SPP
     spBPQueueDestroy(currBpq);
     spBPQueueDestroy(finalBpq);
     spListElementDestroy(newElement);
-    spKDTreeDestroy(kdtree);
     spLoggerPrintDebug("All resources in the scope were peacefully freed.", __FILE__, __FUNCTION__, __LINE__);
     spLoggerPrintInfo("Best images were found!");
     return res;

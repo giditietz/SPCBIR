@@ -3,14 +3,14 @@
 spImagesDirectory = /Users/gideontietz/Desktop/Images/
 spImagesPrefix=img
 spImagesSuffix = .png
-spNumOfImages = 8
-#the following variables have default values, if not set the default value is choosen
+spNumOfImages = 17
+#the following variables have default values, if not set the default value is chosen
 spPCADimension = 20
 spPCAFilename = pca.yml
-spNumOfFeatures = 4
+spNumOfFeatures = 100
 spExtractionMode = true
 spKDTreeSplitMethod = MAX_SPREAD
-spKNN = 4
+spKNN = 5
 spMinimalGUI = true
 spNumOfSimilarImages = 4
 spLoggerLevel = 4
