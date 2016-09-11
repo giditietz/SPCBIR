@@ -56,7 +56,6 @@ SPConfig spConfigCreate(const char *filename, SP_CONFIG_MSG *msg) {
     FUNC_MACRO(createDefaultValuesConfig(spConfig));
     FUNC_MACRO(parseConfigFile(filename, spConfig, &configLines));
     FUNC_MACRO(isDefaultValuesSet(spConfig, filename, configLines));
-    spLoggerCreate(spConfig->spLoggerFilename,spConfig->spLoggerLevel);
     *msg = getConfigMsg(res);
     if (res == SUCCESS)
         return spConfig;
@@ -93,6 +92,26 @@ bool spConfigMinimalGui(const SPConfig config, SP_CONFIG_MSG *msg) {
     }
 
 }
+
+SP_LOGGER_LEVEL spConfigGetLoggerLevel(const SPConfig config,SP_CONFIG_MSG *msg){
+    if(config==NULL){
+        *msg=SP_CONFIG_INVALID_ARGUMENT;
+        return -1;
+    }else{
+        *msg=SP_CONFIG_SUCCESS;
+        return config->spLoggerLevel;
+    }
+
+
+}
+void spConfigGetLoggerName(const SPConfig config,char* name){
+    if(config==NULL){
+        return;
+    }else{
+        strcpy(name,config->spLoggerFilename);
+    }
+}
+
 
 int spConfigGetNumOfImages(const SPConfig config, SP_CONFIG_MSG *msg) {
     assert(msg != NULL);

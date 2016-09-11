@@ -28,7 +28,6 @@ extern "C" {
 
 int main(int argc, char *argv[]) {
     //TODO MUST CREATE AN SPLOGGER STRUCT!!!!!
-    spLoggerCreate(NULL, SP_LOGGER_INFO_WARNING_ERROR_LEVEL); //TODO TEMPORARY!!
     //Decelerations & Inits
     SP_CONFIG_MSG msg;
     SPConfig config = NULL;
@@ -37,7 +36,6 @@ int main(int argc, char *argv[]) {
     int *featuresNum = NULL;
     SPPoint **arrImageFeatures = NULL;
     int imageNum;
-    int totalFeatures;
     SPPoint *totalImageFeaturesArr = NULL;
     SP_KD_TREE_SPLIT_METHOD method;
     bool extraction;
@@ -54,18 +52,11 @@ int main(int argc, char *argv[]) {
     SPKDArray kdarray = NULL;
     bool minimalGUI;
     int numberOfSimilarImages;
+    char logger[MAX_LEN];
+    char loggerMessage[MAX_LEN];
+    SP_LOGGER_LEVEL level;
+    sp::ImageProc *imageProcObject;
 
-
-    SPPoint P0 = NULL;
-    SPPoint P1 = NULL;
-    SPPoint P2 = NULL;
-    SPPoint P3 = NULL;
-    SPPoint P4 = NULL;
-    SPPoint P5 = NULL;
-    SPPoint P6 = NULL;
-    SPPoint P7 = NULL;
-    SPPoint P8 = NULL;
-    SPPoint P9;
 
     //Create SPConfig
     if (argc == 1) {
@@ -82,11 +73,21 @@ int main(int argc, char *argv[]) {
         printf("%s %s\n", COMMAND_LINE_ERROR, argv[2]);//if the user entered arguments not correctly
 
     }
+    //Create Logger
+    level=spConfigGetLoggerLevel(config,&msg);
+    spConfigGetLoggerName(config,logger);
+    if(spLoggerCreate(NULL,level)!=SP_LOGGER_SUCCESS){
+        goto fail;
+    }else{
+        spLoggerPrintInfo("Logger is initialized");
+    }
     extraction = spConfigIsExtractionMode(config, &msg);
-    sp::ImageProc *imageProcObject = new sp::ImageProc(config);
+    imageProcObject = new sp::ImageProc(config);
     if (msg != SP_CONFIG_SUCCESS) {
         goto fail;
     }
+    spLoggerPrintInfo("spImageProc Object is initialized");
+
     imageNum = spConfigGetNumOfImages(config, &msg);
     if (msg != SP_CONFIG_SUCCESS) {
         goto fail;
@@ -99,10 +100,11 @@ int main(int argc, char *argv[]) {
     MALLOC_MACRO(arrImageFeatures, SPPoint**, imageNum * sizeof(SPPoint *));
     // MALLOC_MACRO(arrImageFeatures, SPPoint**, imageNum * sizeof(SPPoint *));
     MALLOC_MACRO(featuresNum, int*, imageNum * sizeof(int));
+    //extraction mode
     for (int i = 0; i < imageNum; i++) {
         arrImageFeatures[i] = NULL;
     }
-    //extraction mode
+
 
 
 
@@ -117,6 +119,7 @@ int main(int argc, char *argv[]) {
 
             arrImageFeatures[temp] = imageProcObject->getImageFeatures(imagePath, temp, &(featuresNum[temp]));
             if (NULL == arrImageFeatures[temp]) {
+                spLoggerPrintError("Failed to get image features",__FILE__,__func__,__LINE__);
                 goto fail;
             }
         }
@@ -127,11 +130,16 @@ int main(int argc, char *argv[]) {
         for (int i = 0; i < imageNum; i++) {
             res = writeFeatures(config, i, featuresNum[i], arrImageFeatures[i]);
             if (res != SP_CONFIG_SUCCESS) {
+                spLoggerPrintError("Failed to write features",__FILE__,__func__,__LINE__);
                 goto fail;
             }
         }
+        sprintf(loggerMessage,"Features were extracted from %d images",imageNum);
+        spLoggerPrintDebug(loggerMessage,__FILE__,__func__,__LINE__);
+        spLoggerPrintInfo("Success: Features extracted");
 
-    } else {
+    } else { //Non-extraction mode
+        spLoggerPrintInfo("Retrieve data from feats files");
         for (int j = 0; j < imageNum; j++) {
             readFeatures(config, j, &(featuresNum[j]), &(arrImageFeatures[j]), created, imageNum);
             created = true;
@@ -139,6 +147,8 @@ int main(int argc, char *argv[]) {
     }
     //end of extraction/non extraction mode
     sum = sumAllFeatures(featuresNum, imageNum);//get total number of features
+    sprintf(loggerMessage,"Total number of features is %d",sum);
+    spLoggerPrintDebug(loggerMessage,__FILE__,__func__,__LINE__);
     createAllImagesPointsArr(&totalImageFeaturesArr, arrImageFeatures, imageNum, sum, featuresNum);
 /*    for (int i = 0; i < imageNum; ++i) {
         for (int j = 0; j <featuresNum[i] ; ++j) {
@@ -147,16 +157,6 @@ int main(int argc, char *argv[]) {
         }
 
     }*/
-    P0 = totalImageFeaturesArr[0];
-    P1 = totalImageFeaturesArr[1];
-    P2 = totalImageFeaturesArr[2];
-    P3 = totalImageFeaturesArr[3];
-    P4 = totalImageFeaturesArr[4];
-    P5 = totalImageFeaturesArr[5];
-    P6 = totalImageFeaturesArr[6];
-    P7 = totalImageFeaturesArr[7];
-    P8 = totalImageFeaturesArr[8];
-    P9 = totalImageFeaturesArr[9];
     free(arrImageFeatures);
     //Init the data structures:
     kdarray = spKDArrayInit(totalImageFeaturesArr, sum);
@@ -207,6 +207,7 @@ int main(int argc, char *argv[]) {
             for (int i = 0; i < numberOfSimilarImages; i++) {
                 int indexOfImageToShow = finalImageIndexes[i];
                 spConfigGetImagePath(resultPath, config, indexOfImageToShow); //FUNC_MALLOC
+                printf("%s\n", resultPath);
                 //two cases: MinimalGUI of Non-MinimalGUI
                 if (minimalGUI) {
                     imageProcObject->showImage(resultPath);
@@ -226,8 +227,7 @@ int main(int argc, char *argv[]) {
     spKDTreeDestroy(root);
     FREE_MACRO(root);//check
     spConfigDestroy(config); //TODO: if != NULL
-    //Destroy KDnode
-    //
+    spLoggerDestroy();
 
 
     return 0;
