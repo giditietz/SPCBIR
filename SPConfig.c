@@ -400,7 +400,7 @@ int setValuesConfig(char *variable, char *val, int lineNum, const char *file, SP
         return SUCCESS;
     }
     if (strcmp(variable, "spImagesSuffix") == 0) {
-        if (strcmp(val, ".png") != 0 && strcmp(val, "jpg") != 0 && strcmp(val, ".bmp") != 0 &&
+        if (strcmp(val, ".png") != 0 && strcmp(val, ".jpg") != 0 && strcmp(val, ".bmp") != 0 &&
             strcmp(val, ".gif") != 0) {//constraints doesn't met
             printConstrainsMessage(file, lineNum);
             return INVALID_STRING;
@@ -568,7 +568,7 @@ int removeSpaceAndCheckValid(char **line) {
     bool firstChar = false;
     bool lastChar = false;
 
-    while (temp[charIndex] != '\0' && temp[charIndex] != '\n') {
+    while (temp[charIndex] != '\0' && temp[charIndex] != '\n' && temp[charIndex] != '\r' ) {
         char c = temp[charIndex];
         if (!firstChar && temp[charIndex] == ' ') {
             charIndex++;

@@ -27,7 +27,6 @@ extern "C" {
 }
 
 int main(int argc, char *argv[]) {
-    //TODO MUST CREATE AN SPLOGGER STRUCT!!!!!
     //Decelerations & Inits
     SP_CONFIG_MSG msg;
     SPConfig config = NULL;
@@ -44,7 +43,7 @@ int main(int argc, char *argv[]) {
     char imagePath[MAX_LEN];
     bool proceed = true;
     SPPoint *queryPointArray =NULL;
-    int numOfFeatsQueryImage;
+    int numOfFeatsQueryImage[1]; //an int[] to comply to imgproc, has a single entry.
     int totalNumberOfFeatures;
     int indexOfQueryImage = INT_MAX;
     int *finalImageIndexes = NULL;
@@ -123,9 +122,9 @@ int main(int argc, char *argv[]) {
                 goto fail;
             }
         }
-        for (int i = 0; i < imageNum; i++) {
+/*        for (int i = 0; i < imageNum; i++) {
             printf("\n%d", featuresNum[i]);
-        }
+        }*/
 
         for (int i = 0; i < imageNum; i++) {
             res = writeFeatures(config, i, featuresNum[i], arrImageFeatures[i]);
@@ -183,7 +182,7 @@ int main(int argc, char *argv[]) {
         if (proceed) {
 
             queryPointArray = imageProcObject->getImageFeatures(queryImagePath, indexOfQueryImage,
-                                                                &numOfFeatsQueryImage);
+                                                                numOfFeatsQueryImage);
             if (NULL == queryPointArray) {
                 spLoggerPrintError("Cannot get image features", __FILE__, __FUNCTION__, __LINE__);
                 goto fail;
@@ -196,7 +195,7 @@ int main(int argc, char *argv[]) {
             }
 
 
-            FUNC_MACRO(spGetFinalImageList(config, root, finalImageIndexes, queryPointArray));
+            FUNC_MACRO(spGetFinalImageList(config, root, finalImageIndexes, queryPointArray,numOfFeatsQueryImage[0]));
             minimalGUI = spConfigGetMinimalGUI(config, &msg); //TODO SAFE_METHOD
 
             //Two cases: MinimalGUI or Non-MinimalGUI
@@ -207,7 +206,7 @@ int main(int argc, char *argv[]) {
             for (int i = 0; i < numberOfSimilarImages; i++) {
                 int indexOfImageToShow = finalImageIndexes[i];
                 spConfigGetImagePath(resultPath, config, indexOfImageToShow); //FUNC_MALLOC
-                printf("%s\n", resultPath);
+                //printf("%s\n", resultPath);
                 //two cases: MinimalGUI of Non-MinimalGUI
                 if (minimalGUI) {
                     imageProcObject->showImage(resultPath);

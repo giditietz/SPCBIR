@@ -121,7 +121,7 @@ int test(SPConfig cfg) {
     spKDTreeKNNSearch(root2, bpq, f1query);
     spKDTreeKNNSearch(root2, bpq, f1query);
     int *finalIndexArray = (int *) calloc((size_t) spConfigGetspNumOfSimilarImages(cfg, &msg), sizeof(int));
-    spGetFinalImageList(cfg, root2, finalIndexArray, qfeatures);
+    spGetFinalImageList(cfg, root2, finalIndexArray, qfeatures,5);
 
     for (int i = 0; i < spConfigGetspNumOfSimilarImages(cfg, &msg); i++) {
         printf("%d ", finalIndexArray[i]);
