@@ -1,9 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "SPKDArray.h"
 #include "SPPoint.h"
-#include "SPListElement.h"
-#include "SPLogger.h"
 #include "IndexedPoint.h"
 
 SPPoint getPoint(IndexedPoint ipoint) {

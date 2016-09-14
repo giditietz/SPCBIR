@@ -1,17 +1,13 @@
-#this is a valid configuration file
-#The following variables don’t have default values and must be set
-spImagesDirectory = /Users/gideontietz/Desktop/Images/
-spImagesPrefix=img
-spImagesSuffix = .png
-spNumOfImages = 17
-#the following variables have default values, if not set the default value is choosen 
-spPCADimension = 20
+spImagesDirectory = /Users/gideontietz/Desktop/sp_test_linux/test1images/
+spImagesPrefix = img
+spImagesSuffix = .jpg
+spNumOfImages = 100
 spPCAFilename = pca.yml
-spNumOfFeatures = 202
-spExtractionMode = true
-spKDTreeSplitMethod = MAX_SPREAD
-spKNN = 2
+spPCADimension = 28
+spNumOfFeatures = 400
+spExtractionMode = false
+spNumOfSimilarImages = 7
+spKDTreeSplitMethod = RANDOM
+spKNN = 15
 spMinimalGUI = true
-spNumOfSimilarImages = 15
 spLoggerLevel = 1
-spLoggerFilename = NULL

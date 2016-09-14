@@ -11,16 +11,9 @@
 #define MAX_LEN 1024
 
 extern "C" {
-#include "SPPoint.h"
 #include "SPKDArray.h"
 #include "SPKDTree.h"
-#include "SPLogger.h"
 #include "SPFinalImageList.h"
-#include "SPConfig.h"
-#include "SPKDTree.h"
-#include <limits.h>
-#include "KDTreeTest.h"
-#include "SPPoint.h"
 #include "Functions.h"
 
 
