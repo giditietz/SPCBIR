@@ -569,7 +569,6 @@ int removeSpaceAndCheckValid(char **line) {
     bool lastChar = false;
 
     while (temp[charIndex] != '\0' && temp[charIndex] != '\n' && temp[charIndex] != '\r' ) {
-        char c = temp[charIndex];
         if (!firstChar && temp[charIndex] == ' ') {
             charIndex++;
             continue;

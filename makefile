@@ -41,7 +41,7 @@ SPPoint.o: SPPoint.c SPPoint.h
 
 #SPConfig
 SPConfig.o: SPConfig.c SPConfig.h SPLogger.h regError.h Malloc_Macro.h
-	$(CC) $(C_COMP_FLAG) -c Config/$*.c
+	$(CC) $(C_COMP_FLAG) -c $*.c
 
 #KDTree and KDArray
 SPKDArray.o: SPKDArray.c SPKDArray.h  SPLogger.h SPPoint.h Malloc_Macro.h IndexedPoint.h

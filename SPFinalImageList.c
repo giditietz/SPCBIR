@@ -24,11 +24,6 @@ int spGetFinalImageList(SPConfig cfg, SPKDNode kdtree, int *finalIndexArray, SPP
         spLoggerPrintError("Given KDTree is NULL!", __FILE__, __FUNCTION__, __LINE__);
         goto fail;
     }
-    int spNumOfFeatures = spConfigGetNumOfFeatures(cfg, &msg);
-
-    if (msg != SP_CONFIG_SUCCESS) {
-        goto fail;
-    }
     int numOfImages = spConfigGetNumOfImages(cfg, &msg);
     if (msg != SP_CONFIG_SUCCESS) {
         goto fail;
