@@ -1,7 +1,7 @@
 CC = gcc
 CPP = g++
 #put your object files here
-OBJS = main.o SPLogger.o SPPoint.o SPKdArray.o SPKdTree.o SPBPriorityQueue.o SPList.o SPListElement.o Functions.o SPConfig.o SPImageProc.o regError.o SPFinalImageList.o IndexedPoint.o
+OBJS = main.o SPLogger.o SPPoint.o SPKDArray.o SPKDTree.o SPBPriorityQueue.o SPList.o SPListElement.o Functions.o SPConfig.o SPImageProc.o regError.o SPFinalImageList.o IndexedPoint.o
 #The executabel filename
 EXEC = SPCBIR
 INCLUDEPATH=/usr/local/lib/opencv-3.1.0/include/
@@ -44,9 +44,9 @@ SPConfig.o: SPConfig.c SPConfig.h SPLogger.h regError.h Malloc_Macro.h
 	$(CC) $(C_COMP_FLAG) -c Config/$*.c
 
 #KDTree and KDArray
-SPKdArray.o: SPKdArray.c SPKdArray.h  SPLogger.h SPPoint.h Malloc_macro.h IndexedPoint.h
+SPKDArray.o: SPKDArray.c SPKDArray.h  SPLogger.h SPPoint.h Malloc_macro.h IndexedPoint.h
 	$(CC) $(C_COMP_FLAG) -c $*.c
-SPKdTree.o: SPKdTree.c SPKdTree.h SPPoint.h SPBPriorityQueue.h  SPLogger.h SPKDArray.h SPConfig.h
+SPKDTree.o: SPKDTree.c SPKDTree.h SPPoint.h SPBPriorityQueue.h  SPLogger.h SPKDArray.h SPConfig.h
 	$(CC) $(C_COMP_FLAG) -c $*.c
 IndexedPoint.o: IndexedPoint.c IndexedPoint.h  SPPoint.h
 	$(CC) $(C_COMP_FLAG) -c $*.c

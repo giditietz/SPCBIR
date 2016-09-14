@@ -123,6 +123,7 @@ SPKDNode spKDTreeInit(SPKDArray spkdArray, SP_KD_TREE_SPLIT_METHOD splitmethod) 
         res = split(spkdArray, dim_for_split);
         left = res[0];
         right = res[1];
+        free(res);
         root->left = spKDTreeInit(left, splitmethod);
         root->right = spKDTreeInit(right, splitmethod);
         return root;

@@ -37,7 +37,6 @@ int main(int argc, char *argv[]) {
     bool proceed = true;
     SPPoint *queryPointArray =NULL;
     int numOfFeatsQueryImage[1]; //an int[] to comply to imgproc, has a single entry.
-    int totalNumberOfFeatures;
     int indexOfQueryImage = INT_MAX;
     int *finalImageIndexes = NULL;
     SPKDNode root = NULL;
