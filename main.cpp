@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
     int sum = 0;
     char imagePath[MAX_LEN];
     bool proceed = true;
-    SPPoint *queryPointArray =NULL;
+    SPPoint *queryPointArray = NULL;
     int numOfFeatsQueryImage[1]; //an int[] to comply to imgproc, has a single entry.
     int indexOfQueryImage = INT_MAX;
     int *finalImageIndexes = NULL;
@@ -50,13 +50,24 @@ int main(int argc, char *argv[]) {
 
 
     //Create SPConfig
+    if(argc>3){
+        printf("%s %s\n", COMMAND_LINE_ERROR, argv[2]);
+        goto fail;
+    }
     if (argc == 1) {
         config = spConfigCreate(DEFAULT_FILE_NAME, &msg);
         if (msg == SP_CONFIG_CANNOT_OPEN_FILE) {//no arguments were entered by user and the default file cannot be open
             printCannotOpenFileNoArguments();
             goto fail;
         }
-    } else if (strcmp(argv[1], C) == 0) {
+    }
+    else if (argc == 2 && strcmp(argv[1], C) == 0) {
+        config = spConfigCreate(DEFAULT_FILE_NAME, &msg);
+        if (msg == SP_CONFIG_CANNOT_OPEN_FILE) {//no arguments were entered by user and the default file cannot be open
+            printCannotOpenFileNoArguments();
+            goto fail;
+        }
+    } else if (argc == 3 && strcmp(argv[1], C) == 0) {
         config = spConfigCreate(argv[2], &msg);
         if (msg == SP_CONFIG_CANNOT_OPEN_FILE) {//user entered arguments but the file cannot be open
             printCannotOpenFile(argv[2]);
@@ -67,11 +78,11 @@ int main(int argc, char *argv[]) {
         goto fail;
     }
     //Create Logger
-    level=spConfigGetLoggerLevel(config,&msg);
-    spConfigGetLoggerName(config,logger);
-    if(spLoggerCreate(NULL,level)!=SP_LOGGER_SUCCESS){
+    level = spConfigGetLoggerLevel(config, &msg);
+    spConfigGetLoggerName(config, logger);
+    if (spLoggerCreate(NULL, level) != SP_LOGGER_SUCCESS) {
         goto fail;
-    }else{
+    } else {
         spLoggerPrintInfo("Logger is initialized");
     }
     extraction = spConfigIsExtractionMode(config, &msg);
@@ -99,8 +110,6 @@ int main(int argc, char *argv[]) {
     }
 
 
-
-
     if (extraction) {
         // imagePath="\0";
         for (temp = 0; temp < imageNum; temp++) {
@@ -112,7 +121,7 @@ int main(int argc, char *argv[]) {
 
             arrImageFeatures[temp] = imageProcObject->getImageFeatures(imagePath, temp, &(featuresNum[temp]));
             if (NULL == arrImageFeatures[temp]) {
-                spLoggerPrintError("Failed to get image features",__FILE__,__func__,__LINE__);
+                spLoggerPrintError("Failed to get image features", __FILE__, __func__, __LINE__);
                 goto fail;
             }
         }
@@ -123,12 +132,12 @@ int main(int argc, char *argv[]) {
         for (int i = 0; i < imageNum; i++) {
             res = writeFeatures(config, i, featuresNum[i], arrImageFeatures[i]);
             if (res != SP_CONFIG_SUCCESS) {
-                spLoggerPrintError("Failed to write features",__FILE__,__func__,__LINE__);
+                spLoggerPrintError("Failed to write features", __FILE__, __func__, __LINE__);
                 goto fail;
             }
         }
-        sprintf(loggerMessage,"Features were extracted from %d images",imageNum);
-        spLoggerPrintDebug(loggerMessage,__FILE__,__func__,__LINE__);
+        sprintf(loggerMessage, "Features were extracted from %d images", imageNum);
+        spLoggerPrintDebug(loggerMessage, __FILE__, __func__, __LINE__);
         spLoggerPrintInfo("Success: Features extracted");
 
     } else { //Non-extraction mode
@@ -140,8 +149,8 @@ int main(int argc, char *argv[]) {
     }
     //end of extraction/non extraction mode
     sum = sumAllFeatures(featuresNum, imageNum);//get total number of features
-    sprintf(loggerMessage,"Total number of features is %d",sum);
-    spLoggerPrintDebug(loggerMessage,__FILE__,__func__,__LINE__);
+    sprintf(loggerMessage, "Total number of features is %d", sum);
+    spLoggerPrintDebug(loggerMessage, __FILE__, __func__, __LINE__);
     createAllImagesPointsArr(&totalImageFeaturesArr, arrImageFeatures, imageNum, sum, featuresNum);
 /*    for (int i = 0; i < imageNum; ++i) {
         for (int j = 0; j <featuresNum[i] ; ++j) {
@@ -189,7 +198,7 @@ int main(int argc, char *argv[]) {
             }
 
 
-            FUNC_MACRO(spGetFinalImageList(config, root, finalImageIndexes, queryPointArray,numOfFeatsQueryImage[0]));
+            FUNC_MACRO(spGetFinalImageList(config, root, finalImageIndexes, queryPointArray, numOfFeatsQueryImage[0]));
             minimalGUI = spConfigGetMinimalGUI(config, &msg); //TODO SAFE_METHOD
 
             //Two cases: MinimalGUI or Non-MinimalGUI

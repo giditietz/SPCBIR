@@ -13,10 +13,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="88878b80-8316-48ed-9675-7a6d5c348176" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SPBPriorityQueue.c" afterPath="$PROJECT_DIR$/SPBPriorityQueue.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SPKDTree.c" afterPath="$PROJECT_DIR$/SPKDTree.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.cpp" afterPath="$PROJECT_DIR$/main.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test.config" afterPath="$PROJECT_DIR$/test.config" />
     </list>
     <ignored path="SPCBIR.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,9 +37,21 @@
       <file leaf-file-name="main.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="66" column="18" selection-start-line="66" selection-start-column="18" selection-end-line="66" selection-end-column="18" />
+            <state relative-caret-position="540">
+              <caret line="75" column="6" selection-start-line="75" selection-start-column="6" selection-end-line="75" selection-end-column="6" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SPBPriorityQueue.c" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SPBPriorityQueue.c">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-4973">
+              <caret line="403" column="46" selection-start-line="403" selection-start-column="46" selection-end-line="403" selection-end-column="46" />
+              <folding>
+                <element signature="e#6428#6457#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -80,8 +90,8 @@
         <option value="$PROJECT_DIR$/SPConfig.c" />
         <option value="$PROJECT_DIR$/SPFinalImageList.c" />
         <option value="$PROJECT_DIR$/test.config" />
-        <option value="$PROJECT_DIR$/SPBPriorityQueue.c" />
         <option value="$PROJECT_DIR$/SPKDTree.c" />
+        <option value="$PROJECT_DIR$/SPBPriorityQueue.c" />
         <option value="$PROJECT_DIR$/main.cpp" />
       </list>
     </option>
@@ -366,7 +376,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="195777000" />
+    <option name="totallyTimeSpent" value="196614000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -450,6 +460,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -696,16 +707,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SPBPriorityQueue.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="738" column="23" selection-start-line="738" selection-start-column="23" selection-end-line="738" selection-end-column="23" />
-          <folding>
-            <element signature="e#6428#6457#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/KDTreeTest.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="607">
@@ -781,10 +782,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/SPBPriorityQueue.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4973">
+          <caret line="403" column="46" selection-start-line="403" selection-start-column="46" selection-end-line="403" selection-end-column="46" />
+          <folding>
+            <element signature="e#6428#6457#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="66" column="18" selection-start-line="66" selection-start-column="18" selection-end-line="66" selection-end-column="18" />
+        <state relative-caret-position="540">
+          <caret line="75" column="6" selection-start-line="75" selection-start-column="6" selection-end-line="75" selection-end-column="6" />
           <folding />
         </state>
       </provider>
