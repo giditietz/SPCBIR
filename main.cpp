@@ -132,7 +132,7 @@ int main(int argc, char *argv[]) {
     } else { //Non-extraction mode
         spLoggerPrintInfo("Retrieve data from feats files");
         for (int j = 0; j < imageNum; j++) {
-            readFeatures(config, j, &(featuresNum[j]), &(arrImageFeatures[j]), created, imageNum);
+            readFeatures(config, j, &(featuresNum[j]), &(arrImageFeatures[j]), created);
             created = true;
         }
     }
