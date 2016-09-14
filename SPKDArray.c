@@ -7,13 +7,14 @@
 #include "Malloc_Macro.h"
 
 int cur_coor = 0;
-typedef struct sp_kdarray {
+struct sp_kdarray {
     int dim;
     int size;
     int dim_to_split;
     int **dataMatrix;
     SPPoint *pointArray;
 };
+
 
 
 
