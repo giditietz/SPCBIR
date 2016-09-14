@@ -13,9 +13,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="88878b80-8316-48ed-9675-7a6d5c348176" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SPKDArray.c" afterPath="$PROJECT_DIR$/SPKDArray.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SPKDTree.c" afterPath="$PROJECT_DIR$/SPKDTree.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Functions.c" afterPath="$PROJECT_DIR$/Functions.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Functions.h" afterPath="$PROJECT_DIR$/Functions.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.cpp" afterPath="$PROJECT_DIR$/main.cpp" />
     </list>
     <ignored path="SPCBIR.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,100 +38,28 @@
       <file leaf-file-name="main.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+            <state relative-caret-position="522">
+              <caret line="134" column="18" selection-start-line="134" selection-start-column="18" selection-end-line="134" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SPKDArray.c" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SPKDArray.c">
+      <file leaf-file-name="Functions.c" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Functions.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="2" selection-start-line="15" selection-start-column="2" selection-end-line="15" selection-end-column="2" />
-              <folding>
-                <element signature="e#0#22#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SPKDTree.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SPKDTree.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="7" column="36" selection-start-line="7" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+            <state relative-caret-position="423">
+              <caret line="122" column="17" selection-start-line="122" selection-start-column="17" selection-end-line="122" selection-end-column="17" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SPKDArray.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SPKDArray.h">
+      <file leaf-file-name="Functions.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Functions.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-143">
-              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="10" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SPKDTree.c" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/SPKDTree.c">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
-              <caret line="190" column="5" selection-start-line="190" selection-start-column="5" selection-end-line="190" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SPListElement.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SPListElement.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
-              <caret line="30" column="4" selection-start-line="30" selection-start-column="4" selection-end-line="30" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SPBPriorityQueue.c" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SPBPriorityQueue.c">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1725">
-              <caret line="121" column="14" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SPBPriorityQueue.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SPBPriorityQueue.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="282">
-              <caret line="41" column="4" selection-start-line="41" selection-start-column="4" selection-end-line="41" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="configTest.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/configTest.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="makefile" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/makefile">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="183" selection-start-line="3" selection-start-column="183" selection-end-line="3" selection-end-column="183" />
+            <state relative-caret-position="120">
+              <caret line="10" column="102" selection-start-line="10" selection-start-column="102" selection-end-line="10" selection-end-column="102" />
               <folding />
             </state>
           </provider>
@@ -157,9 +85,7 @@
         <option value="$PROJECT_DIR$/SPKDTree.h" />
         <option value="$PROJECT_DIR$/IndexedPoint.h" />
         <option value="$PROJECT_DIR$/SPLogger.h" />
-        <option value="$PROJECT_DIR$/Functions.h" />
         <option value="$PROJECT_DIR$/SPConfig.h" />
-        <option value="$PROJECT_DIR$/Functions.c" />
         <option value="$PROJECT_DIR$/conf_gidi.txt" />
         <option value="$PROJECT_DIR$/SPConfig.c" />
         <option value="$PROJECT_DIR$/SPFinalImageList.h" />
@@ -168,10 +94,12 @@
         <option value="$PROJECT_DIR$/IndexedPoint.c" />
         <option value="$PROJECT_DIR$/configTest.txt" />
         <option value="$PROJECT_DIR$/SPKDArray.h" />
-        <option value="$PROJECT_DIR$/main.cpp" />
         <option value="$PROJECT_DIR$/makefile" />
         <option value="$PROJECT_DIR$/SPKDArray.c" />
         <option value="$PROJECT_DIR$/SPKDTree.c" />
+        <option value="$PROJECT_DIR$/Functions.h" />
+        <option value="$PROJECT_DIR$/main.cpp" />
+        <option value="$PROJECT_DIR$/Functions.c" />
       </list>
     </option>
   </component>
@@ -455,7 +383,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="193149000" />
+    <option name="totallyTimeSpent" value="193361000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -664,13 +592,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Functions.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Malloc_Macro.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -687,14 +608,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/conf_gidi.txt" />
-    <entry file="file://$PROJECT_DIR$/Functions.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="117" column="0" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SPConfig.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="267">
@@ -818,30 +731,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/configTest.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/makefile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="183" selection-start-line="3" selection-start-column="183" selection-end-line="3" selection-end-column="183" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SPKDArray.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -856,6 +745,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="7" column="36" selection-start-line="7" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SPKDTree.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="307">
+          <caret line="190" column="5" selection-start-line="190" selection-start-column="5" selection-end-line="190" selection-end-column="5" />
           <folding />
         </state>
       </provider>
@@ -884,10 +781,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SPKDTree.c">
+    <entry file="file://$PROJECT_DIR$/configTest.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="190" column="5" selection-start-line="190" selection-start-column="5" selection-end-line="190" selection-end-column="5" />
+        <state relative-caret-position="180">
+          <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/makefile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="183" selection-start-line="3" selection-start-column="183" selection-end-line="3" selection-end-column="183" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Functions.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="10" column="102" selection-start-line="10" selection-start-column="102" selection-end-line="10" selection-end-column="102" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="522">
+          <caret line="134" column="18" selection-start-line="134" selection-start-column="18" selection-end-line="134" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Functions.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="423">
+          <caret line="122" column="17" selection-start-line="122" selection-start-column="17" selection-end-line="122" selection-end-column="17" />
           <folding />
         </state>
       </provider>
