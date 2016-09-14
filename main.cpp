@@ -54,15 +54,17 @@ int main(int argc, char *argv[]) {
         config = spConfigCreate(DEFAULT_FILE_NAME, &msg);
         if (msg == SP_CONFIG_CANNOT_OPEN_FILE) {//no arguments were entered by user and the default file cannot be open
             printCannotOpenFileNoArguments();
+            goto fail;
         }
     } else if (strcmp(argv[1], C) == 0) {
         config = spConfigCreate(argv[2], &msg);
         if (msg == SP_CONFIG_CANNOT_OPEN_FILE) {//user entered arguments but the file cannot be open
             printCannotOpenFile(argv[2]);
+            goto fail;
         }
     } else {// user didn't entered arguments correctly
         printf("%s %s\n", COMMAND_LINE_ERROR, argv[2]);//if the user entered arguments not correctly
-
+        goto fail;
     }
     //Create Logger
     level=spConfigGetLoggerLevel(config,&msg);
