@@ -199,10 +199,9 @@ int main(int argc, char *argv[]) {
 
 
             FUNC_MACRO(spGetFinalImageList(config, root, finalImageIndexes, queryPointArray, numOfFeatsQueryImage[0]));
-            minimalGUI = spConfigGetMinimalGUI(config, &msg); //TODO SAFE_METHOD
+            minimalGUI = spConfigGetMinimalGUI(config, &msg);
 
             //Two cases: MinimalGUI or Non-MinimalGUI
-
             char resultPath[MAX_LEN];
             if (!minimalGUI) { printf("Best candidates for - %s - are:\n", queryImagePath); }
 
@@ -221,17 +220,16 @@ int main(int argc, char *argv[]) {
         }
     }
 
-
     fail:
     FREE_MACRO(finalImageIndexes);
     FREE_MACRO(queryPointArray);
     FREE_MACRO(featuresNum);
     spKDTreeDestroy(root);
     FREE_MACRO(root);//check
-    spConfigDestroy(config); //TODO: if != NULL
+    if (NULL != config) {
+        spConfigDestroy(config);
+    } //TODO: if != NULL
     spLoggerDestroy();
-
-
     return 0;
 }
 

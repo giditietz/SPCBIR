@@ -8,7 +8,11 @@ SPPoint getPoint(IndexedPoint ipoint) {
 }
 
 IndexedPoint indexedPointInit(SPPoint point, int index) {
-    IndexedPoint ipoint = (IndexedPoint) malloc(sizeof(ipoint));
+    IndexedPoint ipoint = NULL;
+    ipoint = (IndexedPoint) malloc(sizeof(ipoint));
+    if (NULL == ipoint) {
+        return NULL;
+    }
     ipoint->point = point;
     ipoint->pointIndex = index;
     return ipoint;

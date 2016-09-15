@@ -54,7 +54,7 @@ int spGetFinalImageList(SPConfig cfg, SPKDNode kdtree, int *finalIndexArray, SPP
             spLoggerPrintError("KNN Search had failed", __FILE__, __FUNCTION__, __LINE__);
             goto fail;
         }
-        spLoggerPrintInfo("KNN search finished successfully.");
+        spLoggerPrintDebug("KNN search finished successfully.",__FILE__,__FUNCTION__,__LINE__);
 
         // then use its BPQ to extract all the closest image indices
         for (int j = 0; j < spknn; j++) {
