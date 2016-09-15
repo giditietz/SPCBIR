@@ -371,6 +371,7 @@ SPKDArray *split(SPKDArray kdArr, int coor) {
         spKDArrayDestroy(kdArr);
         spKDArrayDestroy(left);
         spKDArrayDestroy(right);
+        //TODO Some frees are missing (for matrices)
         return NULL;
 
 }

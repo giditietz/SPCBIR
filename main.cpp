@@ -183,7 +183,7 @@ int main(int argc, char *argv[]) {
             goto fail; //Program is terminated, so we move to the cleanup phase.
         }
         if (proceed) {
-
+            //TODO what happens if ENTER is pressed?
             queryPointArray = imageProcObject->getImageFeatures(queryImagePath, indexOfQueryImage,
                                                                 numOfFeatsQueryImage);
             if (NULL == queryPointArray) {

@@ -13,10 +13,108 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="88878b80-8316-48ed-9675-7a6d5c348176" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IndexedPoint.c" afterPath="$PROJECT_DIR$/IndexedPoint.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SPFinalImageList.c" afterPath="$PROJECT_DIR$/SPFinalImageList.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SPKDArray.c" afterPath="$PROJECT_DIR$/SPKDArray.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SPKDTree.c" afterPath="$PROJECT_DIR$/SPKDTree.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img0.feats" afterPath="$PROJECT_DIR$/images/img0.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img1.feats" afterPath="$PROJECT_DIR$/images/img1.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img10.feats" afterPath="$PROJECT_DIR$/images/img10.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img11.feats" afterPath="$PROJECT_DIR$/images/img11.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img12.feats" afterPath="$PROJECT_DIR$/images/img12.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img13.feats" afterPath="$PROJECT_DIR$/images/img13.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img14.feats" afterPath="$PROJECT_DIR$/images/img14.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img15.feats" afterPath="$PROJECT_DIR$/images/img15.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img16.feats" afterPath="$PROJECT_DIR$/images/img16.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img17.feats" afterPath="$PROJECT_DIR$/images/img17.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img18.feats" afterPath="$PROJECT_DIR$/images/img18.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img19.feats" afterPath="$PROJECT_DIR$/images/img19.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img2.feats" afterPath="$PROJECT_DIR$/images/img2.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img20.feats" afterPath="$PROJECT_DIR$/images/img20.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img21.feats" afterPath="$PROJECT_DIR$/images/img21.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img22.feats" afterPath="$PROJECT_DIR$/images/img22.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img23.feats" afterPath="$PROJECT_DIR$/images/img23.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img24.feats" afterPath="$PROJECT_DIR$/images/img24.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img25.feats" afterPath="$PROJECT_DIR$/images/img25.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img26.feats" afterPath="$PROJECT_DIR$/images/img26.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img27.feats" afterPath="$PROJECT_DIR$/images/img27.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img28.feats" afterPath="$PROJECT_DIR$/images/img28.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img29.feats" afterPath="$PROJECT_DIR$/images/img29.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img3.feats" afterPath="$PROJECT_DIR$/images/img3.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img30.feats" afterPath="$PROJECT_DIR$/images/img30.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img31.feats" afterPath="$PROJECT_DIR$/images/img31.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img32.feats" afterPath="$PROJECT_DIR$/images/img32.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img33.feats" afterPath="$PROJECT_DIR$/images/img33.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img34.feats" afterPath="$PROJECT_DIR$/images/img34.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img35.feats" afterPath="$PROJECT_DIR$/images/img35.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img36.feats" afterPath="$PROJECT_DIR$/images/img36.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img37.feats" afterPath="$PROJECT_DIR$/images/img37.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img38.feats" afterPath="$PROJECT_DIR$/images/img38.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img39.feats" afterPath="$PROJECT_DIR$/images/img39.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img4.feats" afterPath="$PROJECT_DIR$/images/img4.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img40.feats" afterPath="$PROJECT_DIR$/images/img40.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img41.feats" afterPath="$PROJECT_DIR$/images/img41.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img42.feats" afterPath="$PROJECT_DIR$/images/img42.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img43.feats" afterPath="$PROJECT_DIR$/images/img43.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img44.feats" afterPath="$PROJECT_DIR$/images/img44.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img45.feats" afterPath="$PROJECT_DIR$/images/img45.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img46.feats" afterPath="$PROJECT_DIR$/images/img46.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img47.feats" afterPath="$PROJECT_DIR$/images/img47.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img48.feats" afterPath="$PROJECT_DIR$/images/img48.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img49.feats" afterPath="$PROJECT_DIR$/images/img49.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img5.feats" afterPath="$PROJECT_DIR$/images/img5.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img50.feats" afterPath="$PROJECT_DIR$/images/img50.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img51.feats" afterPath="$PROJECT_DIR$/images/img51.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img52.feats" afterPath="$PROJECT_DIR$/images/img52.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img53.feats" afterPath="$PROJECT_DIR$/images/img53.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img54.feats" afterPath="$PROJECT_DIR$/images/img54.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img55.feats" afterPath="$PROJECT_DIR$/images/img55.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img56.feats" afterPath="$PROJECT_DIR$/images/img56.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img57.feats" afterPath="$PROJECT_DIR$/images/img57.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img58.feats" afterPath="$PROJECT_DIR$/images/img58.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img59.feats" afterPath="$PROJECT_DIR$/images/img59.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img6.feats" afterPath="$PROJECT_DIR$/images/img6.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img60.feats" afterPath="$PROJECT_DIR$/images/img60.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img61.feats" afterPath="$PROJECT_DIR$/images/img61.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img62.feats" afterPath="$PROJECT_DIR$/images/img62.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img63.feats" afterPath="$PROJECT_DIR$/images/img63.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img64.feats" afterPath="$PROJECT_DIR$/images/img64.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img65.feats" afterPath="$PROJECT_DIR$/images/img65.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img66.feats" afterPath="$PROJECT_DIR$/images/img66.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img67.feats" afterPath="$PROJECT_DIR$/images/img67.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img68.feats" afterPath="$PROJECT_DIR$/images/img68.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img69.feats" afterPath="$PROJECT_DIR$/images/img69.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img7.feats" afterPath="$PROJECT_DIR$/images/img7.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img70.feats" afterPath="$PROJECT_DIR$/images/img70.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img71.feats" afterPath="$PROJECT_DIR$/images/img71.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img72.feats" afterPath="$PROJECT_DIR$/images/img72.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img73.feats" afterPath="$PROJECT_DIR$/images/img73.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img74.feats" afterPath="$PROJECT_DIR$/images/img74.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img75.feats" afterPath="$PROJECT_DIR$/images/img75.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img76.feats" afterPath="$PROJECT_DIR$/images/img76.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img77.feats" afterPath="$PROJECT_DIR$/images/img77.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img78.feats" afterPath="$PROJECT_DIR$/images/img78.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img79.feats" afterPath="$PROJECT_DIR$/images/img79.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img8.feats" afterPath="$PROJECT_DIR$/images/img8.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img80.feats" afterPath="$PROJECT_DIR$/images/img80.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img81.feats" afterPath="$PROJECT_DIR$/images/img81.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img82.feats" afterPath="$PROJECT_DIR$/images/img82.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img83.feats" afterPath="$PROJECT_DIR$/images/img83.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img84.feats" afterPath="$PROJECT_DIR$/images/img84.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img85.feats" afterPath="$PROJECT_DIR$/images/img85.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img86.feats" afterPath="$PROJECT_DIR$/images/img86.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img87.feats" afterPath="$PROJECT_DIR$/images/img87.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img88.feats" afterPath="$PROJECT_DIR$/images/img88.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img89.feats" afterPath="$PROJECT_DIR$/images/img89.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img9.feats" afterPath="$PROJECT_DIR$/images/img9.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img90.feats" afterPath="$PROJECT_DIR$/images/img90.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img91.feats" afterPath="$PROJECT_DIR$/images/img91.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img92.feats" afterPath="$PROJECT_DIR$/images/img92.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img93.feats" afterPath="$PROJECT_DIR$/images/img93.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img94.feats" afterPath="$PROJECT_DIR$/images/img94.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img95.feats" afterPath="$PROJECT_DIR$/images/img95.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img96.feats" afterPath="$PROJECT_DIR$/images/img96.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img97.feats" afterPath="$PROJECT_DIR$/images/img97.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img98.feats" afterPath="$PROJECT_DIR$/images/img98.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/img99.feats" afterPath="$PROJECT_DIR$/images/img99.feats" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/pca.yml" afterPath="$PROJECT_DIR$/images/pca.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.cpp" afterPath="$PROJECT_DIR$/main.cpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test.config" afterPath="$PROJECT_DIR$/test.config" />
     </list>
@@ -38,11 +136,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="main.cpp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="185" column="52" selection-start-line="185" selection-start-column="52" selection-end-line="185" selection-end-column="52" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="SPKDArray.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SPKDArray.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="366">
-              <caret line="238" column="34" selection-start-line="238" selection-start-column="0" selection-end-line="239" selection-end-column="0" />
+            <state relative-caret-position="4578">
+              <caret line="373" column="8" selection-start-line="373" selection-start-column="8" selection-end-line="373" selection-end-column="8" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
               </folding>
@@ -53,8 +161,8 @@
       <file leaf-file-name="test.config" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test.config">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+            <state relative-caret-position="90">
+              <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -80,10 +188,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SPFinalImageList.c" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SPFinalImageList.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SPFinalImageList.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
+            <state relative-caret-position="-1020">
               <caret line="48" column="14" selection-start-line="48" selection-start-column="14" selection-end-line="48" selection-end-column="14" />
               <folding />
             </state>
@@ -122,12 +230,12 @@
         <option value="$PROJECT_DIR$/Functions.h" />
         <option value="$PROJECT_DIR$/Functions.c" />
         <option value="$PROJECT_DIR$/SPConfig.c" />
-        <option value="$PROJECT_DIR$/main.cpp" />
         <option value="$PROJECT_DIR$/IndexedPoint.c" />
         <option value="$PROJECT_DIR$/SPKDTree.c" />
+        <option value="$PROJECT_DIR$/SPFinalImageList.c" />
         <option value="$PROJECT_DIR$/SPKDArray.c" />
         <option value="$PROJECT_DIR$/test.config" />
-        <option value="$PROJECT_DIR$/SPFinalImageList.c" />
+        <option value="$PROJECT_DIR$/main.cpp" />
       </list>
     </option>
   </component>
@@ -421,16 +529,16 @@
       <workItem from="1473528862533" duration="11387000" />
       <workItem from="1473545936591" duration="5071000" />
       <workItem from="1473579027847" duration="27320000" />
-      <workItem from="1473959424129" duration="7852000" />
+      <workItem from="1473959424129" duration="8159000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="205140000" />
+    <option name="totallyTimeSpent" value="205447000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13812543" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -439,7 +547,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.50843376" sideWeight="0.5024665" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2614458" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2614458" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -716,11 +824,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/images/img0.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/images/img0.feats">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -770,14 +873,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2305">
-          <caret line="231" column="22" selection-start-line="231" selection-start-column="22" selection-end-line="231" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/IndexedPoint.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -804,14 +899,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test.config">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SPKDTree.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="186">
@@ -820,20 +907,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/SPFinalImageList.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1020">
+          <caret line="48" column="14" selection-start-line="48" selection-start-column="14" selection-end-line="48" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/SPKDArray.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
-          <caret line="238" column="34" selection-start-line="238" selection-start-column="0" selection-end-line="239" selection-end-column="0" />
+        <state relative-caret-position="4578">
+          <caret line="373" column="8" selection-start-line="373" selection-start-column="8" selection-end-line="373" selection-end-column="8" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SPFinalImageList.c">
+    <entry file="file://$PROJECT_DIR$/images/img0.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.config">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="48" column="14" selection-start-line="48" selection-start-column="14" selection-end-line="48" selection-end-column="14" />
+        <state relative-caret-position="90">
+          <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="185" column="52" selection-start-line="185" selection-start-column="52" selection-end-line="185" selection-end-column="52" />
           <folding />
         </state>
       </provider>
