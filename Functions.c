@@ -64,7 +64,7 @@ int writeFeatures(SPConfig config, int index, int numberOfFeatures, SPPoint *arr
 }
 
 int
-readFeatures(SPConfig config, int index, int *featuresNumber, SPPoint **imageAndFeatures, bool created, int imageNum) {
+readFeatures(SPConfig config, int index, int *featuresNumber, SPPoint **imageAndFeatures, bool created) {
     int res = SP_CONFIG_SUCCESS;
     double *axis = NULL;
     FILE *featsFile = NULL;
@@ -120,7 +120,7 @@ readFeatures(SPConfig config, int index, int *featuresNumber, SPPoint **imageAnd
         if (axis == NULL) {
             axis = (double *) malloc(sizeof(double) * dim);
         } else {
-            realloc(axis, sizeof(double) * dim);
+            axis=realloc(axis, sizeof(double) * dim);
         }
         for (int i = 0; i < dim; i++) {//read data
             fgets(temp, MAX_LEN, featsFile);

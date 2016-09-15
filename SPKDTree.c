@@ -18,14 +18,14 @@
 
 int IS_ROOT = true;
 
-typedef struct sp_kd_node {
+struct sp_kd_node {
     int dim;
     double val;
     SPKDNode left;
     SPKDNode right;
     SPPoint data;
     SP_KD_TREE_SPLIT_METHOD splitMethod;
-} *SPKDNode;
+};
 
 
 int findMaxSpreadDimension(SPKDArray spkdArray) {
@@ -123,6 +123,7 @@ SPKDNode spKDTreeInit(SPKDArray spkdArray, SP_KD_TREE_SPLIT_METHOD splitmethod) 
         res = split(spkdArray, dim_for_split);
         left = res[0];
         right = res[1];
+        free(res);
         root->left = spKDTreeInit(left, splitmethod);
         root->right = spKDTreeInit(right, splitmethod);
         return root;
@@ -182,7 +183,7 @@ bool spKDTreeKNNSearch(SPKDNode curr, SPBPQueue bpq, SPPoint queryPoint) {
         curr_distance = spPointL2SquaredDistance(queryPoint, spKDTreeNodeGetData(curr));
         SPListElement newElement = spListElementCreate(curr_index, curr_distance);
         msg = spBPQueueEnqueue(bpq, newElement);
-        if ((msg != SP_ELEMENT_SUCCESS) != (msg != SP_BPQUEUE_FULL)) {
+        if ((msg != SP_BPQUEUE_SUCCESS) && (msg != SP_BPQUEUE_FULL)) {
             spLoggerPrintError(ERROR_MSG_KNN_SEARCH_BPQ_FAILED, __FILE__, __func__, __LINE__);
             return false;
         }

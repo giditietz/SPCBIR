@@ -8,7 +8,7 @@
 #define FINALPROJECT_FUNCTIONS_H
 bool dimensionOk(SPPoint* pointArr, int num);
 int writeFeatures(SPConfig config,int index,int numberOfFeatures,SPPoint* arr);
-int readFeatures(SPConfig config,int index,int* featuresNumber,SPPoint** imageAndFeatures,bool created,int imageNum);
+int readFeatures(SPConfig config,int index,int* featuresNumber,SPPoint** imageAndFeatures,bool created);
 int getIndexFromFeatFile(char** line,int* imageIndex);
 int getNumFeaturesFromFeatFile(char** line,int* featuresNum);
 int getDimensionFromFeatFile(char* line,int* dimension);

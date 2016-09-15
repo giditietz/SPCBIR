@@ -7,13 +7,14 @@
 #include "Malloc_Macro.h"
 
 int cur_coor = 0;
-typedef struct sp_kdarray {
+struct sp_kdarray {
     int dim;
     int size;
     int dim_to_split;
     int **dataMatrix;
     SPPoint *pointArray;
-} *SPKDArray;
+};
+
 
 
 
@@ -85,7 +86,7 @@ SPKDArray spKDArrayInit(SPPoint *arr, int size) {
         pointArray[i] = spPointCopy(arr[i]);
     }
     //we no longer need the "arr":
-    for (int k = 0; k < size ; k++) {
+    for (int k = 0; k < size; k++) {
         spPointDestroy(arr[k]);
     }
     FREE_MACRO(arr);
@@ -148,12 +149,12 @@ SPKDArray spKDArrayInit(SPPoint *arr, int size) {
     return final;
 
     fail:
-        for (int i = 0; i < size; i++) {
-            FREE_MACRO(pointArray[i]);
-        }
-        FREE_MACRO(final);
-        FREE_MACRO(data);
-        spLoggerPrintInfo("KDArray initialization has failed.");
+    for (int i = 0; i < size; i++) {
+        FREE_MACRO(pointArray[i]);
+    }
+    FREE_MACRO(final);
+    FREE_MACRO(data);
+    spLoggerPrintInfo("KDArray initialization has failed.");
 
     return NULL;
 }
@@ -168,7 +169,7 @@ SPKDArray *split(SPKDArray kdArr, int coor) {
     //TODO check if coor < dimention !!
     //TODO malloc/calloc assertion
     SPKDArray left = NULL;
-    SPKDArray right =NULL;
+    SPKDArray right = NULL;
     int **dataMatrix = NULL;
 
 
@@ -228,7 +229,7 @@ SPKDArray *split(SPKDArray kdArr, int coor) {
     }
     int rightPointArrayIndex = 0;
     int leftPointArrayIndex = 0;
-     //puts("\npoint array:");
+    //puts("\npoint array:");
 /*    for (int i = 0; i < size; i++) {
          printf("%d ", spPointGetIndex(pointArray[i]));
      }*/
@@ -335,20 +336,20 @@ SPKDArray *split(SPKDArray kdArr, int coor) {
         rightInsertionIndex = 0;
         //puts("");
     }
- /*   printf("\nleft matrix\n");
-    for (int i = 0; i < dimension; i++) {
-        for (int j = 0; j < leftSize; j++) {
-            printf("%d ", leftdata[i][j]);
-        }
-        puts("");
-    }
-    printf("\nright matrix\n");
-    for (int i = 0; i < dimension; i++) {
-        for (int j = 0; j < rightSize; j++) {
-            printf("%d ", rightdata[i][j]);
-        }
-        puts("");
-    }*/
+    /*   printf("\nleft matrix\n");
+       for (int i = 0; i < dimension; i++) {
+           for (int j = 0; j < leftSize; j++) {
+               printf("%d ", leftdata[i][j]);
+           }
+           puts("");
+       }
+       printf("\nright matrix\n");
+       for (int i = 0; i < dimension; i++) {
+           for (int j = 0; j < rightSize; j++) {
+               printf("%d ", rightdata[i][j]);
+           }
+           puts("");
+       }*/
 
 
 
@@ -366,16 +367,18 @@ SPKDArray *split(SPKDArray kdArr, int coor) {
     right->dataMatrix = rightdata;
 
 
-    SPKDArray ret_array[2] = {left, right};
+    //SPKDArray ret_array[2] = {left, right};
+    SPKDArray* ret_array=(SPKDArray*)malloc(2*sizeof(SPKDArray));
+    ret_array[0]=left;
+    ret_array[1]=right;
     free(arrayX);
     free(leftMap);
     free(rightMap);
-    //spKDArrayDestroy(kdArr);
+    //spKDArrayDestroy(kdArr); /TODO fix!
 
     return ret_array;
 
-    fail:
-    return NULL;
+
 }
 
 /**
