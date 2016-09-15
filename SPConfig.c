@@ -93,22 +93,23 @@ bool spConfigMinimalGui(const SPConfig config, SP_CONFIG_MSG *msg) {
 
 }
 
-SP_LOGGER_LEVEL spConfigGetLoggerLevel(const SPConfig config,SP_CONFIG_MSG *msg){
-    if(config==NULL){
-        *msg=SP_CONFIG_INVALID_ARGUMENT;
+SP_LOGGER_LEVEL spConfigGetLoggerLevel(const SPConfig config, SP_CONFIG_MSG *msg) {
+    if (config == NULL) {
+        *msg = SP_CONFIG_INVALID_ARGUMENT;
         return -1;
-    }else{
-        *msg=SP_CONFIG_SUCCESS;
+    } else {
+        *msg = SP_CONFIG_SUCCESS;
         return config->spLoggerLevel;
     }
 
 
 }
-void spConfigGetLoggerName(const SPConfig config,char* name){
-    if(config==NULL){
+
+void spConfigGetLoggerName(const SPConfig config, char *name) {
+    if (config == NULL) {
         return;
-    }else{
-        strcpy(name,config->spLoggerFilename);
+    } else {
+        strcpy(name, config->spLoggerFilename);
     }
 }
 
@@ -157,21 +158,21 @@ int spConfigGetspNumOfSimilarImages(const SPConfig config, SP_CONFIG_MSG *msg) {
     }
 }
 
-SP_CONFIG_MSG spConfigGetFeaturesPathFeats(char* imagePath, const SPConfig config,
-                                           int index){
+SP_CONFIG_MSG spConfigGetFeaturesPathFeats(char *imagePath, const SPConfig config,
+                                           int index) {
     char indexStr[LINE_LENGTH];
-    if(imagePath==NULL||config==NULL){
+    if (imagePath == NULL || config == NULL) {
         return SP_CONFIG_INVALID_ARGUMENT;
     }
-    if(index>=config->spNumOfImages){
+    if (index >= config->spNumOfImages) {
         return SP_CONFIG_INDEX_OUT_OF_RANGE;
     }
-    else{
-        strcat(imagePath,config->spImagesDirectory);
-        strcat(imagePath,config->spImagesPrefix);
-        sprintf(indexStr,"%d",index);
-        strcat(imagePath,indexStr);
-        strcat(imagePath,FEATS);
+    else {
+        strcat(imagePath, config->spImagesDirectory);
+        strcat(imagePath, config->spImagesPrefix);
+        sprintf(indexStr, "%d", index);
+        strcat(imagePath, indexStr);
+        strcat(imagePath, FEATS);
         return SP_CONFIG_SUCCESS;
 
 
@@ -199,7 +200,7 @@ SP_CONFIG_MSG spConfigGetImagePath(char *imagePath, const SPConfig config,
         return SP_CONFIG_INDEX_OUT_OF_RANGE;
     }
     else {
-        strcpy(imagePath,""); //it was an error
+        strcpy(imagePath, ""); //it was an error
         strcat(imagePath, config->spImagesDirectory);
         strcat(imagePath, config->spImagesPrefix);
         sprintf(indexStr, "%d", index);
@@ -210,19 +211,20 @@ SP_CONFIG_MSG spConfigGetImagePath(char *imagePath, const SPConfig config,
 
     }
 }
-SP_KD_TREE_SPLIT_METHOD spConfigGetSplitMethod(const SPConfig config, SP_CONFIG_MSG* msg){
-    assert(msg!=NULL);
-    if(config==NULL){
-        *msg=SP_CONFIG_INVALID_ARGUMENT;
+
+SP_KD_TREE_SPLIT_METHOD spConfigGetSplitMethod(const SPConfig config, SP_CONFIG_MSG *msg) {
+    assert(msg != NULL);
+    if (config == NULL) {
+        *msg = SP_CONFIG_INVALID_ARGUMENT;
         return INCREMENTAL;
-    }else{
-        *msg=SP_CONFIG_SUCCESS;
+    } else {
+        *msg = SP_CONFIG_SUCCESS;
         return config->spKDTreeSplitMethod;
     }
 }
 
 
-bool spConfigGetMinimalGUI(const SPConfig config, SP_CONFIG_MSG* msg){
+bool spConfigGetMinimalGUI(const SPConfig config, SP_CONFIG_MSG *msg) {
     assert(msg != NULL);
     if (config == NULL) {
         *msg = SP_CONFIG_INVALID_ARGUMENT;
@@ -232,7 +234,6 @@ bool spConfigGetMinimalGUI(const SPConfig config, SP_CONFIG_MSG* msg){
         return config->spMinimalGUI;
     }
 }
-
 
 
 SP_CONFIG_MSG spConfigGetPCAPath(char *pcaPath, const SPConfig config) {
@@ -362,11 +363,11 @@ int parseConfigFile(const char *file, SPConfig config, int *numberOfLines) {
         pointer = strchr(str, '=');
         if (pointer == NULL) {//there is no '='
             sscanf(str, "%s", str);//check if this line is empty;
-            if (strlen(str) == 0 || *str == '\n') {
+            if (strlen(str) == 0 || str[0] == '\n' || str[0] == '\r') {
                 continue;//go to the next line
             } else {
                 res = LINE_INVALID;
-                printInvalidLineErrorMsg(file, lineNum);
+                //printInvalidLineErrorMsg(file, lineNum);
                 goto fail;
                 break;
             }
@@ -568,7 +569,7 @@ int removeSpaceAndCheckValid(char **line) {
     bool firstChar = false;
     bool lastChar = false;
 
-    while (temp[charIndex] != '\0' && temp[charIndex] != '\n' && temp[charIndex] != '\r' ) {
+    while (temp[charIndex] != '\0' && temp[charIndex] != '\n' && temp[charIndex] != '\r') {
         if (!firstChar && temp[charIndex] == ' ') {
             charIndex++;
             continue;

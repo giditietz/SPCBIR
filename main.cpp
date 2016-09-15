@@ -6,7 +6,7 @@
 #define DEFAULT_FILE_NAME "spcbir.config"
 #define C "-c"
 #define COMMAND_LINE_ERROR "Invalid command line : use -c"
-
+#define CONFIG_FILENAME "<config_filename>"
 
 #define MAX_LEN 1024
 
@@ -61,19 +61,20 @@ int main(int argc, char *argv[]) {
             goto fail;
         }
     } else if (argc == 2 && strcmp(argv[1], C) == 0) {
-        printf("%s %s\n", COMMAND_LINE_ERROR, argv[2]);
+        printf("%s %s\n", COMMAND_LINE_ERROR, CONFIG_FILENAME);
         goto fail;
     } else if (argc == 3 && strcmp(argv[1], C) == 0) {
         config = spConfigCreate(argv[2], &msg);
-        if(!config){
-            goto fail;
-        }
         if (msg == SP_CONFIG_CANNOT_OPEN_FILE) {//user entered arguments but the file cannot be open
             printCannotOpenFile(argv[2]);
             goto fail;
         }
+        if (!config) {
+            goto fail;
+        }
+
     } else {// user didn't entered arguments correctly
-        printf("%s %s\n", COMMAND_LINE_ERROR, argv[2]);//if the user entered arguments not correctly
+        printf("%s %s\n", COMMAND_LINE_ERROR, CONFIG_FILENAME);//if the user entered arguments not correctly
         goto fail;
     }
     //Create Logger
