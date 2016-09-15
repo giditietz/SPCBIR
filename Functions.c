@@ -36,7 +36,9 @@ int writeFeatures(SPConfig config, int index, int numberOfFeatures, SPPoint *arr
     }
     /**
      *each file will start like this:
-    Imageindex,numberOfFeatures,Dimension
+    Imageindex
+    numberOfFeatures
+    Dimension
     $$$//feature number 1
      coordinate0
      coordinate1
@@ -47,7 +49,7 @@ int writeFeatures(SPConfig config, int index, int numberOfFeatures, SPPoint *arr
      ...
      $$$
      */
-    fprintf(file, "%d,%d,%d\n", index, numberOfFeatures, dimension);
+    fprintf(file, "%d\n%d\n%d\n", index, numberOfFeatures, dimension);
     for (int i = 0; i < numberOfFeatures; i++) {
         fprintf(file, "%s\n", SEP);
 
@@ -85,23 +87,33 @@ readFeatures(SPConfig config, int index, int *featuresNumber, SPPoint **imageAnd
         return res;
     }
     //store the first line which contains: imageIndex,NumberOfFeatures,Dimension
-    fgets(firstLine, MAX_LEN, featsFile);
-    char *line = (char *) malloc(MAX_LEN);
-    strcpy(line, firstLine);
-    res = getIndexFromFeatFile(&line, &imageIndex);
-    if (res != SP_CONFIG_SUCCESS) {
+    fgets(firstLine, MAX_LEN, featsFile);//get index
+    imageIndex=atoi(firstLine);
+    if(imageIndex!=index){//verify imageIndex=Index
+        res=SP_CONFIG_INVALID_ARGUMENT;
+        goto fail;
+    }
+    fgets(firstLine, MAX_LEN, featsFile);//get features
+    *featuresNumber=atoi(firstLine);
+    fgets(firstLine, MAX_LEN, featsFile);//get dim
+    dim=atoi(firstLine);
+
+    //char *line = (char *) malloc(MAX_LEN);
+    //strcpy(line, firstLine);
+    //res = getIndexFromFeatFile(&line, &imageIndex);
+    /*if (res != SP_CONFIG_SUCCESS) {
         sprintf(loggerMessage, "Failed to retrieve index from imageNumber:%d", index);
         spLoggerPrintError(loggerMessage, __FILE__, __func__, __LINE__);
         goto fail;
-    }
+    }*/
     //char* line2=(char*)malloc(MAX_LEN);
     //strcpy(line2,line);
-    res = getNumFeaturesFromFeatFile(&line, featuresNumber,&dim);
-    if (res != SP_CONFIG_SUCCESS) {
+    //res = getNumFeaturesFromFeatFile(&line, featuresNumber,&dim);
+    /*if (res != SP_CONFIG_SUCCESS) {
         sprintf(loggerMessage, "Failed to retrieve index from imageNumber:%d", index);
         spLoggerPrintError(loggerMessage, __FILE__, __func__, __LINE__);
         goto fail;
-    }
+    }*/
     //char* line3=(char*)malloc(MAX_LEN);
     // strcpy(line3,line2);
    // getDimensionFromFeatFile(line, &dim);
@@ -185,7 +197,7 @@ bool dimensionOk(SPPoint *pointArr, int num) {
     return true;
 }
 
-int getIndexFromFeatFile(char **line, int *imageIndex) {
+/*int getIndexFromFeatFile(char **line, int *imageIndex) {
     int res = SP_CONFIG_SUCCESS;
     char *variable;
     char *val;
@@ -230,7 +242,7 @@ int getNumFeaturesFromFeatFile(char **line, int *featuresNum, int* dim) {
     fail:
     // FREE_MACRO(str1);
     return res;
-}
+}*/
 /*
 int getDimensionFromFeatFile(char *line, int *dimension) {
     int res = SP_CONFIG_SUCCESS;
