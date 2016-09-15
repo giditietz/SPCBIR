@@ -50,7 +50,7 @@ int main(int argc, char *argv[]) {
 
 
     //Create SPConfig
-    if(argc>3){
+    if (argc > 3) {
         printf("%s %s\n", COMMAND_LINE_ERROR, argv[2]);
         goto fail;
     }
@@ -60,15 +60,14 @@ int main(int argc, char *argv[]) {
             printCannotOpenFileNoArguments();
             goto fail;
         }
-    }
-    else if (argc == 2 && strcmp(argv[1], C) == 0) {
-        config = spConfigCreate(DEFAULT_FILE_NAME, &msg);
-        if (msg == SP_CONFIG_CANNOT_OPEN_FILE) {//no arguments were entered by user and the default file cannot be open
-            printCannotOpenFileNoArguments();
-            goto fail;
-        }
+    } else if (argc == 2 && strcmp(argv[1], C) == 0) {
+        printf("%s %s\n", COMMAND_LINE_ERROR, argv[2]);
+        goto fail;
     } else if (argc == 3 && strcmp(argv[1], C) == 0) {
         config = spConfigCreate(argv[2], &msg);
+        if(!config){
+            goto fail;
+        }
         if (msg == SP_CONFIG_CANNOT_OPEN_FILE) {//user entered arguments but the file cannot be open
             printCannotOpenFile(argv[2]);
             goto fail;
