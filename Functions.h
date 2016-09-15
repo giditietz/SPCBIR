@@ -9,8 +9,8 @@
 bool dimensionOk(SPPoint* pointArr, int num);
 int writeFeatures(SPConfig config,int index,int numberOfFeatures,SPPoint* arr);
 int readFeatures(SPConfig config,int index,int* featuresNumber,SPPoint** imageAndFeatures,bool created);
-int getIndexFromFeatFile(char** line,int* imageIndex);
-int getNumFeaturesFromFeatFile(char** line,int* featuresNum,int *dim);
+//int getIndexFromFeatFile(char** line,int* imageIndex);
+//int getNumFeaturesFromFeatFile(char** line,int* featuresNum,int *dim);
 //int getDimensionFromFeatFile(char* line,int* dimension);
 int createPointsArray(SPPoint** ptr, int len,bool created);
 int sumAllFeatures(int* featuresArr,int imageNum);

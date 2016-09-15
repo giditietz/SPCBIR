@@ -71,6 +71,7 @@ readFeatures(SPConfig config, int index, int *featuresNumber, SPPoint **imageAnd
     double *axis = NULL;
     FILE *featsFile = NULL;
     char path[MAX_LEN];
+    strcpy(path,"");
     char firstLine[MAX_LEN];
     int imageIndex;
     // int featureNumber;
