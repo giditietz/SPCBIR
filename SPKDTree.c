@@ -12,7 +12,7 @@
 
 
 #define ERROR_MSG_KNN_SEARCH_FAILED "Error: KNN search has failed"
-#define ERROR_MSG_KNN_SEARCH_BPQ_FAILED "Error: KNN search has failed due to a BPQueue issue"
+#define ERROR_MSG_KNN_SEARCH_BPQ_ENQUEUE_FAILED "Error: KNN search has failed due to a BPQueue issue"
 #define ERROR_MSG_NULL_NODE "Error: node is NULL"
 
 
@@ -77,7 +77,6 @@ double findMedianValueByCoor(SPKDArray spkdArray, int coor) {
     }
     return spPointGetAxisCoor(pointList[dataMatrix[coor][location_of_median]], coor);
 
-
 }
 
 SPKDNode spKDTreeInit(SPKDArray spkdArray, SP_KD_TREE_SPLIT_METHOD splitmethod) {
@@ -89,7 +88,6 @@ SPKDNode spKDTreeInit(SPKDArray spkdArray, SP_KD_TREE_SPLIT_METHOD splitmethod) 
     SPKDArray left;
     SPKDArray right;
 
-    //TODO raise exception if splitMethod is invalid
     //TODO (spKDArrayGetSize(spkdArray)==1) -> error
     int dim_for_split = 0;
     if (spKDArrayGetSize(spkdArray) == 1) { //stopping condition
@@ -114,7 +112,7 @@ SPKDNode spKDTreeInit(SPKDArray spkdArray, SP_KD_TREE_SPLIT_METHOD splitmethod) 
                 IS_ROOT = false;
             }
             else {
-                dim_for_split = (spKDArrayGetDimToSplit(spkdArray) + 1) % (max_dim); //TODO verify correctness}
+                dim_for_split = (spKDArrayGetDimToSplit(spkdArray) + 1) % (max_dim);
             }
         }
         root->dim = dim_for_split;
@@ -140,7 +138,7 @@ bool spKDTreeIsLeaf(SPKDNode node) {
     }
 }
 
-
+///Getters and setter for SPKDTree
 int spKDTreeNodeGetDim(SPKDNode node) {
     return node->dim;
 }
@@ -184,7 +182,7 @@ bool spKDTreeKNNSearch(SPKDNode curr, SPBPQueue bpq, SPPoint queryPoint) {
         SPListElement newElement = spListElementCreate(curr_index, curr_distance);
         msg = spBPQueueEnqueue(bpq, newElement);
         if ((msg != SP_BPQUEUE_SUCCESS) && (msg != SP_BPQUEUE_FULL)) {
-            spLoggerPrintError(ERROR_MSG_KNN_SEARCH_BPQ_FAILED, __FILE__, __func__, __LINE__);
+            spLoggerPrintError(ERROR_MSG_KNN_SEARCH_BPQ_ENQUEUE_FAILED, __FILE__, __func__, __LINE__);
             return false;
         }
         return true;
