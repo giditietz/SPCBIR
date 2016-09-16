@@ -143,8 +143,11 @@ int main(int argc, char *argv[]) {
     } else { //Non-extraction mode
         spLoggerPrintInfo("Retrieve data from feats files");
         for (int j = 0; j < imageNum; j++) {
-            readFeatures(config, j, &(featuresNum[j]), &(arrImageFeatures[j]), created);
+            res=readFeatures(config, j, &(featuresNum[j]), &(arrImageFeatures[j]), created);
             created = true;
+            if(res!=SP_CONFIG_SUCCESS){
+                goto fail;
+            }
         }
     }
     //end of extraction/non extraction mode
