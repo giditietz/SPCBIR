@@ -8,7 +8,16 @@
 #include "SPLogger.h"
 #include "SPConfig.h"
 #include "Malloc_Macro.h"
-
+#define ZERO 0
+#define KDTREE_NULL_STR "Given KDTree is NULL!"
+#define KNN_SEARCH_FAIL "KNN Search had failed"
+#define KNN_SEARCH_SUCCESS "KNN search finished successfully."
+#define ELEMENT_STR "Element was not peeked from BPQueue"
+#define BP_ERROR_DQ_STR "BPQueue error in Dequeue"
+#define BP_ERROR_EQ_STR "BPQueue error in Enqueue"
+#define RESOURCE_FREE_STR "All resources in the scope were peacefully freed."
+#define RESOURCE_SCOPE_STR "All resources in the scope were forcefully freed."
+#define BEST_IMG_STR "Best images were found!"
 
 int spGetFinalImageList(SPConfig cfg, SPKDNode kdtree, int *finalIndexArray, SPPoint *queryImageFeatures, int queryFeaturesNum) {
     //declare the arrays/structs that will be malloced later
@@ -21,7 +30,7 @@ int spGetFinalImageList(SPConfig cfg, SPKDNode kdtree, int *finalIndexArray, SPP
     SPBPQueue finalBpq = NULL;
     SP_CONFIG_MSG msg;
     if (NULL == kdtree) {
-        spLoggerPrintError("Given KDTree is NULL!", __FILE__, __FUNCTION__, __LINE__);
+        spLoggerPrintError(KDTREE_NULL_STR, __FILE__, __FUNCTION__, __LINE__);
         goto fail;
     }
     int numOfImages = spConfigGetNumOfImages(cfg, &msg);
@@ -51,16 +60,16 @@ int spGetFinalImageList(SPConfig cfg, SPKDNode kdtree, int *finalIndexArray, SPP
         currPoint = queryImageFeatures[i];
         //  -for each feature, run KNN Search
         if (!spKDTreeKNNSearch(kdtree, currBpq, currPoint)) {
-            spLoggerPrintError("KNN Search had failed", __FILE__, __FUNCTION__, __LINE__);
+            spLoggerPrintError(KNN_SEARCH_FAIL, __FILE__, __FUNCTION__, __LINE__);
             goto fail;
         }
-        spLoggerPrintDebug("KNN search finished successfully.",__FILE__,__FUNCTION__,__LINE__);
+        spLoggerPrintDebug(KNN_SEARCH_SUCCESS,__FILE__,__FUNCTION__,__LINE__);
 
         // then use its BPQ to extract all the closest image indices
         for (int j = 0; j < spknn; j++) {
             curElement = spBPQueuePeek(currBpq);
             if (NULL == curElement) {
-                spLoggerPrintError("Element was not peeked from BPQueue", __FILE__, __FUNCTION__, __LINE__);
+                spLoggerPrintError(ELEMENT_STR, __FILE__, __FUNCTION__, __LINE__);
                 goto fail;
             }
             curElementIndex = spListElementGetIndex(curElement);
@@ -70,22 +79,13 @@ int spGetFinalImageList(SPConfig cfg, SPKDNode kdtree, int *finalIndexArray, SPP
             //Dequeue the first element after using it
             bpqMsg = spBPQueueDequeue(currBpq);
             if (!(bpqMsg == SP_BPQUEUE_FULL || bpqMsg == SP_BPQUEUE_SUCCESS)) {
-                spLoggerPrintError("BPQueue error in Dequeue", __FILE__, __FUNCTION__, __LINE__);
+                spLoggerPrintError(BP_ERROR_DQ_STR, __FILE__, __FUNCTION__, __LINE__);
                 goto fail;
             }
         }
         //TODO Delete prints
-/*        for (int k = 0; k < numOfImages; k++) {
-            printf("%d ", indexArray[k]);
-        }*/
-       // puts("\n");
     }
-/*    for (int k = 0; k < numOfImages; k++) {
-        printf("%d ", indexArray[k]);
-    }*/
-   // puts("\n");
-    //after loop is done, our list will represent the number of times each index was encountered in the KNN Search
-    //find the maximum of the array for future calculations
+
     for (int i = 0; i < numOfImages; i++) {
         if (indexArray[i] > maxCountOfIndex) {
             maxCountOfIndex = indexArray[i];
@@ -99,7 +99,7 @@ int spGetFinalImageList(SPConfig cfg, SPKDNode kdtree, int *finalIndexArray, SPP
         newElement = spListElementCreate(imageIndex, newVal);
         bpqMsg = spBPQueueEnqueue(finalBpq, newElement);
         if (!(bpqMsg == SP_BPQUEUE_FULL || bpqMsg == SP_BPQUEUE_SUCCESS)) {
-            spLoggerPrintError("BPQueue error in Enqueue", __FILE__, __FUNCTION__, __LINE__);
+            spLoggerPrintError(BP_ERROR_EQ_STR, __FILE__, __FUNCTION__, __LINE__);
             goto fail;
         }
     }
@@ -114,7 +114,7 @@ int spGetFinalImageList(SPConfig cfg, SPKDNode kdtree, int *finalIndexArray, SPP
         //Dequeue the first element after using it
         bpqMsg = spBPQueueDequeue(finalBpq);
         if (!(bpqMsg == SP_BPQUEUE_FULL || bpqMsg == SP_BPQUEUE_SUCCESS)) {
-            spLoggerPrintError("BPQueue error in Dequeue", __FILE__, __FUNCTION__, __LINE__);
+            spLoggerPrintError(BP_ERROR_DQ_STR, __FILE__, __FUNCTION__, __LINE__);
             goto fail;
         }
     }
@@ -124,8 +124,8 @@ int spGetFinalImageList(SPConfig cfg, SPKDNode kdtree, int *finalIndexArray, SPP
     spBPQueueDestroy(currBpq);
     spBPQueueDestroy(finalBpq);
     spListElementDestroy(newElement);
-    spLoggerPrintDebug("All resources in the scope were peacefully freed.", __FILE__, __FUNCTION__, __LINE__);
-    spLoggerPrintInfo("Best images were found!");
+    spLoggerPrintDebug(RESOURCE_FREE_STR, __FILE__, __FUNCTION__, __LINE__);
+    spLoggerPrintInfo(BEST_IMG_STR);
     return res;
 
     fail:
@@ -143,7 +143,7 @@ int spGetFinalImageList(SPConfig cfg, SPKDNode kdtree, int *finalIndexArray, SPP
         spKDTreeDestroy(kdtree);
     }
     res = INVALID_ARGUMENT;
-    spLoggerPrintDebug("All resources in the scope were forcefully freed.", __FILE__, __FUNCTION__, __LINE__);
+    spLoggerPrintDebug(RESOURCE_SCOPE_STR, __FILE__, __FUNCTION__, __LINE__);
 
     return res;
 }

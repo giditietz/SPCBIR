@@ -235,14 +235,47 @@ SP_CONFIG_MSG spConfigGetPCAPath(char* pcaPath, const SPConfig config);
  * If config == NULL nothig is done.
  */
 void spConfigDestroy(SPConfig config);
-//TODO
+/**
+ *
+ * @param file
+ * @param config
+ * @param numberOfLines
+ * @return
+ * CANNOT_OPEN FILE if file cannot be open
+ * LINE_INAVLID if there is an invalid line in the config file
+ * SUCCESS no errors occured
+ */
 int parseConfigFile(const char* file,SPConfig config,int* numberOfLines);
 
+/**
+ * get KDSplit Method from config struct
+ * @param config
+ * @param msg SUCCESS no error occured, else puts the right MSG
+ * @return INCREMENTAL,MAX_SPREAD,RANDOM according to what is defined in config
+*/
 SP_KD_TREE_SPLIT_METHOD spConfigGetSplitMethod(const SPConfig config, SP_CONFIG_MSG* msg);
-
+/**
+ * this function creats the img.feat path as required according to the parameteres in config file
+ * @param imagePath
+ * @param config
+ * @param index
+ * @return SUCCESS if no error occured, else puts the right MSG
+ */
 SP_CONFIG_MSG spConfigGetFeaturesPathFeats(char* imagePath, const SPConfig config,
                                            int index);
 
+/**
+ * gets logger lever which is defined in config file
+ * @param config
+ * @param msg
+ * @return 1,2,3,4
+ */
 SP_LOGGER_LEVEL spConfigGetLoggerLevel(const SPConfig config,SP_CONFIG_MSG *msg);
+
+/**
+ * gets logger file name which is defined in config file
+ * @param config
+ * @param name
+ */
 void spConfigGetLoggerName(const SPConfig config,char* name);
 #endif /* SPCONFIG_H_ */

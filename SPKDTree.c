@@ -14,6 +14,10 @@
 #define ERROR_MSG_KNN_SEARCH_FAILED "Error: KNN search has failed"
 #define ERROR_MSG_KNN_SEARCH_BPQ_ENQUEUE_FAILED "Error: KNN search has failed due to a BPQueue issue"
 #define ERROR_MSG_NULL_NODE "Error: node is NULL"
+#define ZERO 0
+#define NEGETIVE -1
+#define ONE 1
+#define TWO 2
 
 
 int IS_ROOT = true;
@@ -37,17 +41,11 @@ int findMaxSpreadDimension(SPKDArray spkdArray) {
     int dimension = spKDArrayGetDim(spkdArray);
     int size = spKDArrayGetSize(spkdArray);
     int **dataMatrix = spKDArrayGetDataMatrix(spkdArray);
-/*    printf("\ndata matrix in max spread\n");
-    for (int i = 0; i < dimension; i++) {
-        for (int j = 0; j < size; j++) {
-            printf("%d ", dataMatrix[i][j]);
-        }
-        puts("");
-    }*/
+
     SPPoint *pointList = spKDArrayGetPointArray(spkdArray);
     for (int i = 0; i < dimension; i++) {
-        int smallestPointIndex = dataMatrix[i][0];
-        int largestPointIndex = dataMatrix[i][size - 1];
+        int smallestPointIndex = dataMatrix[i][ZERO];
+        int largestPointIndex = dataMatrix[i][size - ONE];
         min = spPointGetAxisCoor(pointList[smallestPointIndex],
                                  i);//each first entry in a row of the matrix is the index of the point with the minimal value by axis.
         max = spPointGetAxisCoor(pointList[largestPointIndex],
@@ -69,11 +67,11 @@ double findMedianValueByCoor(SPKDArray spkdArray, int coor) {
     int point_num = spKDArrayGetSize(spkdArray);
     int **dataMatrix = spKDArrayGetDataMatrix(spkdArray);
     SPPoint *pointList = spKDArrayGetPointArray(spkdArray);
-    if (point_num % 2 == 0) {
-        location_of_median = point_num / 2 - 1;
+    if (point_num % TWO == ZERO) {
+        location_of_median = point_num / TWO - ONE;
     }
     else {
-        location_of_median = point_num / 2;
+        location_of_median = point_num / TWO;
     }
     return spPointGetAxisCoor(pointList[dataMatrix[coor][location_of_median]], coor);
 
@@ -89,13 +87,13 @@ SPKDNode spKDTreeInit(SPKDArray spkdArray, SP_KD_TREE_SPLIT_METHOD splitmethod) 
     SPKDArray right;
 
     //TODO (spKDArrayGetSize(spkdArray)==1) -> error
-    int dim_for_split = 0;
-    if (spKDArrayGetSize(spkdArray) == 1) { //stopping condition
+    int dim_for_split = ZERO;
+    if (spKDArrayGetSize(spkdArray) == ONE) { //stopping condition
         root->val = DBL_MAX;
-        root->dim = -1;
+        root->dim = NEGETIVE;
         root->left = NULL;
         root->right = NULL;
-        root->data = spKDArrayGetPointArray(spkdArray)[0];
+        root->data = spKDArrayGetPointArray(spkdArray)[ZERO];
         return root;
     }
     else {
@@ -108,19 +106,19 @@ SPKDNode spKDTreeInit(SPKDArray spkdArray, SP_KD_TREE_SPLIT_METHOD splitmethod) 
         }
         else if (root->splitMethod == INCREMENTAL) {
             if (IS_ROOT) {
-                dim_for_split = 0;
+                dim_for_split = ZERO;
                 IS_ROOT = false;
             }
             else {
-                dim_for_split = (spKDArrayGetDimToSplit(spkdArray) + 1) % (max_dim);
+                dim_for_split = (spKDArrayGetDimToSplit(spkdArray) + ONE) % (max_dim);
             }
         }
         root->dim = dim_for_split;
         root->val = findMedianValueByCoor(spkdArray, dim_for_split);
         root->data = NULL;
         res = split(spkdArray, dim_for_split);
-        left = res[0];
-        right = res[1];
+        left = res[ZERO];
+        right = res[ONE];
         free(res);
         root->left = spKDTreeInit(left, splitmethod);
         root->right = spKDTreeInit(right, splitmethod);

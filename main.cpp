@@ -7,9 +7,29 @@
 #define C "-c"
 #define COMMAND_LINE_ERROR "Invalid command line : use -c"
 #define CONFIG_FILENAME "<config_filename>"
-
+#define ZERO 0
+#define ONE 1
+#define TWO 2
+#define THREE 3
 #define MAX_LEN 1024
-
+#define FORMAT "%s %s\n"
+#define LOGGER_INIT "Logger is initialized"
+#define IMAGE_PROC_INIT "spImageProc Object is initialized"
+#define IMAGE_FEATURE_FAIL "Failed to get image features"
+#define FAIL_WRITE_FEAT "Failed to write features"
+#define FEAT_EXTRACT "Features were extracted from %d images"
+#define SUCCESS_FEAT "Success: Features extracted"
+#define RETRIEVE_DATA "Retrieve data from feats files"
+#define TOTAL_NUM_FEAT "Total number of features is %d"
+#define KDARRAY_INIT_FAIL "KDArray init failed due to a memory allocation error."
+#define ENTER_PATH "\nPlease enter an image path:\n"
+#define STRING_FORMAT "%s"
+#define STRING_FORMATN "%s\n"
+#define EXIT_FORMAT "<>"
+#define EXIT_MESSAGE "Exiting...\n"
+#define CANT_GET_FEAT "Cannot get image features"
+#define ALLOC_ERROR "Memory allocation error"
+#define CANDIDATED_MSG "Best candidates for - %s - are:\n"
 extern "C" {
 #include "SPKDArray.h"
 #include "SPKDTree.h"
@@ -36,7 +56,7 @@ int main(int argc, char *argv[]) {
     char imagePath[MAX_LEN];
     bool proceed = true;
     SPPoint *queryPointArray = NULL;
-    int numOfFeatsQueryImage[1]; //an int[] to comply to imgproc, has a single entry.
+    int numOfFeatsQueryImage[ONE]; //an int[] to comply to imgproc, has a single entry.
     int indexOfQueryImage = INT_MAX;
     int *finalImageIndexes = NULL;
     SPKDNode root = NULL;
@@ -50,23 +70,26 @@ int main(int argc, char *argv[]) {
 
 
     //Create SPConfig
-    if (argc > 3) {
-        printf("%s %s\n", COMMAND_LINE_ERROR, argv[2]);
+    if (argc > THREE) {
+        printf(FORMAT, COMMAND_LINE_ERROR, argv[TWO]);
         goto fail;
     }
-    if (argc == 1) {
+    if (argc == ONE) {
         config = spConfigCreate(DEFAULT_FILE_NAME, &msg);
         if (msg == SP_CONFIG_CANNOT_OPEN_FILE) {//no arguments were entered by user and the default file cannot be open
             printCannotOpenFileNoArguments();
+            fflush(NULL);
             goto fail;
         }
-    } else if (argc == 2 && strcmp(argv[1], C) == 0) {
-        printf("%s %s\n", COMMAND_LINE_ERROR, CONFIG_FILENAME);
+    } else if (argc == TWO && strcmp(argv[ONE], C) == ZERO) {
+        printf(FORMAT, COMMAND_LINE_ERROR, CONFIG_FILENAME);
+        fflush(NULL);
         goto fail;
-    } else if (argc == 3 && strcmp(argv[1], C) == 0) {
-        config = spConfigCreate(argv[2], &msg);
+    } else if (argc == THREE && strcmp(argv[ONE], C) == ZERO) {
+        config = spConfigCreate(argv[TWO], &msg);
         if (msg == SP_CONFIG_CANNOT_OPEN_FILE) {//user entered arguments but the file cannot be open
-            printCannotOpenFile(argv[2]);
+            printCannotOpenFile(argv[TWO]);
+            fflush(NULL);
             goto fail;
         }
         if (!config) {
@@ -74,7 +97,7 @@ int main(int argc, char *argv[]) {
         }
 
     } else {// user didn't entered arguments correctly
-        printf("%s %s\n", COMMAND_LINE_ERROR, CONFIG_FILENAME);//if the user entered arguments not correctly
+        printf(FORMAT, COMMAND_LINE_ERROR, CONFIG_FILENAME);//if the user entered arguments not correctly
         goto fail;
     }
     //Create Logger
@@ -83,14 +106,17 @@ int main(int argc, char *argv[]) {
     if (spLoggerCreate(NULL, level) != SP_LOGGER_SUCCESS) {
         goto fail;
     } else {
-        spLoggerPrintInfo("Logger is initialized");
+        spLoggerPrintInfo(LOGGER_INIT);
     }
     extraction = spConfigIsExtractionMode(config, &msg);
     imageProcObject = new sp::ImageProc(config);
+    if(imageProcObject==NULL){
+        goto fail;
+    }
     if (msg != SP_CONFIG_SUCCESS) {
         goto fail;
     }
-    spLoggerPrintInfo("spImageProc Object is initialized");
+    spLoggerPrintInfo(IMAGE_PROC_INIT);
 
     imageNum = spConfigGetNumOfImages(config, &msg);
     if (msg != SP_CONFIG_SUCCESS) {
@@ -102,46 +128,38 @@ int main(int argc, char *argv[]) {
     }
 
     MALLOC_MACRO(arrImageFeatures, SPPoint**, imageNum * sizeof(SPPoint *));
-    // MALLOC_MACRO(arrImageFeatures, SPPoint**, imageNum * sizeof(SPPoint *));
     MALLOC_MACRO(featuresNum, int*, imageNum * sizeof(int));
     //extraction mode
     for (int i = 0; i < imageNum; i++) {
         arrImageFeatures[i] = NULL;
     }
-
-
     if (extraction) {
-        // imagePath="\0";
         for (temp = 0; temp < imageNum; temp++) {
-            // Get image path
             msg = spConfigGetImagePath(imagePath, config, temp);
             if (msg != SP_CONFIG_SUCCESS) {
                 goto fail;
             }
-
             arrImageFeatures[temp] = imageProcObject->getImageFeatures(imagePath, temp, &(featuresNum[temp]));
             if (NULL == arrImageFeatures[temp]) {
-                spLoggerPrintError("Failed to get image features", __FILE__, __func__, __LINE__);
+                spLoggerPrintError(IMAGE_FEATURE_FAIL, __FILE__, __func__, __LINE__);
                 goto fail;
             }
         }
-/*        for (int i = 0; i < imageNum; i++) {
-            printf("\n%d", featuresNum[i]);
-        }*/
+
 
         for (int i = 0; i < imageNum; i++) {
             res = writeFeatures(config, i, featuresNum[i], arrImageFeatures[i]);
             if (res != SP_CONFIG_SUCCESS) {
-                spLoggerPrintError("Failed to write features", __FILE__, __func__, __LINE__);
+                spLoggerPrintError(FAIL_WRITE_FEAT, __FILE__, __func__, __LINE__);
                 goto fail;
             }
         }
-        sprintf(loggerMessage, "Features were extracted from %d images", imageNum);
+        sprintf(loggerMessage,FEAT_EXTRACT, imageNum);
         spLoggerPrintDebug(loggerMessage, __FILE__, __func__, __LINE__);
-        spLoggerPrintInfo("Success: Features extracted");
+        spLoggerPrintInfo(SUCCESS_FEAT);
 
     } else { //Non-extraction mode
-        spLoggerPrintInfo("Retrieve data from feats files");
+        spLoggerPrintInfo(RETRIEVE_DATA);
         for (int j = 0; j < imageNum; j++) {
 
             res = readFeatures(config, j, &(featuresNum[j]), &(arrImageFeatures[j]), created);
@@ -149,44 +167,31 @@ int main(int argc, char *argv[]) {
                 goto fail;
             }
             created = true;
-            if(res!=SP_CONFIG_SUCCESS){
-                goto fail;
-            }
+
         }
     }
     //end of extraction/non extraction mode
     sum = sumAllFeatures(featuresNum, imageNum);//get total number of features
-    sprintf(loggerMessage, "Total number of features is %d", sum);
+    sprintf(loggerMessage,TOTAL_NUM_FEAT , sum);
     spLoggerPrintDebug(loggerMessage, __FILE__, __func__, __LINE__);
     createAllImagesPointsArr(&totalImageFeaturesArr, arrImageFeatures, imageNum, sum, featuresNum);
-/*    for (int i = 0; i < imageNum; ++i) {
-        for (int j = 0; j <featuresNum[i] ; ++j) {
-            spPointDestroy(arrImageFeatures[i][j]);
 
-        }
-
-    }*/
     free(arrImageFeatures);
     //Init the data structures:
     kdarray = spKDArrayInit(totalImageFeaturesArr, sum);
     if (NULL == kdarray) {
-        spLoggerPrintError("KDArray init failed due to a memory allocation error.", __FILE__, __FUNCTION__, __LINE__);
+        spLoggerPrintError(KDARRAY_INIT_FAIL, __FILE__, __FUNCTION__, __LINE__);
         goto fail;
     }
     root = spKDTreeInit(kdarray, method);
-    //test(config); //temporary test for kdtree, only works with conf-gidi.txt (change the images path)
-
     //query
-
     while (proceed) {
         char queryImagePath[MAX_LEN];
-        puts("\nPlease enter an image path:\n");
-        //fgets(queryImagePath, MAX_LEN, stdin); //user input
-        scanf("%s", queryImagePath);
+        puts(ENTER_PATH);
+        scanf(STRING_FORMAT, queryImagePath);
         fflush(NULL);
-        if (0 == strcmp("<>", queryImagePath)) {
-            proceed = false;
-            puts("Exiting...\n");
+        if (0 == strcmp(EXIT_FORMAT, queryImagePath)) {
+            puts(EXIT_MESSAGE);
             goto fail; //Program is terminated, so we move to the cleanup phase.
         }
         if (proceed) {
@@ -194,13 +199,13 @@ int main(int argc, char *argv[]) {
             queryPointArray = imageProcObject->getImageFeatures(queryImagePath, indexOfQueryImage,
                                                                 numOfFeatsQueryImage);
             if (NULL == queryPointArray) {
-                spLoggerPrintError("Cannot get image features", __FILE__, __FUNCTION__, __LINE__);
+                spLoggerPrintError(CANT_GET_FEAT, __FILE__, __FUNCTION__, __LINE__);
                 goto fail;
             }
             numberOfSimilarImages = spConfigGetspNumOfSimilarImages(config, &msg);
             finalImageIndexes = (int *) calloc((size_t) numberOfSimilarImages, sizeof(int));
             if (NULL == finalImageIndexes) {
-                spLoggerPrintError("Memory allocation error", __FILE__, __FUNCTION__, __LINE__);
+                spLoggerPrintError(ALLOC_ERROR, __FILE__, __FUNCTION__, __LINE__);
                 goto fail;
             }
 
@@ -210,18 +215,17 @@ int main(int argc, char *argv[]) {
 
             //Two cases: MinimalGUI or Non-MinimalGUI
             char resultPath[MAX_LEN];
-            if (!minimalGUI) { printf("Best candidates for - %s - are:\n", queryImagePath); }
+            if (!minimalGUI) { printf(CANDIDATED_MSG, queryImagePath); }
 
             for (int i = 0; i < numberOfSimilarImages; i++) {
                 int indexOfImageToShow = finalImageIndexes[i];
                 spConfigGetImagePath(resultPath, config, indexOfImageToShow); //FUNC_MALLOC
-                //printf("%s\n", resultPath);
                 //two cases: MinimalGUI of Non-MinimalGUI
                 if (minimalGUI) {
                     imageProcObject->showImage(resultPath);
                 }
                 else {
-                    printf("%s\n", resultPath);
+                    printf(STRING_FORMATN, resultPath);
                 }
             }
         }
@@ -241,5 +245,5 @@ int main(int argc, char *argv[]) {
 }
 
 
-///Users/gideontietz/Desktop/Images/quaryA.png
+
 

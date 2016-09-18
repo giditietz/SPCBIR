@@ -13,6 +13,9 @@
 #define MESSAGE_TITLE "- message: "
 #define DEBUG_TITLE "---DEBUG---"
 #define INFO_TITLE "---INFO---"
+#define FORMAT_ONE "%s\n"
+#define FORMAT_TWO "%s%s\n"
+#define FORMAT_THREE "%s%d\n"
 
 
 // Global variable holding the logger
@@ -118,15 +121,15 @@ SP_LOGGER_MSG spLoggerPrintError(const char* msg, const char* file,
 	if(msg==NULL||file==NULL||function==NULL||line<0){
 		return SP_LOGGER_INVAlID_ARGUMENT;
 	}
-	if(fprintf(logger->outputChannel,"%s\n",ERROR_TITLE)<0)
+	if(fprintf(logger->outputChannel,FORMAT_ONE,ERROR_TITLE)<0)
 		return SP_LOGGER_WRITE_FAIL;
-	if(fprintf(logger->outputChannel,"%s%s\n",FILE_TITLE,file)<0)
+	if(fprintf(logger->outputChannel,FORMAT_TWO,FILE_TITLE,file)<0)
 		return SP_LOGGER_WRITE_FAIL;
-	if(fprintf(logger->outputChannel,"%s%s\n",FUNCTION_TITLE,function)<0)
+	if(fprintf(logger->outputChannel,FORMAT_TWO,FUNCTION_TITLE,function)<0)
 		return SP_LOGGER_WRITE_FAIL;
-	if(fprintf(logger->outputChannel,"%s%d\n",LINE_TITLE,line)<0)
+	if(fprintf(logger->outputChannel,FORMAT_THREE,LINE_TITLE,line)<0)
 		return SP_LOGGER_WRITE_FAIL;
-	if(fprintf(logger->outputChannel,"%s%s\n",MESSAGE_TITLE,msg)<0)
+	if(fprintf(logger->outputChannel,FORMAT_TWO,MESSAGE_TITLE,msg)<0)
 		return SP_LOGGER_WRITE_FAIL;
 	return SP_LOGGER_SUCCESS;
 }
@@ -175,15 +178,15 @@ SP_LOGGER_MSG spLoggerPrintWarning(const char* msg, const char* file,
 	if(logger->level==SP_LOGGER_ERROR_LEVEL){
 		return SP_LOGGER_SUCCESS;
 	}else{
-			if(fprintf(logger->outputChannel,"%s\n",WARNING_TITLE)<0)
+			if(fprintf(logger->outputChannel,FORMAT_ONE,WARNING_TITLE)<0)
 				return SP_LOGGER_WRITE_FAIL;
-			if(fprintf(logger->outputChannel,"%s%s\n",FILE_TITLE,file)<0)
+			if(fprintf(logger->outputChannel,FORMAT_TWO,FILE_TITLE,file)<0)
 				return SP_LOGGER_WRITE_FAIL;
-			if(fprintf(logger->outputChannel,"%s%s\n",FUNCTION_TITLE,function)<0)
+			if(fprintf(logger->outputChannel,FORMAT_TWO,FUNCTION_TITLE,function)<0)
 				return SP_LOGGER_WRITE_FAIL;
-			if(fprintf(logger->outputChannel,"%s%d\n",LINE_TITLE,line)<0)
+			if(fprintf(logger->outputChannel,FORMAT_THREE,LINE_TITLE,line)<0)
 				return SP_LOGGER_WRITE_FAIL;
-			if(fprintf(logger->outputChannel,"%s%s\n",MESSAGE_TITLE,msg)<0)
+			if(fprintf(logger->outputChannel,FORMAT_TWO,MESSAGE_TITLE,msg)<0)
 				return SP_LOGGER_WRITE_FAIL;
 			return SP_LOGGER_SUCCESS;
 
@@ -218,9 +221,9 @@ SP_LOGGER_MSG spLoggerPrintInfo(const char* msg){
 		return SP_LOGGER_INVAlID_ARGUMENT;
 	}
 	if(logger->level==SP_LOGGER_INFO_WARNING_ERROR_LEVEL||logger->level==SP_LOGGER_DEBUG_INFO_WARNING_ERROR_LEVEL){
-		if(fprintf(logger->outputChannel,"%s\n",INFO_TITLE)<0)
+		if(fprintf(logger->outputChannel,FORMAT_ONE,INFO_TITLE)<0)
 			return SP_LOGGER_WRITE_FAIL;
-		if(fprintf(logger->outputChannel,"%s%s\n",MESSAGE_TITLE,msg)<0)
+		if(fprintf(logger->outputChannel,FORMAT_TWO,MESSAGE_TITLE,msg)<0)
 			return SP_LOGGER_WRITE_FAIL;
 		return SP_LOGGER_SUCCESS;
 
@@ -271,15 +274,15 @@ SP_LOGGER_MSG spLoggerPrintDebug(const char* msg, const char* file,
 	if(logger->level!=SP_LOGGER_DEBUG_INFO_WARNING_ERROR_LEVEL){
 		return SP_LOGGER_SUCCESS;
 	}else{
-					if(fprintf(logger->outputChannel,"%s\n",DEBUG_TITLE)<0)
+					if(fprintf(logger->outputChannel,FORMAT_ONE,DEBUG_TITLE)<0)
 						return SP_LOGGER_WRITE_FAIL;
-					if(fprintf(logger->outputChannel,"%s%s\n",FILE_TITLE,file)<0)
+					if(fprintf(logger->outputChannel,FORMAT_TWO,FILE_TITLE,file)<0)
 						return SP_LOGGER_WRITE_FAIL;
-					if(fprintf(logger->outputChannel,"%s%s\n",FUNCTION_TITLE,function)<0)
+					if(fprintf(logger->outputChannel,FORMAT_TWO,FUNCTION_TITLE,function)<0)
 						return SP_LOGGER_WRITE_FAIL;
-					if(fprintf(logger->outputChannel,"%s%d\n",LINE_TITLE,line)<0)
+					if(fprintf(logger->outputChannel,FORMAT_THREE,LINE_TITLE,line)<0)
 							return SP_LOGGER_WRITE_FAIL;
-					if(fprintf(logger->outputChannel,"%s%s\n",MESSAGE_TITLE,msg)<0)
+					if(fprintf(logger->outputChannel,FORMAT_TWO,MESSAGE_TITLE,msg)<0)
 						return SP_LOGGER_WRITE_FAIL;
 					return SP_LOGGER_SUCCESS;
 	}
@@ -304,7 +307,7 @@ SP_LOGGER_MSG spLoggerPrintMsg(const char* msg){
 		return SP_LOGGER_INVAlID_ARGUMENT;
 	}
 	else{
-		if(fprintf(logger->outputChannel,"%s\n",msg)<0)
+		if(fprintf(logger->outputChannel,FORMAT_ONE,msg)<0)
 			return SP_LOGGER_WRITE_FAIL;
 		return SP_LOGGER_SUCCESS;
 	}

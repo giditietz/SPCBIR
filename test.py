@@ -9,7 +9,7 @@ def get_config(argv):
     for i in range(len(argv) - 1):
         if argv[i] == "-c":
             return argv[i+1]
-    return "spcbir.config"
+    return "test.config"
 
 def get_config_param(config, param, default = ""):
     f = open(config)
