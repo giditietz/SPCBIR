@@ -175,8 +175,16 @@ int main(int argc, char *argv[]) {
     sprintf(loggerMessage,TOTAL_NUM_FEAT , sum);
     spLoggerPrintDebug(loggerMessage, __FILE__, __func__, __LINE__);
     createAllImagesPointsArr(&totalImageFeaturesArr, arrImageFeatures, imageNum, sum, featuresNum);
-
-    free(arrImageFeatures);
+for (int k = 0; k < imageNum; ++k) {
+        for (int i = 0; i < featuresNum[k]; ++i) {
+            if (NULL != arrImageFeatures[k][i]) {
+                spPointDestroy(arrImageFeatures[k][i]);
+            }
+        }
+        FREE_MACRO(arrImageFeatures[k]);
+    }
+    FREE_MACRO(arrImageFeatures);
+ 
     //Init the data structures:
     kdarray = spKDArrayInit(totalImageFeaturesArr, sum);
     if (NULL == kdarray) {
@@ -211,12 +219,18 @@ int main(int argc, char *argv[]) {
 
 
             FUNC_MACRO(spGetFinalImageList(config, root, finalImageIndexes, queryPointArray, numOfFeatsQueryImage[0]));
+		for(int i=0;i<numOfFeatsQueryImage[0];i++){
+			if(NULL!=queryPointArray[i]){
+				spPointDestroy(queryPointArray[i]);
+			}
+		}
+		FREE_MACRO(queryPointArray);
             minimalGUI = spConfigGetMinimalGUI(config, &msg);
 
             //Two cases: MinimalGUI or Non-MinimalGUI
             char resultPath[MAX_LEN];
             if (!minimalGUI) { printf(CANDIDATED_MSG, queryImagePath); }
-
+	
             for (int i = 0; i < numberOfSimilarImages; i++) {
                 int indexOfImageToShow = finalImageIndexes[i];
                 spConfigGetImagePath(resultPath, config, indexOfImageToShow); //FUNC_MALLOC
@@ -228,21 +242,24 @@ int main(int argc, char *argv[]) {
                     printf(STRING_FORMATN, resultPath);
                 }
             }
+		FREE_MACRO(finalImageIndexes);
         }
+
     }
 
     fail:
-    FREE_MACRO(finalImageIndexes);
-    FREE_MACRO(queryPointArray);
     FREE_MACRO(featuresNum);
     spKDTreeDestroy(root);
-    FREE_MACRO(root);//check
+//    FREE_MACRO(root);//check
     if (NULL != config) {
         spConfigDestroy(config);
     } //TODO: if != NULL
     spLoggerDestroy();
+if (!imageProcObject){
+delete(imageProcObject);}
     return 0;
 }
+
 
 
 

@@ -9,7 +9,7 @@
 #include "SPLogger.h"
 #include <math.h>
 #include <float.h>
-
+#include "Malloc_Macro.h"
 
 #define ERROR_MSG_KNN_SEARCH_FAILED "Error: KNN search has failed"
 #define ERROR_MSG_KNN_SEARCH_BPQ_ENQUEUE_FAILED "Error: KNN search has failed due to a BPQueue issue"
@@ -93,7 +93,8 @@ SPKDNode spKDTreeInit(SPKDArray spkdArray, SP_KD_TREE_SPLIT_METHOD splitmethod) 
         root->dim = NEGETIVE;
         root->left = NULL;
         root->right = NULL;
-        root->data = spKDArrayGetPointArray(spkdArray)[ZERO];
+        root->data =spPointCopy(spKDArrayGetPointArray(spkdArray)[ZERO]);
+	spKDArrayDestroy(spkdArray);
         return root;
     }
     else {
@@ -227,7 +228,7 @@ bool spKDTreeKNNSearch(SPKDNode curr, SPBPQueue bpq, SPPoint queryPoint) {
 
 //TODO verify that it's working. The tests have shown that it's fine, but we need to make sure.
 void spKDTreeDestroy(SPKDNode node) {
-    if(!node){
+/*    if(!node){
         return;
     }
     if (spKDTreeIsLeaf(node)) {
@@ -247,5 +248,13 @@ void spKDTreeDestroy(SPKDNode node) {
             node->right = NULL;
 
         }
-    }
+    }*/
+if(node != NULL){
+		spKDTreeDestroy(node->left);
+		spKDTreeDestroy(node->right);
+        if(node->data!=NULL){
+                spPointDestroy(node->data);
+        }
+	}
+	FREE_MACRO(node);
 }

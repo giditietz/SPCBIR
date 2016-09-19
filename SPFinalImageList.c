@@ -28,6 +28,8 @@ int spGetFinalImageList(SPConfig cfg, SPKDNode kdtree, int *finalIndexArray, SPP
     SPListElement newElement = NULL;
     SPBPQueue currBpq = NULL;
     SPBPQueue finalBpq = NULL;
+    SPListElement* elementPointer=NULL;
+    int elementPointerIndex=0;
     SP_CONFIG_MSG msg;
     if (NULL == kdtree) {
         spLoggerPrintError(KDTREE_NULL_STR, __FILE__, __FUNCTION__, __LINE__);
@@ -94,15 +96,19 @@ int spGetFinalImageList(SPConfig cfg, SPKDNode kdtree, int *finalIndexArray, SPP
     //for each index in imageList: enqueue(index,(max - imageList[index]))
     //the  new BPQueue 'finalBpq' will now hold our 'numOfSimilarImages' best images.
     //we use the BPQueue to sort our indices efficiently.
+    elementPointer=(SPListElement*)malloc(sizeof(SPListElement)*numOfImages);
     for (int imageIndex = 0; imageIndex < numOfImages; imageIndex++) {
         newVal = maxCountOfIndex - indexArray[imageIndex];
         newElement = spListElementCreate(imageIndex, newVal);
+        elementPointer[elementPointerIndex]=newElement;
+        elementPointerIndex++;
         bpqMsg = spBPQueueEnqueue(finalBpq, newElement);
         if (!(bpqMsg == SP_BPQUEUE_FULL || bpqMsg == SP_BPQUEUE_SUCCESS)) {
             spLoggerPrintError(BP_ERROR_EQ_STR, __FILE__, __FUNCTION__, __LINE__);
             goto fail;
         }
     }
+
     for (int j = 0; j < numOfSimilarImages; j++) {
         //extractMin the BPqueue and insert the indexes to the new array.
         curElement = spBPQueuePeek(finalBpq);
@@ -118,12 +124,18 @@ int spGetFinalImageList(SPConfig cfg, SPKDNode kdtree, int *finalIndexArray, SPP
             goto fail;
         }
     }
+    for(int i=0;i<elementPointerIndex;i++){
+        if(elementPointer[i]!=NULL){
+            spListElementDestroy(elementPointer[i]);
+        }
+    }
+    free(elementPointer);
 
     //free the used resources
     free(indexArray);
     spBPQueueDestroy(currBpq);
     spBPQueueDestroy(finalBpq);
-    spListElementDestroy(newElement);
+//    spListElementDestroy(newElement);
     spLoggerPrintDebug(RESOURCE_FREE_STR, __FILE__, __FUNCTION__, __LINE__);
     spLoggerPrintInfo(BEST_IMG_STR);
     return res;

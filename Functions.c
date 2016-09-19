@@ -195,7 +195,7 @@ int createAllImagesPointsArr(SPPoint **result, SPPoint **source, int imageNum, i
 
     for (int j = 0; j < imageNum; j++) {
         for (int t = 0; t < featuresNum[j]; t++) {
-            SPPoint p = source[j][t];
+            SPPoint p =spPointCopy(source[j][t]);
             (*result)[location] = p;
 
             location++;
