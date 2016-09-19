@@ -394,12 +394,15 @@ int parseConfigFile(const char *file, SPConfig config, int *numberOfLines) {
     if (configFile == NULL) {
         return CANNOT_OPEN_FILE;
     }
-    char *variable = NULL;
-    char *val = NULL;
-    char *str = NULL;
-    MALLOC_MACRO(variable, char*, MAX_LEN);
-    MALLOC_MACRO(val, char*, MAX_LEN);
-    MALLOC_MACRO(str, char*, MAX_LEN);
+   // char *variable = NULL;
+  //  char *val = NULL;
+    //char *str = NULL;
+    char str[MAX_LEN];
+    char* variable=NULL;
+    char* val=NULL;
+    //MALLOC_MACRO(variable, char*, MAX_LEN);
+    //MALLOC_MACRO(val, char*, MAX_LEN);
+    //MALLOC_MACRO(str, char*, MAX_LEN);
     //read the file line by line and parse every line
     while (fgets(str, MAX_LEN, configFile) != NULL) {
         lineNum++;
@@ -429,9 +432,16 @@ int parseConfigFile(const char *file, SPConfig config, int *numberOfLines) {
         }
     }
     *numberOfLines = lineNum;
+   // free(str);
+   // free(val);
+    //free(variable);
+    //FREE_MACRO(str);
+    //FREE_MACRO(val);
+
+    //FREE_MACRO(variable);
     return SUCCESS;
     fail:
-    FREE_MACRO(variable);
+   // FREE_MACRO(variable);
     if (res == LINE_INVALID)
         printInvalidLineErrorMsg(file, lineNum);
     //  FREE_MACRO(val);

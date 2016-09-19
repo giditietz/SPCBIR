@@ -180,9 +180,11 @@ bool spKDTreeKNNSearch(SPKDNode curr, SPBPQueue bpq, SPPoint queryPoint) {
         SPListElement newElement = spListElementCreate(curr_index, curr_distance);
         msg = spBPQueueEnqueue(bpq, newElement);
         if ((msg != SP_BPQUEUE_SUCCESS) && (msg != SP_BPQUEUE_FULL)) {
+            spListElementDestroy(newElement);//TODO ido handeled free
             spLoggerPrintError(ERROR_MSG_KNN_SEARCH_BPQ_ENQUEUE_FAILED, __FILE__, __func__, __LINE__);
             return false;
         }
+        spListElementDestroy(newElement);//TODO ido handeled free
         return true;
     }
     else {

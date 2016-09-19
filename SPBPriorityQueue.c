@@ -565,7 +565,7 @@ SP_BPQUEUE_MSG spBPQueueEnqueue(SPBPQueue source, SPListElement element){
 	if(!found){
 		status = spListInsertLast(list,element);
 	}
-
+	//spListElementDestroy(element);//TODO ido handled free
 	switch(status){
 		case SP_LIST_OUT_OF_MEMORY:
 			return SP_BPQUEUE_OUT_OF_MEMORY;

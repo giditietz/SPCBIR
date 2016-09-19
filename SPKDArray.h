@@ -39,6 +39,7 @@ SPPoint *spKDArrayGetPointArray(SPKDArray kdarray);
 int **spKDArrayGetDataMatrix(SPKDArray kdarray);
 
 int spKDArrayGetDimToSplit(SPKDArray kdarray);
+void spKDArrayDestroy(SPKDArray kdarray);
 
 
 
